@@ -79,6 +79,7 @@ export const DRILLS = [
       academy: "Add weak-foot-only juggling for the final 30 seconds."
     }
   },
+
   {
     id: "w5", name: "Passing square warm-up", category: "warmup", formation: "box",
     ageMin: 8, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: [],
@@ -186,6 +187,7 @@ export const DRILLS = [
       academy: "Add a coach or teammate applying light pressure from behind to simulate a recovering defender."
     }
   },
+
   {
     id: "d4", name: "Two-touch cone turns", category: "technical", formation: "line",
     ageMin: 7, ageMax: 10, skills: ["recreation", "travel"], focus: ["dribbling"],
@@ -326,6 +328,7 @@ export const DRILLS = [
       academy: "Add a passive, then active, defender trying to step in front of the return pass."
     }
   },
+
   {
     id: "p5", name: "Long pass accuracy channels", category: "technical", formation: "line",
     ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["passing"],
@@ -463,6 +466,7 @@ export const DRILLS = [
       academy: "Add a goalkeeper and a recovering center back to make the far-post run and finish fully live."
     }
   },
+
   {
     id: "s5", name: "Volley and half-volley finishing", category: "technical", formation: "goal",
     ageMin: 14, ageMax: 19, skills: ["academy"], focus: ["shooting"],
@@ -583,6 +587,7 @@ export const DRILLS = [
       travel: "Add a ball for the defender to win or delay once they arrive in position."
     }
   },
+
   {
     id: "def5", name: "Team shape shadow defending", category: "technical", formation: "zones",
     ageMin: 14, ageMax: 19, skills: ["academy"], focus: ["defending"], styles: ["physical"],
@@ -687,6 +692,41 @@ export const DRILLS = [
     }
   },
 
+  {
+    id: "f4", name: "Reaction sprint starts", category: "technical", formation: "line",
+    ageMin: 8, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: ["fitness"],
+    players: "8-24", equipment: ["Cones"],
+    summary: "Players start from different body positions and sprint on a visual or verbal cue, sharpening the first-step quickness that matters more in games than top-end speed.",
+    steps: [
+      "Line players up on a start line in groups of 4-6.",
+      "Have them start from standing, seated, lying face-down, or facing backward.",
+      "On a hand signal or call, players react and sprint 10-15 yards as fast as possible.",
+      "Rest fully between reps and cycle through 3-4 different starting positions."
+    ],
+    points: ["React to the signal, don't anticipate it", "Drive the arms hard on the first three steps", "Full recovery between reps keeps quality high"],
+    levelNotes: {
+      recreation: "Turn it into a simple racing game with partners for extra motivation.",
+      academy: "Add a ball to react onto and dribble away with for the final few reps."
+    }
+  },
+  {
+    id: "f5", name: "Small-space quickness circuit", category: "technical", formation: "grid",
+    ageMin: 10, ageMax: 19, skills: ["travel", "academy"], focus: ["fitness"],
+    players: "6-18", equipment: ["Cones"],
+    summary: "A tight circuit of short, sharp changes of direction packed into a small area, mirroring the quick, repeated bursts players make during a real match.",
+    steps: [
+      "Mark a 5x5 yard square with a cone at each corner and one in the center.",
+      "Players sprint from the center to each corner and back, touching each cone before returning to the middle.",
+      "Complete all four corners as one rep, then rest 30-45 seconds.",
+      "Run 4-5 total reps."
+    ],
+    points: ["Stay low and quick on every touch of the cone", "Explode out of each direction change", "Keep the head up throughout, not looking down at the cones"],
+    levelNotes: {
+      travel: "Extend the square slightly and allow a bit more rest between reps.",
+      academy: "Add a ball for the final two reps, dribbling to each cone instead of sprinting empty-handed."
+    }
+  },
+
   // SSG / POSSESSION
   {
     id: "ssg1", name: "4v4 small-sided game", category: "ssg", formation: "box",
@@ -756,6 +796,7 @@ export const DRILLS = [
       academy: "Add a two-touch limit once the group is comfortable, and track consecutive completed passes as a team target."
     }
   },
+
   {
     id: "ssg5", name: "3v3 to four goals", category: "ssg", formation: "box",
     ageMin: 7, ageMax: 14, skills: ["recreation", "travel", "academy"], focus: ["dribbling", "shooting", "passing"], formats: ["7v7", "9v9"],
@@ -983,8 +1024,739 @@ export const DRILLS = [
       travel: "Extend the halfway-line rule to give the pressing team more time to succeed early on.",
       academy: "Add a rule that a failed press leads directly into defending a 2v1 or 3v2 break, raising the cost of a lazy press."
     }
+  },
+
+  // WARM-UP (additional)
+  {
+    id: "w8", name: "Figure-8 dribble warm-up", category: "warmup", formation: "circle",
+    ageMin: 7, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: [],
+    players: "6-20", equipment: ["Cones", "One ball per player"],
+    summary: "Players weave a continuous figure-8 pattern around two cones, an easy repeatable warm-up that builds close control and a rhythm before the session ramps up.",
+    steps: [
+      "Set two cones 6 yards apart for each player or pair.",
+      "Players dribble a figure-8 loop around both cones continuously for 45 seconds.",
+      "Switch direction of the loop for the next 45-second set.",
+      "Finish with a weak-foot-only round for players ready for the challenge."
+    ],
+    points: ["Small touches on the turns", "Keep the head up on the straight sections", "Both directions, both feet"],
+    levelNotes: {
+      recreation: "Widen the cone spacing so the turns are gentler while confidence builds.",
+      travel: "Time each round and challenge players to keep the ball inside a tighter loop.",
+      academy: "Add a defender shadowing from outside the loop without engaging, just to add visual pressure."
+    }
+  },
+  {
+    id: "w9", name: "Passing diamond warm-up", category: "warmup", formation: "box",
+    ageMin: 9, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: [],
+    players: "8-20", equipment: ["Cones", "Balls"],
+    summary: "Groups of four pass around a diamond shape, an early-session way to get passing rhythm and movement going before the main technical work begins.",
+    steps: [
+      "Set four cones in a diamond, 8 yards apart, one player per cone.",
+      "Pass around the diamond in order for two minutes, following the pass into the next spot.",
+      "Switch to passing across the diamond's short diagonal for two minutes.",
+      "Finish with a group target of ten consecutive clean passes."
+    ],
+    points: ["Move immediately after passing", "Communicate before the ball arrives", "Firm, accurate passes on the ground"],
+    levelNotes: {
+      recreation: "Let players take a settling touch before every pass.",
+      travel: "Introduce a two-touch limit once the shape is comfortable.",
+      academy: "Add a defender in the middle trying to intercept the diagonal passes."
+    }
+  },
+
+  // DRIBBLING (additional)
+  {
+    id: "d8", name: "Sole roll control course", category: "technical", formation: "line",
+    ageMin: 7, ageMax: 11, skills: ["recreation", "travel"], focus: ["dribbling"],
+    players: "6-16", equipment: ["Cones", "Balls"],
+    summary: "Players guide the ball through a simple course using only sole rolls, isolating one foundational touch so it becomes automatic before combining it with other moves.",
+    steps: [
+      "Set up a channel of 5 cones, 3 yards apart.",
+      "Players move the ball from cone to cone using only sole rolls — no other touches allowed.",
+      "Time each run and repeat 3-4 times.",
+      "Finish with a freestyle round mixing sole rolls with normal dribbling."
+    ],
+    points: ["Keep the sole light on the ball, don't stamp", "Stay balanced over the ball", "Small, controlled rolls rather than big pushes"],
+    levelNotes: {
+      recreation: "Let players go at their own pace — this is about the feel of the touch, not speed.",
+      travel: "Add a stopwatch and a friendly head-to-head format."
+    }
+  },
+  {
+    id: "d9", name: "1v1 end-to-end dribble battle", category: "technical", formation: "zones",
+    ageMin: 10, ageMax: 16, skills: ["travel", "academy"], focus: ["dribbling"],
+    players: "8-16", equipment: ["Cones"],
+    summary: "Two players start at opposite ends of a channel and try to dribble past each other to the far end, a simple but demanding test of close control under direct pressure.",
+    steps: [
+      "Mark a 12x8 yard channel with a target line at each end.",
+      "Both players start with a ball at opposite ends and dribble toward the other's target line.",
+      "When they meet in the middle, each must find a way past the other while protecting their own ball.",
+      "Play to first player across the far line, then reset and rotate opponents."
+    ],
+    points: ["Shield the ball with the body when passing close to an opponent", "Change pace to create the gap", "Stay calm in the crowded moment in the middle"],
+    levelNotes: {
+      travel: "Widen the channel slightly to make the first few reps more manageable.",
+      academy: "Narrow the channel and add a time limit to force quicker decisions."
+    }
+  },
+  {
+    id: "d10", name: "Scissor move repetition drill", category: "technical", formation: "line",
+    ageMin: 10, ageMax: 19, skills: ["travel", "academy"], focus: ["dribbling"],
+    players: "6-18", equipment: ["Cones", "Balls"],
+    summary: "Focused repetition on the scissor move at a cone, building the fake-and-go pattern that creates separation from a defender in a 1v1 moment.",
+    steps: [
+      "Set a single cone for each player, 8 yards from the start line.",
+      "Player dribbles to the cone, performs a scissor move (stepping over the ball without touching it), then accelerates away at an angle.",
+      "Return to the start and repeat, alternating which foot leads the scissor.",
+      "Run 6-8 total reps, increasing speed as the move becomes comfortable."
+    ],
+    points: ["Sell the fake with the hips, not just the foot", "Keep the standing leg balanced through the move", "Explode away immediately after"],
+    levelNotes: {
+      travel: "Walk through the move slowly first before adding any speed.",
+      academy: "Add a passive defender at the cone to give the move a real target to beat."
+    }
+  },
+  {
+    id: "d11", name: "Dribble and freeze", category: "technical", formation: "grid",
+    ageMin: 7, ageMax: 10, skills: ["recreation", "travel"], focus: ["dribbling"],
+    players: "8-20", equipment: ["Cones"],
+    summary: "A reaction-based dribbling game where players freeze in place with the ball under close control the instant the coach calls it, building the habit of keeping the ball tight at all times.",
+    steps: [
+      "Mark a grid and have every player dribble freely inside it.",
+      "On the coach's call of 'freeze,' every player must stop with the ball dead under their foot within one second.",
+      "Check a few players' control each round and reset with 'go.'",
+      "Play 4-5 rounds, occasionally calling 'freeze' twice in quick succession to keep it sharp."
+    ],
+    points: ["Keep the ball within a foot of your body at all times", "React the instant you hear the call", "Balance over the ball when frozen"],
+    levelNotes: {
+      recreation: "Make a game of it — last player to freeze cleanly does a silly forfeit like five jumping jacks."
+    }
+  },
+  {
+    id: "d12", name: "Tight-space turns box", category: "technical", formation: "box",
+    ageMin: 11, ageMax: 19, skills: ["travel", "academy"], focus: ["dribbling"],
+    players: "8-16", equipment: ["Cones", "Bibs"],
+    summary: "Several players dribble inside a small shared box, forced to turn away from traffic constantly — a demanding way to build the close control needed in congested midfield areas.",
+    steps: [
+      "Mark an 8x8 yard box and put 4-5 players inside, each with a ball.",
+      "Players dribble freely, using turns to avoid contact with teammates and the edges of the box.",
+      "After a minute, call out a specific turn everyone must use for the next round: inside hook, drag-back, Cruyff.",
+      "Rotate players in and out to keep the box density high."
+    ],
+    points: ["Scan constantly for open space", "Use the turn early, don't wait until you're trapped", "Stay light on the feet to react quickly"],
+    levelNotes: {
+      travel: "Use a slightly larger box while players adjust to the crowding.",
+      academy: "Shrink the box and add a rule that any ball-to-ball contact restarts that player's count."
+    }
+  },
+  {
+    id: "d13", name: "Dribbling relay tournament", category: "technical", formation: "line",
+    ageMin: 8, ageMax: 14, skills: ["recreation", "travel"], focus: ["dribbling"],
+    players: "8-20", equipment: ["Cones"],
+    summary: "Teams race through a dribbling course in a bracket-style tournament, turning close-control practice into a competitive, high-energy team event.",
+    steps: [
+      "Set up 3-4 identical short dribbling courses (weave through 4-5 cones).",
+      "Split into teams of 3-4 and run a relay, each player completing the course before tagging the next.",
+      "Track times or simply first team finished; run bracket rounds if there are enough teams.",
+      "Crown a winning team after 2-3 rounds."
+    ],
+    points: ["Full speed without losing control", "Clean handoffs between teammates", "Cheer teammates on between reps"],
+    levelNotes: {
+      recreation: "Keep courses short and simple so every player finishes with confidence.",
+      travel: "Add a required move (step-over, scissor) at one cone in the course."
+    }
+  },
+
+  // PASSING (additional)
+  {
+    id: "p9", name: "One-touch finishing square", category: "technical", formation: "box",
+    ageMin: 13, ageMax: 19, skills: ["academy"], focus: ["passing"],
+    players: "8-16", equipment: ["Cones", "Bibs"],
+    summary: "A fast-tempo square possession game restricted to strictly one touch, sharpening the speed of thought and technique needed to play at the top of the sport.",
+    steps: [
+      "Mark a 12x12 yard square with four players on the corners and two in the middle as defenders.",
+      "Corner players must play every ball first-time; no second touch allowed.",
+      "Defenders press to force an error or a poor first-time pass.",
+      "Rotate defenders every 3 minutes regardless of turnovers."
+    ],
+    points: ["Body shape open before the ball arrives", "Decide where the next pass goes before receiving", "Weight the pass so it's catchable first-time"],
+    levelNotes: {
+      academy: "Track consecutive one-touch passes as a team target and reset the count after a poor pass."
+    }
+  },
+  {
+    id: "p10", name: "Cross-field switch passing", category: "technical", formation: "line",
+    ageMin: 13, ageMax: 19, skills: ["travel", "academy"], focus: ["passing"],
+    players: "8-16", equipment: ["Cones", "Balls"],
+    summary: "Players practice switching the point of attack with a long, accurate diagonal pass across the width of the field — a skill that unlocks space against a compact defense.",
+    steps: [
+      "Set up two target zones on opposite sides of the field, 35-40 yards apart.",
+      "One line of players strikes diagonal switches from one zone to a receiver in the other.",
+      "The receiver controls and returns the ball down the line, then rotates to the back.",
+      "Switch striking sides after every 8 reps."
+    ],
+    points: ["Open the body to strike across the ball for the diagonal flight", "Aim to arrive at the receiver's front foot", "Follow the pass to support after switching"],
+    levelNotes: {
+      travel: "Shorten the distance while accuracy is still developing.",
+      academy: "Add a receiver who must control and finish at a small goal within two touches of the switch."
+    }
+  },
+  {
+    id: "p11", name: "Passing under time pressure", category: "technical", formation: "box",
+    ageMin: 11, ageMax: 17, skills: ["travel", "academy"], focus: ["passing"],
+    players: "9-16", equipment: ["Cones", "Bibs"],
+    summary: "A possession game with a visible countdown clock, training players to keep their passing quality high even as the pressure and pace increase.",
+    steps: [
+      "Set up a 15x15 yard grid with a 5v2 or 6v3 possession game inside.",
+      "Start a visible countdown from 30 seconds; the possession team must hit a pass target before time expires.",
+      "If they succeed, reset the clock and continue; if not, rotate a defender in.",
+      "Gradually shorten the countdown as the group improves."
+    ],
+    points: ["Play quickly but don't rush into a bad pass", "Communicate loudly to speed up decisions", "Keep the shape wide so options stay open under pressure"],
+    levelNotes: {
+      travel: "Start with a generous 45-second window and a lower pass target.",
+      academy: "Drop to a 20-second window with a higher pass target for a genuinely demanding version."
+    }
+  },
+  {
+    id: "p12", name: "Two-ball rondo", category: "technical", formation: "circle",
+    ageMin: 12, ageMax: 19, skills: ["academy"], focus: ["passing", "possession"],
+    players: "10-16", equipment: ["Cones", "Bibs"],
+    summary: "A standard rondo with a second ball introduced mid-drill, forcing constant scanning and communication since two plays are live in the grid at once.",
+    steps: [
+      "Set up a normal rondo (5v2 or 6v2) in a 12x12 yard grid.",
+      "Play normally for two minutes to establish rhythm.",
+      "Introduce a second ball into the grid without stopping play.",
+      "Play for 90 seconds with both balls live, then remove one and reset."
+    ],
+    points: ["Know where both balls are at all times", "Communicate which ball you're tracking", "Stay switched on even when not directly involved in a play"],
+    levelNotes: {
+      academy: "Add a rule that defenders can win either ball, doubling their chances and raising the intensity."
+    }
+  },
+  {
+    id: "p13", name: "Support angle passing triangle", category: "technical", formation: "box",
+    ageMin: 9, ageMax: 13, skills: ["recreation", "travel"], focus: ["passing"],
+    players: "6-15", equipment: ["Cones"],
+    summary: "A guided passing drill that teaches young players to find a supporting angle rather than standing square to the ball, the foundation of good spacing in possession.",
+    steps: [
+      "Set up a triangle of cones, 8 yards apart, with one player on each.",
+      "The receiving player must always move to a slight angle off the passer before receiving, never standing directly in line.",
+      "Pass around the triangle, checking each player's angle before the next pass.",
+      "Rotate positions every few minutes."
+    ],
+    points: ["Angle your body to see both the ball and the space behind you", "Move before the pass arrives, not after", "Call for the ball once your angle is set"],
+    levelNotes: {
+      recreation: "Walk through the correct angle with cones marking a 'good spot' before adding live passing."
+    }
+  },
+  {
+    id: "p14", name: "Driven pass technique", category: "technical", formation: "line",
+    ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["passing"],
+    players: "8-16", equipment: ["Cones", "Balls"],
+    summary: "Focused technical work on the low, driven pass — firmer and flatter than a standard ground pass — used to beat a defender's leg or cover more ground quickly.",
+    steps: [
+      "Pair players up 15-18 yards apart.",
+      "Each player strikes a driven pass, aiming to keep it low and firm rather than lifted.",
+      "Focus on a locked ankle and a follow-through toward the target on every strike.",
+      "Increase distance gradually as accuracy holds up."
+    ],
+    points: ["Strike through the ball's equator, not underneath it", "Lock the ankle at contact", "Follow through low toward the target"],
+    levelNotes: {
+      travel: "Keep the distance shorter until the flight stays consistently low.",
+      academy: "Add a passive obstacle (a mannequin or cone at knee height) the pass must stay under."
+    }
+  },
+
+  // SHOOTING (additional)
+  {
+    id: "s8", name: "Quick-fire finishing circuit", category: "technical", formation: "goal",
+    ageMin: 9, ageMax: 14, skills: ["recreation", "travel"], focus: ["shooting"],
+    players: "8-18", equipment: ["Cones", "Goal", "Balls"],
+    summary: "A high-repetition finishing circuit where players move quickly between three shooting stations, keeping energy high and touches on goal frequent.",
+    steps: [
+      "Set up three shooting stations around the box at different angles, each with a small pile of balls.",
+      "Players rotate through all three stations, taking 3 shots at each before moving to the next.",
+      "Keep the pace brisk — the goal is quantity of quality reps, not standing around.",
+      "Run through the full circuit twice."
+    ],
+    points: ["Quick set-up touch before every shot", "Vary the target corner shot to shot", "Keep the energy and pace up between stations"],
+    levelNotes: {
+      recreation: "Keep the stations close to goal so success comes easily and often.",
+      travel: "Add a goalkeeper and require a specific corner to be called before each shot."
+    }
+  },
+  {
+    id: "s9", name: "Curling shot technique", category: "technical", formation: "goal",
+    ageMin: 13, ageMax: 19, skills: ["travel", "academy"], focus: ["shooting"],
+    players: "6-14", equipment: ["Goal", "Balls"],
+    summary: "Technical work on striking with the inside of the foot to bend the ball around a goalkeeper or a defender, a finishing tool for tighter-angle chances.",
+    steps: [
+      "Set up balls at a slight angle to goal, 16-18 yards out.",
+      "Players strike across the outside of the ball with the inside of the foot to generate curl toward the far post.",
+      "Take 5-6 attempts, focusing on contact point before adding power.",
+      "Progress to game-speed strikes once the curl is consistent."
+    ],
+    points: ["Strike across the ball, not through the center", "Lean the body away from the direction of curl slightly", "Follow through across your body toward the target"],
+    levelNotes: {
+      travel: "Start with a stationary ball and no goalkeeper to isolate the technique.",
+      academy: "Add a goalkeeper and a defender in the near-post passing lane to make the curl necessary."
+    }
+  },
+  {
+    id: "s10", name: "1-2 combination finish", category: "technical", formation: "goal",
+    ageMin: 11, ageMax: 17, skills: ["travel", "academy"], focus: ["shooting", "passing"],
+    players: "8-16", equipment: ["Cones", "Goal", "Balls"],
+    summary: "A simple wall-pass into the box, finished first-time, linking the passing work from earlier in a session directly into a shooting outcome.",
+    steps: [
+      "Position a passer at the top of the box and a wall player just inside it, with a finisher approaching from deeper.",
+      "The finisher plays to the wall player and sprints past into the box.",
+      "The wall player returns the ball first-time into the finisher's path.",
+      "The finisher strikes first-time on goal; rotate roles every 4-5 reps."
+    ],
+    points: ["The wall player sets the return first-time, no extra touch", "Time the run so the return ball arrives in stride", "Get a shot away quickly once in the box"],
+    levelNotes: {
+      travel: "Slow the pattern down and rehearse without a goalkeeper first.",
+      academy: "Add a recovering defender to make the timing and the finish fully live."
+    }
+  },
+  {
+    id: "s11", name: "Near post far post choice", category: "technical", formation: "goal",
+    ageMin: 10, ageMax: 16, skills: ["recreation", "travel", "academy"], focus: ["shooting"],
+    players: "8-18", equipment: ["Cones", "Goal", "Balls"],
+    summary: "Players receive a service and must read the goalkeeper's position to decide between a near-post or far-post finish, building in-game decision-making rather than a scripted shot.",
+    steps: [
+      "Set up a server delivering crosses or cutbacks from the side of the box.",
+      "A goalkeeper (or coach standing in as one) positions randomly toward the near or far post before each service.",
+      "The finisher reads the keeper's position and picks the open side to finish.",
+      "Rotate through 8-10 reps per finisher, then swap roles."
+    ],
+    points: ["Scan the goal before the ball arrives, not after", "Commit to a decision, don't hesitate mid-strike", "Finish low and placed rather than blazing at the keeper"],
+    levelNotes: {
+      recreation: "Keep the keeper mostly central so both options stay realistically open.",
+      academy: "Add a recovering defender to force a quicker read and finish."
+    }
+  },
+  {
+    id: "s12", name: "Penalty kick composure reps", category: "technical", formation: "goal",
+    ageMin: 10, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: ["shooting"],
+    players: "6-18", equipment: ["Goal", "Balls"],
+    summary: "Players take penalty kicks under a bit of manufactured pressure — a countdown, a crowd of watching teammates — building the composure needed for the real, high-stakes version.",
+    steps: [
+      "Line players up to take penalties one at a time with a goalkeeper in place.",
+      "Gather the rest of the group behind the shooter to create a bit of watching pressure.",
+      "Each player picks their spot before stepping up and commits to it fully.",
+      "Run 2-3 rounds so everyone gets multiple attempts."
+    ],
+    points: ["Decide your spot before you place the ball, not while walking up", "Keep the run-up consistent every time", "Strike with conviction — a committed shot beats a hesitant one"],
+    levelNotes: {
+      recreation: "Keep the tone light and encouraging — this is about building comfort, not pressure for its own sake.",
+      academy: "Add real stakes, like a mini shootout between two teams, to replicate match pressure."
+    }
+  },
+  {
+    id: "s13", name: "Turn and shoot", category: "technical", formation: "goal",
+    ageMin: 9, ageMax: 14, skills: ["recreation", "travel"], focus: ["shooting"],
+    players: "8-16", equipment: ["Cones", "Goal", "Balls"],
+    summary: "Players receive with their back to goal and must turn under control before shooting, a common finishing pattern for a target forward receiving into feet.",
+    steps: [
+      "Position a server behind the penalty spot and a finisher with their back to goal in front of them.",
+      "The server plays the ball into the finisher's feet.",
+      "The finisher takes a touch to turn toward goal, using whichever turn feels most natural, then shoots.",
+      "Rotate through 8-10 reps, alternating which side the finisher turns toward."
+    ],
+    points: ["Check the defender's or goalkeeper's position with a glance before turning", "Turn onto the stronger shooting angle when possible", "Get the shot away quickly once turned — don't take an extra touch"],
+    levelNotes: {
+      recreation: "Serve the ball gently and give plenty of time to find the turn.",
+      travel: "Add a passive defender behind the finisher to make the turn decision realistic."
+    }
+  },
+
+  // DEFENDING (additional)
+  {
+    id: "def8", name: "Show and delay to sideline", category: "technical", formation: "zones",
+    ageMin: 9, ageMax: 14, skills: ["recreation", "travel"], focus: ["defending"],
+    players: "8-16", equipment: ["Cones"],
+    summary: "Defenders practice showing an attacker toward the sideline and delaying rather than diving in, using the touchline as an extra defender the way real games reward.",
+    steps: [
+      "Mark a channel along a sideline with a defender starting centrally and an attacker with the ball 10 yards away.",
+      "The attacker tries to dribble past toward the middle of the field; the defender's job is to show them toward the line instead.",
+      "Play until the attacker is forced out of bounds or the defender wins the ball.",
+      "Rotate roles every 4-5 reps."
+    ],
+    points: ["Angle your body to close off the middle of the field", "Stay patient — forcing wide is a win even without a tackle", "Match the attacker's pace, don't overcommit"],
+    levelNotes: {
+      recreation: "Give the defender a generous head start in position to build early confidence.",
+      travel: "Add a time limit that rewards the defender for forcing the attacker out quickly."
+    }
+  },
+  {
+    id: "def9", name: "Defending crosses and headers", category: "technical", formation: "goal",
+    ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["defending"],
+    players: "8-16", equipment: ["Cones", "Goal", "Balls"],
+    summary: "Defenders practice tracking a runner and winning the ball in the air on crosses into the box, a specific and high-value defending skill that isolated 1v1 drills don't cover.",
+    steps: [
+      "Set up a server crossing from the wing, an attacker making a run into the box, and a defender tracking them.",
+      "The server delivers a cross; the defender must get goal-side and win the header or clearance.",
+      "Rotate servers, attackers, and defenders every 4-5 reps.",
+      "Vary the cross type: driven, floated, and cut-back deliveries."
+    ],
+    points: ["Get goal-side of the attacker before the cross arrives", "Attack the ball at its highest point", "Clear with distance and width, not back toward your own goal"],
+    levelNotes: {
+      travel: "Use a slower, floated service at first to build timing before adding driven crosses.",
+      academy: "Add a goalkeeper communicating with the defender to simulate real coordination."
+    }
+  },
+  {
+    id: "def10", name: "Compactness shuttle", category: "technical", formation: "zones",
+    ageMin: 12, ageMax: 19, skills: ["academy"], focus: ["defending"],
+    players: "10-16", equipment: ["Cones", "Bibs"],
+    summary: "A unit of defenders shuttles side to side and forward-back on a coach's command, training the collective compactness that makes a defensive line hard to play through.",
+    steps: [
+      "Line up 4 defenders in their usual defensive shape inside a marked zone.",
+      "The coach calls directions — left, right, step up, drop — and the whole line shifts together.",
+      "Check spacing between each command; correct any gaps before continuing.",
+      "Progress to calling directions faster to test the group's communication under pace."
+    ],
+    points: ["Move on the call, not a beat behind", "Keep even spacing across the line at all times", "Talk constantly to stay connected as a unit"],
+    levelNotes: {
+      academy: "Add a ball being played around the perimeter by attackers to give the shifts a live picture to react to."
+    }
+  },
+  {
+    id: "def11", name: "1v2 defending recovery", category: "technical", formation: "zones",
+    ageMin: 13, ageMax: 19, skills: ["academy"], focus: ["defending"],
+    players: "9-16", equipment: ["Cones"],
+    summary: "A lone defender faces two attackers and must delay, show them into a difficult angle, and buy time for cover to arrive — training composure in a numbers-down moment.",
+    steps: [
+      "Mark a 20x15 yard area with a defender starting centrally and two attackers with a ball.",
+      "The attackers try to combine and score at a small goal; the defender must delay without overcommitting.",
+      "After 3 seconds, a second defender joins from the side to represent recovering cover.",
+      "Play until a goal or the ball is won; rotate roles."
+    ],
+    points: ["Delay, don't dive in — buying time is the job until help arrives", "Show attackers away from the most dangerous space", "Communicate loudly the moment cover arrives"],
+    levelNotes: {
+      academy: "Vary the delay before cover arrives (2-5 seconds) so the defender can't predict help's timing."
+    }
+  },
+  {
+    id: "def12", name: "Interception reads", category: "technical", formation: "box",
+    ageMin: 10, ageMax: 15, skills: ["travel", "academy"], focus: ["defending"],
+    players: "8-16", equipment: ["Cones", "Bibs"],
+    summary: "Defenders practice reading a passing lane and stepping in front to intercept, rather than only reacting once the ball has been played — a proactive defending habit.",
+    steps: [
+      "Set up a 4v2 possession grid with two defenders working together.",
+      "Defenders must try to anticipate the next pass and step into the lane to intercept, rather than chasing the ball after it's played.",
+      "Award a bonus point for a clean interception versus a standard tackle.",
+      "Rotate defenders in every 3-4 minutes."
+    ],
+    points: ["Watch the passer's body shape for clues on where the ball is going", "Time the step into the lane so it's a clean interception, not a foul", "Stay ready to recover if the read is wrong"],
+    levelNotes: {
+      travel: "Slow the possession team's tempo at first so reads are easier to make successfully.",
+      academy: "Speed the tempo up and track the team's interception count as a session target."
+    }
+  },
+  {
+    id: "def13", name: "Last defender race", category: "technical", formation: "line",
+    ageMin: 8, ageMax: 12, skills: ["recreation", "travel"], focus: ["defending", "fitness"],
+    players: "8-20", equipment: ["Cones"],
+    summary: "A fun race that simulates being the last defender chasing back on a breakaway, building recovery speed and the mentality to never stop chasing the play.",
+    steps: [
+      "Set up a 20-yard sprint from a 'beaten' starting position to a 'recovered' cone near an imaginary goal.",
+      "On the whistle, players sprint the full distance as if chasing back after being beaten.",
+      "Time each player or race them in pairs.",
+      "Run 3-4 reps with full recovery between them."
+    ],
+    points: ["Sprint at full effort, no jogging back", "Get goal-side before slowing to defend", "Keep believing you can catch the play — never give up on the sprint"],
+    levelNotes: {
+      recreation: "Frame it as a fun race with cheering rather than a fitness test."
+    }
+  },
+
+  // FITNESS / AGILITY (additional)
+  {
+    id: "f6", name: "Box jump and sprint combo", category: "technical", formation: "line",
+    ageMin: 11, ageMax: 19, skills: ["travel", "academy"], focus: ["fitness"],
+    players: "6-18", equipment: ["Cones"],
+    summary: "A short explosive circuit pairing a jump with an immediate sprint, training the burst of power that shows up in duels, headers, and quick accelerations.",
+    steps: [
+      "Mark a takeoff spot and a 10-yard sprint lane beyond it.",
+      "Player performs two-footed broad jumps in place, then immediately sprints the 10 yards at full speed.",
+      "Walk back to recover fully before the next rep.",
+      "Run 5-6 total reps."
+    ],
+    points: ["Land soft and balanced from the jump", "Explode into the sprint the instant you land", "Full recovery between reps to keep quality high"],
+    levelNotes: {
+      travel: "Reduce to a single jump before the sprint while the movement pattern is new.",
+      academy: "Add a ball to receive and dribble away with at the end of the sprint."
+    }
+  },
+  {
+    id: "f7", name: "Partner resistance sprints", category: "technical", formation: "pairs",
+    ageMin: 13, ageMax: 19, skills: ["travel", "academy"], focus: ["fitness"],
+    players: "8-18", equipment: ["None"],
+    summary: "Partners provide light resistance to each other over short sprints, building the drive phase strength that helps players win the first few steps of a race for the ball.",
+    steps: [
+      "Pair players up; one holds the other lightly at the waist or shoulders from behind.",
+      "The lead player drives forward for 10 yards against the light resistance while the partner jogs behind, resisting gently.",
+      "Release the resistance for the final 5 yards to sprint free.",
+      "Switch roles and repeat for 4-5 reps each."
+    ],
+    points: ["Stay low and drive with the legs, don't lean too far forward", "Resistance should be light — this builds technique, not a wrestling match", "Full sprint once released"],
+    levelNotes: {
+      travel: "Keep the resistance very light and the distance short while players learn the drill.",
+      academy: "Increase resistance slightly and add a ball to receive right at the release point."
+    }
+  },
+  {
+    id: "f8", name: "Repeat sprint pyramid", category: "technical", formation: "line",
+    ageMin: 13, ageMax: 19, skills: ["academy"], focus: ["fitness"],
+    players: "6-20", equipment: ["Cones"],
+    summary: "A demanding conditioning set that climbs and descends in distance, building the repeat-sprint ability that separates fresh legs from tired ones late in a match.",
+    steps: [
+      "Mark cones at 10, 20, 30, 20, and 10 yards from a start line.",
+      "Players sprint to each distance in order, jogging back to the start between each rep.",
+      "Rest 30-45 seconds between reps, shorter than a full recovery to build match-realistic fatigue resistance.",
+      "Complete the full pyramid as one set; run 1-2 sets depending on the group's conditioning level."
+    ],
+    points: ["Hold sprint quality even as fatigue builds", "Use the jog-back actively, not as a total rest", "Mental toughness matters as much as physical here"],
+    levelNotes: {
+      academy: "This is a demanding academy-level set — make sure the group is properly warmed up first."
+    }
+  },
+
+  // SSG / POSSESSION (additional)
+  {
+    id: "ssg8", name: "Overload possession 5v3", category: "ssg", formation: "box",
+    ageMin: 9, ageMax: 16, skills: ["recreation", "travel", "academy"], focus: ["possession", "passing"], formats: ["7v7", "9v9"],
+    players: "8-16", equipment: ["Cones", "Bibs"],
+    summary: "A numbers-up possession game that rewards quick combination play and support, building confidence in keeping the ball against real pressure.",
+    steps: [
+      "Mark a 20x20 yard grid.",
+      "Set up a 5v3 possession game inside — five attackers against three defenders.",
+      "Attackers try to string together as many passes as possible; defenders press to win it back.",
+      "Rotate defenders in every 3 minutes so everyone gets both roles."
+    ],
+    points: ["Spread out to use the extra numbers", "Support at angles, not directly behind the ball", "Play out of pressure calmly rather than rushing"],
+    levelNotes: {
+      recreation: "Allow unlimited touches to keep the game flowing and confidence high.",
+      academy: "Move to a two-touch limit and track consecutive completed passes as a team target."
+    }
+  },
+  {
+    id: "ssg9", name: "End-zone possession game", category: "ssg", formation: "zones",
+    ageMin: 10, ageMax: 17, skills: ["travel", "academy"], focus: ["possession", "shooting"], formats: ["7v7", "9v9"],
+    players: "10-16", equipment: ["Cones", "Bibs"],
+    summary: "Teams score by dribbling or passing the ball into an end zone rather than at a goal, rewarding patient buildup and combination play over direct shooting.",
+    steps: [
+      "Mark a field with an end zone at each end, roughly 5 yards deep.",
+      "Teams score a point for any player receiving the ball under control inside the opponent's end zone.",
+      "Play normal possession rules elsewhere on the field.",
+      "Play 5-6 minute periods, coaching patience in building toward the end zone."
+    ],
+    points: ["Draw defenders out before playing into the end zone", "Support the player entering the zone for a possible layoff", "Don't force the ball forward before the opportunity is really there"],
+    levelNotes: {
+      travel: "Make the end zones wide and shallow so entries come more easily at first.",
+      academy: "Narrow the end zones and require a first-time pass or touch to score inside them."
+    }
+  },
+  {
+    id: "ssg10", name: "4v4 plus goalkeepers", category: "ssg", formation: "box",
+    ageMin: 9, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: ["shooting", "defending", "possession"], formats: ["9v9", "11v11"],
+    players: "10-16", equipment: ["Cones", "Goals", "Bibs"],
+    summary: "A small-sided game with full-size goals and goalkeepers, closer to the real match picture than a small-goals version and a good finishing-focused session closer.",
+    steps: [
+      "Set up two full-size (or junior) goals with goalkeepers at a 30x20 yard field.",
+      "Play 4v4 with normal rules and offside if age-appropriate.",
+      "Play 4-6 minute games, rotating in extra players and goalkeepers between games.",
+      "Coach shape and finishing decisions from the sideline."
+    ],
+    points: ["Attack the goal directly when the chance is on", "Communicate with your goalkeeper on set pieces and back passes", "Track back the moment possession is lost"],
+    levelNotes: {
+      recreation: "Keep goals slightly smaller or use extra keepers so scoring stays achievable.",
+      academy: "Add a condition like 'no goals from outside the box' to encourage combination play in tight areas."
+    }
+  },
+  {
+    id: "ssg11", name: "Counter-attack transition game", category: "ssg", formation: "zones",
+    ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["possession", "defending", "fitness"], formats: ["9v9", "11v11"],
+    players: "12-18", equipment: ["Cones", "Bibs", "Goals"],
+    summary: "A game built specifically to reward fast, direct attacking the moment the ball is won, training the counter-attacking instinct that punishes a disorganized opponent.",
+    steps: [
+      "Set up a full-width field with goals at each end.",
+      "Play normal rules, but award bonus points for any goal scored within 8 seconds of winning possession.",
+      "Play 5-6 minute periods, coaching the first pass and run after a turnover specifically.",
+      "Track and announce the bonus-point count to keep the incentive visible."
+    ],
+    points: ["Look forward immediately on winning the ball, not sideways", "Sprint into space the instant possession changes", "Keep the first pass simple and forward, not fancy"],
+    levelNotes: {
+      travel: "Extend the bonus window to 10-12 seconds so the reward feels achievable.",
+      academy: "Tighten to a true 6-second window to sharpen the group's transition speed."
+    }
+  },
+  {
+    id: "ssg12", name: "Wide overload game", category: "ssg", formation: "box",
+    ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["possession", "passing"], styles: ["combination"], formats: ["9v9", "11v11"],
+    players: "10-16", equipment: ["Cones", "Bibs", "Goals"],
+    summary: "A small-sided game with wide channels that only attackers can use, encouraging teams to build overloads out wide and cross into the box — reinforcing the combination-play ideas from earlier in a session.",
+    steps: [
+      "Mark a field with a wide channel down each sideline, entry restricted to attacking players only.",
+      "Play normal small-sided rules elsewhere, but goals only count if the buildup used a wide channel at some point in the possession.",
+      "Play 5-6 minute periods, coaching overlaps and underlaps into the channel.",
+      "Rotate which players get extra time in the wide channel to spread the reps around."
+    ],
+    points: ["Use the wide channel with purpose, not just for width's sake", "Time runs into the channel so the ball carrier has an option", "Look up for the cross or cutback once in the channel"],
+    levelNotes: {
+      travel: "Relax the rule to 'bonus point' rather than a requirement while the idea is new.",
+      academy: "Make wide-channel use a strict scoring requirement to force the pattern every time."
+    }
+  },
+
+  // COOLDOWN (additional)
+  {
+    id: "c4", name: "Foam roll and mobility flow", category: "cooldown", formation: "line",
+    ageMin: 13, ageMax: 19, skills: ["academy"], focus: [],
+    players: "6-20", equipment: ["Foam rollers (optional)"],
+    summary: "A slightly more structured cooldown for older, higher-training-load players, combining mobility movements with optional foam rolling to aid recovery between sessions.",
+    steps: [
+      "Spread players out with enough space to move freely.",
+      "Lead a short mobility flow: hip circles, world's greatest stretch, ankle rocks.",
+      "For players with access to foam rollers, spend 2-3 minutes on the quads, calves, and upper back.",
+      "Close with a few slow, deep breaths as a group."
+    ],
+    points: ["Move with control, not speed", "Breathe steadily throughout", "Focus on areas that felt tight during the session"],
+    levelNotes: {
+      academy: "Tie this to the session's physical demands — extra time on legs after a fitness-heavy day."
+    }
+  },
+  {
+    id: "c5", name: "Two-minute reflection circle", category: "cooldown", formation: "circle",
+    ageMin: 9, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: [],
+    players: "6-24", equipment: ["None"],
+    summary: "A quick, low-key closing circle where players share one word or one sentence about the session, building team culture without eating into limited practice time.",
+    steps: [
+      "Gather the group in a circle for two minutes at the very end of the session.",
+      "Ask each player to share one word describing how the session felt, or one thing they're proud of.",
+      "Keep it moving quickly — this isn't a long debrief, just a quick moment of connection.",
+      "Close with a group cheer or a coach's one-sentence takeaway."
+    ],
+    points: ["Keep energy positive regardless of how the session went", "Make sure every player gets a turn", "Respect the two-minute limit so pickup stays on time"],
+    levelNotes: {
+      recreation: "Great as a closing ritual every single session — the consistency is what builds culture."
+    }
+  },
+
+  // TRAINING PHILOSOPHY — POSITIONAL PLAY (additional)
+  {
+    id: "bp3", name: "Build-out from the back", category: "technical", formation: "zones",
+    ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["possession", "passing"], styles: ["positional"],
+    players: "10-16", equipment: ["Cones", "Bibs"],
+    summary: "A structured possession pattern starting from the goalkeeper, training the patient, positional build-out associated with possession-based teams rather than clearing the ball long under pressure.",
+    steps: [
+      "Set up a back three or four plus a goalkeeper at one end of a marked third of the field, facing a small group of pressing attackers.",
+      "The goalkeeper starts every sequence, and the back line must build play out using short passes and movement rather than going long.",
+      "Attackers press to try to win the ball high; if they do, they can score at a small goal.",
+      "Reset from the goalkeeper after every turnover or clearance and repeat."
+    ],
+    points: ["Create passing angles before the goalkeeper receives the ball back", "Split the center backs wide to stretch the press", "Play out of pressure calmly — composure beats panic"],
+    levelNotes: {
+      travel: "Allow the goalkeeper an escape long pass as a safety valve while the pattern is new.",
+      academy: "Remove the long-pass option entirely and make the group solve every press on the ground."
+    }
+  },
+  {
+    id: "bp4", name: "Rondo to switch", category: "technical", formation: "box",
+    ageMin: 12, ageMax: 19, skills: ["academy"], focus: ["possession", "passing"], styles: ["positional"],
+    players: "10-16", equipment: ["Cones", "Bibs"],
+    summary: "A large rondo split into two connected zones, training players to recognize the moment to switch the point of attack from a settled possession into a fresh side.",
+    steps: [
+      "Set up two adjoining 12x12 yard grids with a shared 'free' player who can move between both.",
+      "Play a standard possession rondo in one grid until the group has strung together several passes.",
+      "Use the free player to switch the ball into the second grid, where a new rondo begins.",
+      "Continue switching back and forth every time possession is well established."
+    ],
+    points: ["Recognize when a side has gone stale and needs a switch", "Use the free player as the connector, not just an extra body", "Receive the switch pass on the half-turn to keep tempo up"],
+    levelNotes: {
+      academy: "Add a defender who can chase the switch, rewarding a well-timed and well-weighted pass."
+    }
+  },
+
+  // TRAINING PHILOSOPHY — COMBINATION PLAY (additional)
+  {
+    id: "ar3", name: "Give-and-go into the box", category: "technical", formation: "gates",
+    ageMin: 11, ageMax: 17, skills: ["travel", "academy"], focus: ["passing", "shooting"], styles: ["combination"],
+    players: "9-16", equipment: ["Cones", "Goal", "Balls"],
+    summary: "A simple combination pattern that ends in a shot, connecting the wall-pass idea directly to a finishing outcome so players see the full value of the combination.",
+    steps: [
+      "Position a passer at the edge of the box and a wall player just inside it, with a small goal to finish at.",
+      "The passer plays to the wall player and sprints into the box.",
+      "The wall player lays the ball back first-time into the run.",
+      "The passer finishes on goal; rotate roles after every 4-5 reps."
+    ],
+    points: ["The wall player's touch is the pass, not a stop-and-start", "Sprint the instant the pass is played", "Finish quickly once in the box, don't over-touch it"],
+    levelNotes: {
+      travel: "Walk the pattern through without a defender until the timing clicks.",
+      academy: "Add a recovering defender to make the run and finish fully live."
+    }
+  },
+  {
+    id: "ar4", name: "Diagonal combination runs", category: "technical", formation: "zones",
+    ageMin: 13, ageMax: 19, skills: ["travel", "academy"], focus: ["passing", "dribbling"], styles: ["combination"],
+    players: "9-18", equipment: ["Cones"],
+    summary: "Players practice the diagonal run that pulls a defender out of position and opens a passing lane behind them — a key combination-play movement in the final third.",
+    steps: [
+      "Set up a channel with a ball carrier at one end and a runner starting central.",
+      "The runner makes a diagonal run across the ball carrier's path, dragging an imaginary defender with them.",
+      "The ball carrier plays into the space the run has vacated, either to the runner or a third player filling in behind.",
+      "Rotate roles and repeat down the channel."
+    ],
+    points: ["Sell the diagonal run fully — a half-hearted run doesn't drag the defender", "Time the pass to the space created, not necessarily to the runner", "Third player should read the run and fill the vacated space"],
+    levelNotes: {
+      travel: "Walk through the pattern without pressure first so the movement is understood.",
+      academy: "Add a defender tracking the runner to make the decision of where to play fully live."
+    }
+  },
+
+  // TRAINING PHILOSOPHY — PRESS AND PHYSICAL DUELS (additional)
+  {
+    id: "epl4", name: "Set piece defending organization", category: "technical", formation: "zones",
+    ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["defending"], styles: ["physical"],
+    players: "10-18", equipment: ["Cones", "Goal", "Balls"],
+    summary: "A focused walkthrough and live rep of defending a corner or free kick, training the organization and physical commitment that decides a large share of goals at every level.",
+    steps: [
+      "Set up defenders in their assigned zonal or man-marking positions inside the box.",
+      "Walk through each player's job — who takes the near post, who tracks the most dangerous runner — before going live.",
+      "Deliver a real corner or free kick service and have the group defend it fully.",
+      "Reset and repeat 5-6 times, rotating the delivery type and angle."
+    ],
+    points: ["Attack the ball first, don't wait for it to arrive", "Communicate assignments loudly before every delivery", "Clear with authority — first contact should be decisive, not tentative"],
+    levelNotes: {
+      travel: "Start with a walkthrough at half speed before adding live, full-speed reps.",
+      academy: "Add an attacking team trying to score to make every rep fully competitive."
+    }
+  },
+  {
+    id: "epl5", name: "Front-foot tackling technique", category: "technical", formation: "pairs",
+    ageMin: 10, ageMax: 19, skills: ["travel", "academy"], focus: ["defending"], styles: ["physical"],
+    players: "8-18", equipment: ["Cones"],
+    summary: "Technical work on the block tackle — timing, body position, and follow-through — building the confidence to win the ball cleanly and decisively rather than shying away from contact.",
+    steps: [
+      "Pair players up facing each other, each with a foot on their own ball.",
+      "On a signal, both players attempt a controlled block tackle at the same time, driving through the ball with a firm ankle.",
+      "Progress to one player dribbling gently at the other, who times a live tackle.",
+      "Run 6-8 reps per pair, alternating who dribbles and who tackles."
+    ],
+    points: ["Firm ankle and full body weight behind the tackle", "Eyes on the ball through contact, not the opponent", "Follow through to win the ball, not just make contact"],
+    levelNotes: {
+      travel: "Keep tackles controlled and at moderate pace to build technique safely.",
+      academy: "Add a live 1v1 to goal so the tackle has a real match consequence attached."
+    }
   }
 ];
+
+/* ---------------------------------------------------------
+   CONSTANTS
+--------------------------------------------------------- */
 
 export const AGES = Array.from({ length: 13 }, (_, i) => i + 7); // 7..19
 
@@ -1048,7 +1820,6 @@ export const CATEGORY_LABEL = {
   ssg: "Small-sided game",
   cooldown: "Cool-down"
 };
-
 export const SKILL_CATEGORIES = [
   { id: "technical", name: "Technical", skills: ["First touch", "Passing accuracy", "Dribbling & ball control", "Finishing", "Heading", "Crossing", "Weak foot ability"] },
   { id: "physical", name: "Physical", skills: ["Pace", "Strength & physicality", "Stamina", "Agility & quickness", "Aerial ability"] },
@@ -1088,6 +1859,10 @@ export function suggestPositionsForPlayer(player) {
   return top.slice(0, 2).map((s) => s.pos.id);
 }
 
+/* ---------------------------------------------------------
+   FORMATION ASSISTANT — objectives and formation library
+--------------------------------------------------------- */
+
 export const OBJECTIVES = [
   { id: "possession", name: "Possession & build-out", tagline: "Control the game through the middle with patient buildup from the back." },
   { id: "press", name: "High press & quick transition", tagline: "Win the ball high up the field and attack in numbers before the defense resets." },
@@ -1114,6 +1889,18 @@ export const FORMATIONS = {
       { role: "CB", label: "CB", x: 24, y: 20 }, { role: "CB", label: "CB", x: 50, y: 17 }, { role: "CB", label: "CB", x: 76, y: 20 },
       { role: "CM", label: "CM", x: 34, y: 50 }, { role: "CM", label: "CM", x: 66, y: 50 },
       { role: "ST", label: "ST", x: 50, y: 82 }
+    ]},
+    { name: "3-1-2", tags: ["defensive", "balanced"], blurb: "A back three protected by a single holding midfielder, freeing two forwards to combine and stretch the game up top.", slots: [
+      { role: "GK", label: "GK", x: 50, y: 6 },
+      { role: "CB", label: "CB", x: 24, y: 20 }, { role: "CB", label: "CB", x: 50, y: 17 }, { role: "CB", label: "CB", x: 76, y: 20 },
+      { role: "CDM", label: "CDM", x: 50, y: 46 },
+      { role: "ST", label: "ST", x: 35, y: 80 }, { role: "ST", label: "ST", x: 65, y: 80 }
+    ]},
+    { name: "2-1-3", tags: ["press"], blurb: "A minimal back two behind a single holding player, committing three attackers to press and pin the opponent immediately.", slots: [
+      { role: "GK", label: "GK", x: 50, y: 6 },
+      { role: "CB", label: "CB", x: 35, y: 20 }, { role: "CB", label: "CB", x: 65, y: 20 },
+      { role: "CDM", label: "CDM", x: 50, y: 44 },
+      { role: "W", label: "W", x: 20, y: 78 }, { role: "ST", label: "ST", x: 50, y: 84 }, { role: "W", label: "W", x: 80, y: 78 }
     ]}
   ],
   "9v9": [
@@ -1134,6 +1921,19 @@ export const FORMATIONS = {
       { role: "FB", label: "FB", x: 15, y: 22 }, { role: "CB", label: "CB", x: 38, y: 18 }, { role: "CB", label: "CB", x: 62, y: 18 }, { role: "FB", label: "FB", x: 85, y: 22 },
       { role: "CM", label: "CM", x: 24, y: 50 }, { role: "CM", label: "CM", x: 50, y: 48 }, { role: "CM", label: "CM", x: 76, y: 50 },
       { role: "ST", label: "ST", x: 50, y: 84 }
+    ]},
+    { name: "3-1-3-1", tags: ["possession", "press"], blurb: "A back three feeding a holding midfielder, a wide front three around a playmaker, and a focal striker — built to combine through the middle and the channels.", slots: [
+      { role: "GK", label: "GK", x: 50, y: 6 },
+      { role: "CB", label: "CB", x: 24, y: 20 }, { role: "CB", label: "CB", x: 50, y: 16 }, { role: "CB", label: "CB", x: 76, y: 20 },
+      { role: "CDM", label: "CDM", x: 50, y: 40 },
+      { role: "W", label: "W", x: 18, y: 64 }, { role: "CAM", label: "CAM", x: 50, y: 60 }, { role: "W", label: "W", x: 82, y: 64 },
+      { role: "ST", label: "ST", x: 50, y: 86 }
+    ]},
+    { name: "4-2-2", tags: ["defensive"], blurb: "A full back four for real defensive width and cover, a tight midfield two, and two forwards ready to break on the counter.", slots: [
+      { role: "GK", label: "GK", x: 50, y: 6 },
+      { role: "FB", label: "FB", x: 15, y: 22 }, { role: "CB", label: "CB", x: 38, y: 18 }, { role: "CB", label: "CB", x: 62, y: 18 }, { role: "FB", label: "FB", x: 85, y: 22 },
+      { role: "CM", label: "CM", x: 35, y: 50 }, { role: "CM", label: "CM", x: 65, y: 50 },
+      { role: "ST", label: "ST", x: 38, y: 84 }, { role: "ST", label: "ST", x: 62, y: 84 }
     ]}
   ],
   "11v11": [
@@ -1161,6 +1961,19 @@ export const FORMATIONS = {
       { role: "CB", label: "CB", x: 26, y: 18 }, { role: "CB", label: "CB", x: 50, y: 14 }, { role: "CB", label: "CB", x: 74, y: 18 },
       { role: "FB", label: "FB", x: 8, y: 44 }, { role: "CDM", label: "CDM", x: 38, y: 42 }, { role: "CM", label: "CM", x: 62, y: 42 }, { role: "FB", label: "FB", x: 92, y: 44 },
       { role: "CAM", label: "CAM", x: 50, y: 62 },
+      { role: "ST", label: "ST", x: 38, y: 86 }, { role: "ST", label: "ST", x: 62, y: 86 }
+    ]},
+    { name: "4-1-4-1", tags: ["press", "balanced"], blurb: "A single defensive midfielder screens the back four while a busy midfield four provides width and combination play in front, with one striker as the outlet.", slots: [
+      { role: "GK", label: "GK", x: 50, y: 5 },
+      { role: "FB", label: "FB", x: 14, y: 20 }, { role: "CB", label: "CB", x: 37, y: 15 }, { role: "CB", label: "CB", x: 63, y: 15 }, { role: "FB", label: "FB", x: 86, y: 20 },
+      { role: "CDM", label: "CDM", x: 50, y: 38 },
+      { role: "W", label: "W", x: 16, y: 58 }, { role: "CM", label: "CM", x: 38, y: 56 }, { role: "CM", label: "CM", x: 62, y: 56 }, { role: "W", label: "W", x: 84, y: 58 },
+      { role: "ST", label: "ST", x: 50, y: 88 }
+    ]},
+    { name: "5-3-2", tags: ["defensive"], blurb: "A back five for maximum defensive solidity, a compact midfield three, and two forwards who can hold the ball up and break quickly.", slots: [
+      { role: "GK", label: "GK", x: 50, y: 5 },
+      { role: "FB", label: "FB", x: 8, y: 22 }, { role: "CB", label: "CB", x: 28, y: 16 }, { role: "CB", label: "CB", x: 50, y: 13 }, { role: "CB", label: "CB", x: 72, y: 16 }, { role: "FB", label: "FB", x: 92, y: 22 },
+      { role: "CM", label: "CM", x: 30, y: 50 }, { role: "CM", label: "CM", x: 50, y: 48 }, { role: "CM", label: "CM", x: 70, y: 50 },
       { role: "ST", label: "ST", x: 38, y: 86 }, { role: "ST", label: "ST", x: 62, y: 86 }
     ]}
   ]
