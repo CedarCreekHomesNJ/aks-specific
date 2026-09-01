@@ -62,39 +62,50 @@ export default function Home() {
   }
 
   return (
-    <div style={{ maxWidth: 560 }}>
-      <div style={{ maxWidth: 480, margin: '60px auto 0', padding: '0 20px', fontFamily: 'sans-serif', textAlign: 'center' }}>
-        <h1>AKS Specific</h1>
+    <div>
+      <div className="app-bar">
+        <div className="logo-mark">A</div>
+        <div className="brand">AKS Specific</div>
+      </div>
+
+      <div className="page" style={{ maxWidth: 640 }}>
+        <h1 style={{ fontSize: 30 }}>Coaching, organized.</h1>
+        <p style={{ color: 'var(--ink-soft)', fontSize: 15, marginBottom: 28 }}>
+          Build practice plans, manage your roster, and dial in a formation — all saved to your team's private link.
+        </p>
 
         {links.length > 0 && (
-          <div style={{ textAlign: 'left', margin: '32px 0' }}>
-            <h3>Your teams and profiles</h3>
+          <div style={{ marginBottom: 28 }}>
+            <p className="section-title">Your teams and profiles</p>
             {links.map((l) => (
-              <div key={`${l.type}-${l.code}`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1px solid #ddd', borderRadius: 6, padding: 10, marginBottom: 6 }}>
-                <Link to={l.type === 'team' ? `/t/${l.code}` : `/p/${l.code}`} style={{ textDecoration: 'none', color: '#1F4D3A' }}>
-                  <span style={{ fontSize: 11, background: '#eee', borderRadius: 3, padding: '2px 6px', marginRight: 8 }}>
-                    {l.type === 'team' ? 'Team' : 'Profile'}
-                  </span>
+              <div key={`${l.type}-${l.code}`} className="card" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 14, marginBottom: 8 }}>
+                <Link to={l.type === 'team' ? `/t/${l.code}` : `/p/${l.code}`} style={{ textDecoration: 'none', color: 'var(--ink)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <span className={l.type === 'team' ? 'badge' : 'badge badge-orange'}>{l.type === 'team' ? 'Team' : 'Profile'}</span>
                   {l.label}
                 </Link>
-                <button onClick={() => forget(l.type, l.code)} style={{ fontSize: 12, color: '#999' }}>Forget</button>
+                <button onClick={() => forget(l.type, l.code)} className="btn btn-outline btn-sm">Forget</button>
               </div>
             ))}
           </div>
         )}
 
-        <p>Create a new team to get your private, saved coaching dashboard.</p>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button onClick={createTeam} disabled={creating} style={{ padding: '12px 24px', fontSize: 16 }}>
-          {creating ? 'Creating…' : 'Create a new team'}
-        </button>
+        {error && <p style={{ color: '#D92D20' }}>{error}</p>}
 
-        <p style={{ marginTop: 40, color: '#777', fontSize: 13.5 }}>
-          Coaching more than one team? Create a profile to keep them all in one saved place.
-        </p>
-        <button onClick={createProfile} disabled={creatingProfile} style={{ padding: '10px 18px' }}>
-          {creatingProfile ? 'Creating…' : 'Create a coach profile'}
-        </button>
+        <div className="card" style={{ marginBottom: 16, textAlign: 'center', padding: 28 }}>
+          <p style={{ fontWeight: 700, marginBottom: 14 }}>Start a new team</p>
+          <button onClick={createTeam} disabled={creating} className="btn btn-primary">
+            {creating ? 'Creating…' : 'Create a new team'}
+          </button>
+        </div>
+
+        <div className="card" style={{ textAlign: 'center', padding: 22 }}>
+          <p style={{ color: 'var(--ink-soft)', fontSize: 13.5, marginBottom: 12 }}>
+            Coaching more than one team? Create a profile to keep them all in one saved place.
+          </p>
+          <button onClick={createProfile} disabled={creatingProfile} className="btn btn-outline">
+            {creatingProfile ? 'Creating…' : 'Create a coach profile'}
+          </button>
+        </div>
       </div>
     </div>
   )

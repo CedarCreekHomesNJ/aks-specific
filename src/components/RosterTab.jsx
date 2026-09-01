@@ -64,43 +64,30 @@ export default function RosterTab({ team }) {
     loadRoster()
   }
 
-  const chipStyle = (on) => ({
-    border: '1px solid #ccc',
-    borderRadius: 4,
-    padding: '5px 10px',
-    fontSize: 12.5,
-    marginRight: 6,
-    marginBottom: 6,
-    cursor: 'pointer',
-    background: on ? '#1F4D3A' : '#fff',
-    color: on ? '#fff' : '#333',
-    display: 'inline-block'
-  })
-
   return (
-    <div style={{ maxWidth: 640 }}>
-      <h2>Team roster</h2>
+    <div style={{ maxWidth: 680 }}>
+      <div className="card" style={{ marginBottom: 24 }}>
+        <h2 style={{ fontSize: 20 }}>Add a player</h2>
 
-      <div style={{ border: '1px solid #ddd', borderRadius: 6, padding: 20, marginBottom: 24 }}>
         <div style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
           <div style={{ flex: 2 }}>
-            <label style={{ fontSize: 13, fontWeight: 600 }}>Name</label>
-            <input style={{ display: 'block', width: '100%', padding: 8, marginTop: 4 }} value={name} onChange={(e) => setName(e.target.value)} />
+            <label className="field-label">Name</label>
+            <input className="field" value={name} onChange={(e) => setName(e.target.value)} />
           </div>
           <div style={{ flex: 1 }}>
-            <label style={{ fontSize: 13, fontWeight: 600 }}>Age</label>
-            <input type="number" style={{ display: 'block', width: '100%', padding: 8, marginTop: 4 }} value={age} onChange={(e) => setAge(e.target.value)} />
+            <label className="field-label">Age</label>
+            <input type="number" className="field" value={age} onChange={(e) => setAge(e.target.value)} />
           </div>
         </div>
 
-        <label style={{ fontSize: 13, fontWeight: 600 }}>Strengths (up to {MAX_STRENGTHS})</label>
+        <label className="field-label">Strengths (up to {MAX_STRENGTHS})</label>
         {SKILL_CATEGORIES.map((cat) => (
-          <div key={cat.id} style={{ marginTop: 8, marginBottom: 8 }}>
-            <p style={{ fontSize: 12, color: '#777', margin: '4px 0' }}>{cat.name}</p>
+          <div key={cat.id} style={{ marginTop: 8, marginBottom: 4 }}>
+            <p style={{ fontSize: 11.5, color: 'var(--ink-soft)', margin: '4px 0', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.03em' }}>{cat.name}</p>
             {cat.skills.map((skill) => {
               const on = strengths.includes(skill)
               return (
-                <span key={skill} style={chipStyle(on)} onClick={() => toggleSkill(skill, strengths, setStrengths, MAX_STRENGTHS)}>
+                <span key={skill} className={`chip ${on ? 'chip-active' : ''}`} onClick={() => toggleSkill(skill, strengths, setStrengths, MAX_STRENGTHS)}>
                   {skill}
                 </span>
               )
@@ -108,40 +95,43 @@ export default function RosterTab({ team }) {
           </div>
         ))}
 
-        <label style={{ fontSize: 13, fontWeight: 600, display: 'block', marginTop: 16 }}>Needs improvement (up to {MAX_NEEDS})</label>
+        <label className="field-label" style={{ display: 'block', marginTop: 16 }}>Needs improvement (up to {MAX_NEEDS})</label>
         <div style={{ marginTop: 8 }}>
           {ALL_SKILLS.map((skill) => {
             const on = needs.includes(skill)
             return (
-              <span key={skill} style={{ ...chipStyle(on), background: on ? '#D98E27' : '#fff' }} onClick={() => toggleSkill(skill, needs, setNeeds, MAX_NEEDS)}>
+              <span key={skill} className={`chip chip-orange ${on ? 'chip-active' : ''}`} onClick={() => toggleSkill(skill, needs, setNeeds, MAX_NEEDS)}>
                 {skill}
               </span>
             )
           })}
         </div>
 
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error && <p style={{ color: '#D92D20' }}>{error}</p>}
 
-        <button onClick={addPlayer} style={{ marginTop: 16, padding: '10px 20px' }}>Add to roster</button>
+        <button onClick={addPlayer} className="btn btn-primary" style={{ marginTop: 12 }}>Add to roster</button>
       </div>
 
       {loading ? (
-        <p>Loading roster…</p>
+        <p style={{ color: 'var(--ink-soft)' }}>Loading roster…</p>
       ) : roster.length === 0 ? (
-        <p style={{ color: '#777' }}>No players saved yet.</p>
+        <p style={{ color: 'var(--ink-soft)' }}>No players saved yet.</p>
       ) : (
         <div>
           {roster.map((p) => (
-            <div key={p.id} style={{ border: '1px solid #eee', borderRadius: 6, padding: 12, marginBottom: 8, display: 'flex', justifyContent: 'space-between' }}>
+            <div key={p.id} className="card" style={{ padding: 14, marginBottom: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div>
-                <strong>{p.name}</strong>{p.age ? ` (U${p.age})` : ''}{' '}
-                {(p.suggested_positions || []).map((posId) => {
-                  const pos = POSITIONS.find((x) => x.id === posId)
-                  return <span key={posId} style={{ background: '#1F4D3A', color: '#fff', borderRadius: 3, padding: '2px 8px', fontSize: 11, marginLeft: 6 }}>{pos ? pos.short : posId}</span>
-                })}
-                <div style={{ fontSize: 12.5, color: '#777', marginTop: 4 }}>{p.strengths.join(', ')}</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+                  <strong style={{ fontSize: 15.5 }}>{p.name}</strong>
+                  {p.age ? <span style={{ color: 'var(--ink-soft)', fontSize: 12.5 }}>U{p.age}</span> : null}
+                  {(p.suggested_positions || []).map((posId) => {
+                    const pos = POSITIONS.find((x) => x.id === posId)
+                    return <span key={posId} className="badge">{pos ? pos.short : posId}</span>
+                  })}
+                </div>
+                <div style={{ fontSize: 12.5, color: 'var(--ink-soft)', marginTop: 6 }}>{p.strengths.join(', ')}</div>
               </div>
-              <button onClick={() => removePlayer(p.id)}>Remove</button>
+              <button onClick={() => removePlayer(p.id)} className="btn btn-outline btn-sm">Remove</button>
             </div>
           ))}
         </div>

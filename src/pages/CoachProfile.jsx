@@ -109,55 +109,63 @@ export default function CoachProfile() {
   }
 
   if (loading) return <p style={{ padding: 40 }}>Loading profile…</p>
-  if (error) return <p style={{ padding: 40, color: 'red' }}>{error}</p>
+  if (error) return <p style={{ padding: 40, color: '#D92D20' }}>{error}</p>
 
   return (
-    <div style={{ fontFamily: 'sans-serif', maxWidth: 700, margin: '0 auto', padding: 20 }}>
-      <Link to="/" style={{ fontSize: 13, color: '#1F4D3A' }}>← Back to my teams</Link>
+    <div>
+      <div className="app-bar">
+        <div className="logo-mark">A</div>
+        <div className="brand">AKS Specific</div>
+      </div>
 
-      <h1 style={{ marginTop: 8 }}>{profile.name || 'My teams'}</h1>
-      <p style={{ color: '#777', fontSize: 13 }}>
-        Bookmark this page — profile access code: <strong>{profile.access_code}</strong>
-      </p>
+      <div className="page">
+        <Link to="/" style={{ fontSize: 13, color: 'var(--green-dark)', fontWeight: 700, textDecoration: 'none' }}>← Back to my teams</Link>
 
-      <h3 style={{ marginTop: 32 }}>Your teams</h3>
-      {teams.length === 0 ? (
-        <p style={{ color: '#777' }}>No teams linked yet — create a new one or link an existing team below.</p>
-      ) : (
-        <div>
-          {teams.map((t) => (
-            <div key={t.id} style={{ border: '1px solid #ddd', borderRadius: 6, padding: 14, marginBottom: 8, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div>
-                <strong>{t.team_name}</strong>
-                {t.age_group && <span style={{ color: '#777', fontSize: 13 }}> — {t.age_group}</span>}
-                {t.location && <div style={{ fontSize: 12.5, color: '#999' }}>{t.location}</div>}
+        <h1 style={{ marginTop: 12 }}>{profile.name || 'My teams'}</h1>
+        <p style={{ color: 'var(--ink-soft)', fontSize: 13 }}>
+          Bookmark this page — profile access code: <strong>{profile.access_code}</strong>
+        </p>
+
+        <p className="section-title" style={{ marginTop: 28 }}>Your teams</p>
+        {teams.length === 0 ? (
+          <p style={{ color: 'var(--ink-soft)' }}>No teams linked yet — create a new one or link an existing team below.</p>
+        ) : (
+          <div>
+            {teams.map((t) => (
+              <div key={t.id} className="card" style={{ padding: 16, marginBottom: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div>
+                  <strong style={{ fontSize: 15.5 }}>{t.team_name}</strong>
+                  {t.age_group && <span className="badge" style={{ marginLeft: 8 }}>{t.age_group}</span>}
+                  {t.location && <div style={{ fontSize: 12.5, color: 'var(--ink-soft)', marginTop: 4 }}>{t.location}</div>}
+                </div>
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <Link to={`/t/${t.access_code}`}>
+                    <button className="btn btn-secondary btn-sm">Open dashboard</button>
+                  </Link>
+                  <button onClick={() => deleteTeam(t)} className="btn btn-danger btn-sm">Delete</button>
+                </div>
               </div>
-              <div>
-                <Link to={`/t/${t.access_code}`}>
-                  <button style={{ marginRight: 8 }}>Open dashboard</button>
-                </Link>
-                <button onClick={() => deleteTeam(t)} style={{ color: '#A32D2D' }}>Delete</button>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
 
-      <div style={{ marginTop: 32, borderTop: '1px solid #eee', paddingTop: 20 }}>
-        <button onClick={createTeam} disabled={creating} style={{ padding: '10px 18px', marginRight: 24 }}>
-          {creating ? 'Creating…' : '+ Create a new team'}
-        </button>
+        <div className="card" style={{ marginTop: 24, padding: 20 }}>
+          <button onClick={createTeam} disabled={creating} className="btn btn-primary" style={{ marginBottom: 18 }}>
+            {creating ? 'Creating…' : '+ Create a new team'}
+          </button>
 
-        <div style={{ marginTop: 16 }}>
-          <p style={{ fontSize: 13, fontWeight: 600 }}>Already have a team's link? Attach it to this profile:</p>
-          <input
-            value={linkCode}
-            onChange={(e) => setLinkCode(e.target.value)}
-            placeholder="Team access code"
-            style={{ padding: 8, marginRight: 8 }}
-          />
-          <button onClick={linkTeam}>Link team</button>
-          {linkError && <p style={{ color: 'red', fontSize: 13 }}>{linkError}</p>}
+          <p style={{ fontSize: 13, fontWeight: 700, marginBottom: 8 }}>Already have a team's link? Attach it to this profile:</p>
+          <div style={{ display: 'flex', gap: 8 }}>
+            <input
+              value={linkCode}
+              onChange={(e) => setLinkCode(e.target.value)}
+              placeholder="Team access code"
+              className="field"
+              style={{ flex: 1 }}
+            />
+            <button onClick={linkTeam} className="btn btn-outline">Link team</button>
+          </div>
+          {linkError && <p style={{ color: '#D92D20', fontSize: 13 }}>{linkError}</p>}
         </div>
       </div>
     </div>

@@ -27,39 +27,32 @@ export default function FormationAssistantTab({ team }) {
   const usedIds = new Set(slots.filter((s) => s.player).map((s) => s.player.id))
   const bench = roster.filter((p) => !usedIds.has(p.id))
 
-  const chip = (on) => ({
-    display: 'inline-block', border: '1px solid #ccc', borderRadius: 4,
-    padding: '8px 16px', marginRight: 8, marginBottom: 8, cursor: 'pointer',
-    background: on ? '#1F4D3A' : '#fff', color: on ? '#fff' : '#333'
-  })
-
   return (
-    <div style={{ maxWidth: 800 }}>
-      <h2>Formation assistant</h2>
+    <div style={{ maxWidth: 820 }}>
+      <div className="card" style={{ marginBottom: 20 }}>
+        <p className="section-title">Game format</p>
+        {GAME_FORMATS.map((g) => (
+          <span key={g.id} className={`chip ${format === g.id ? 'chip-active' : ''}`} onClick={() => setFormat(g.id)}>{g.name}</span>
+        ))}
 
-      <p style={{ fontWeight: 600, fontSize: 13 }}>Game format</p>
-      {GAME_FORMATS.map((g) => (
-        <span key={g.id} style={chip(format === g.id)} onClick={() => setFormat(g.id)}>{g.name}</span>
-      ))}
-
-      <p style={{ fontWeight: 600, fontSize: 13, marginTop: 16 }}>Objective</p>
-      {OBJECTIVES.map((o) => (
-        <div key={o.id} style={{ ...chip(objective === o.id), display: 'block' }} onClick={() => setObjective(o.id)}>
-          <strong>{o.name}</strong>
-          <div style={{ fontSize: 12.5, marginTop: 4 }}>{o.tagline}</div>
-        </div>
-      ))}
+        <p className="section-title" style={{ marginTop: 16 }}>Objective</p>
+        {OBJECTIVES.map((o) => (
+          <div key={o.id} className={`chip chip-block chip-orange ${objective === o.id ? 'chip-active' : ''}`} onClick={() => setObjective(o.id)}>
+            <strong>{o.name}</strong>
+            <div className="chip-sub">{o.tagline}</div>
+          </div>
+        ))}
+      </div>
 
       {formation && (
-        <div style={{ marginTop: 24 }}>
-          <h3>{formation.name}</h3>
-          <p style={{ color: '#555' }}>{formation.blurb}</p>
+        <div>
+          <h3 style={{ marginBottom: 2 }}>{formation.name}</h3>
+          <p style={{ color: 'var(--ink-soft)', fontSize: 14, marginBottom: 18 }}>{formation.blurb}</p>
 
           <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap' }}>
-            <div style={{
-              position: 'relative', width: 300, height: 420, background: '#1F4D3A',
-              borderRadius: 8, flexShrink: 0
-            }}>
+            <div className="pitch-card" style={{ width: 300, height: 420, flexShrink: 0 }}>
+              <div style={{ position: 'absolute', inset: 10, border: '2px solid rgba(255,255,255,0.25)', borderRadius: 10 }} />
+              <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)', width: 70, height: 70, border: '2px solid rgba(255,255,255,0.2)', borderRadius: '50%' }} />
               {slots.map((s, i) => (
                 <div
                   key={s.slotKey || i}
@@ -73,33 +66,34 @@ export default function FormationAssistantTab({ team }) {
                 >
                   <div style={{
                     width: 34, height: 34, borderRadius: '50%',
-                    background: s.player ? '#F5F2EA' : 'rgba(245,242,234,0.25)',
-                    border: '2px solid #D98E27',
+                    background: s.player ? '#fff' : 'rgba(255,255,255,0.25)',
+                    border: '2px solid var(--orange)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: 11, fontWeight: 600, color: '#1F4D3A', margin: '0 auto'
+                    fontSize: 11, fontWeight: 800, color: 'var(--green-dark)', margin: '0 auto',
+                    fontFamily: "'Poppins', sans-serif"
                   }}>
                     {s.player ? s.player.name.split(' ').map((p) => p[0]).slice(0, 2).join('').toUpperCase() : s.label}
                   </div>
-                  <div style={{ fontSize: 10, color: '#F5F2EA', marginTop: 2, maxWidth: 70, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <div style={{ fontSize: 10, color: '#fff', marginTop: 2, maxWidth: 70, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', fontWeight: 600 }}>
                     {s.player ? s.player.name : 'Open'}
                   </div>
                 </div>
               ))}
             </div>
 
-            <div style={{ flex: 1, minWidth: 200 }}>
+            <div style={{ flex: 1, minWidth: 220 }}>
               {loading ? (
-                <p>Loading roster…</p>
+                <p style={{ color: 'var(--ink-soft)' }}>Loading roster…</p>
               ) : roster.length === 0 ? (
-                <p style={{ color: '#777', fontSize: 13.5 }}>No roster saved yet — add players in the Team roster tab and they'll slot in here automatically.</p>
+                <p style={{ color: 'var(--ink-soft)', fontSize: 13.5 }}>No roster saved yet — add players in the Team roster tab and they'll slot in here automatically.</p>
               ) : (
                 <div>
-                  <p style={{ fontWeight: 600, fontSize: 13 }}>Bench / unassigned</p>
+                  <p className="section-title">Bench / unassigned</p>
                   {bench.length === 0 ? (
-                    <p style={{ fontSize: 13, color: '#777' }}>Every rostered player has a slot in this shape.</p>
+                    <p style={{ fontSize: 13, color: 'var(--ink-soft)' }}>Every rostered player has a slot in this shape.</p>
                   ) : (
                     bench.map((p) => (
-                      <span key={p.id} style={{ display: 'inline-block', border: '1px solid #ddd', borderRadius: 4, padding: '6px 10px', fontSize: 12.5, marginRight: 6, marginBottom: 6 }}>{p.name}</span>
+                      <span key={p.id} className="chip">{p.name}</span>
                     ))
                   )}
                 </div>
