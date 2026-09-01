@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import {
   AGES, SKILL_LEVELS, FOCUS_OPTIONS, MAX_FOCUS, STYLE_OPTIONS,
-  GAME_FORMATS, DURATIONS, CATEGORY_LABEL, DRILLS, generatePlan
+  GAME_FORMATS, DURATIONS, CATEGORY_LABEL, DRILLS, generatePlan, recommendIdentities
 } from '../lib/gameData'
 import FormationIcon from './FormationIcon'
 import DrillDiagram from './DrillDiagram'
@@ -13,9 +13,10 @@ export default function PracticePlanTab({ team }) {
   const [phase, setPhase] = useState('wizard')
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState({
-    age: 10, skill: null, focus: [], identity: 'blend',
+    age: 10, skill: null, focus: [], identity: [],
     gameFormat: team.game_format || '9v9', duration: 60, players: 14
   })
+  const [identityTouched, setIdentityTouched] = useState(false)
   const [plan, setPlan] = useState([])
   const [browserOpen, setBrowserOpen] = useState(false)
   const [swapKey, setSwapKey] = useState(null)
@@ -25,6 +26,7 @@ export default function PracticePlanTab({ team }) {
   const [diagramDrill, setDiagramDrill] = useState(null)
 
   const key = STEPS[step]
+  const recommended = recommendIdentities(answers.skill, answers.focus)
 
   function canAdvance() {
     if (key === 'skill') return !!answers.skill
@@ -41,6 +43,14 @@ export default function PracticePlanTab({ team }) {
     })
   }
 
+  function toggleIdentity(id) {
+    setIdentityTouched(true)
+    setAnswers((prev) => {
+      const has = prev.identity.includes(id)
+      return { ...prev, identity: has ? prev.identity.filter((i) => i !== id) : [...prev.identity, id] }
+    })
+  }
+
   function buildPlan() {
     return generatePlan({
       age: answers.age, skill: answers.skill, focuses: answers.focus,
@@ -49,6 +59,9 @@ export default function PracticePlanTab({ team }) {
   }
 
   function next() {
+    if (key === 'focus' && !identityTouched) {
+      setAnswers((prev) => ({ ...prev, identity: recommendIdentities(prev.skill, prev.focus) }))
+    }
     if (step < STEPS.length - 1) {
       setStep(step + 1)
     } else {
@@ -64,6 +77,7 @@ export default function PracticePlanTab({ team }) {
   function startOver() {
     setPhase('wizard')
     setStep(0)
+    setIdentityTouched(false)
     setBrowserOpen(false)
     setSwapKey(null)
   }
@@ -114,6 +128,10 @@ export default function PracticePlanTab({ team }) {
     closeBrowser()
   }
 
+  function exportPlan() {
+    window.print()
+  }
+
   const totalMinutes = plan.reduce((a, s) => a + (s.minutes || 0), 0)
 
   const filteredDrills = DRILLS.filter((d) => {
@@ -161,12 +179,22 @@ export default function PracticePlanTab({ team }) {
         {key === 'identity' && (
           <div>
             <h3>Training identity</h3>
-            {STYLE_OPTIONS.map((s) => (
-              <div key={s.id} className={`chip chip-block ${answers.identity === s.id ? 'chip-active' : ''}`} onClick={() => setAnswers({ ...answers, identity: s.id })}>
-                <strong>{s.name}</strong>
-                <div className="chip-sub">{s.tagline}</div>
-              </div>
-            ))}
+            <p style={{ fontSize: 13, color: 'var(--ink-soft)', marginBottom: 12 }}>
+              {recommended.length > 0
+                ? 'Based on the competitive level and focus you picked, we suggest the identities marked below — pick any combination you want.'
+                : "Pick any combination — leave all unpicked for a healthy mix of all three."}
+            </p>
+            {STYLE_OPTIONS.map((s) => {
+              const isRecommended = recommended.includes(s.id)
+              const isOn = answers.identity.includes(s.id)
+              return (
+                <div key={s.id} className={`chip chip-block ${isOn ? 'chip-active' : ''}`} onClick={() => toggleIdentity(s.id)}>
+                  <strong>{s.name}</strong>
+                  {isRecommended && <span className="badge badge-orange" style={{ marginLeft: 8 }}>Recommended</span>}
+                  <div className="chip-sub">{s.tagline}</div>
+                </div>
+              )
+            })}
           </div>
         )}
 
@@ -207,9 +235,17 @@ export default function PracticePlanTab({ team }) {
 
   return (
     <div style={{ maxWidth: 760 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 10 }}>
+      <div className="print-only" style={{ marginBottom: 20 }}>
+        <h2 style={{ marginBottom: 2 }}>{team.team_name} — Practice Plan</h2>
+        <p style={{ color: '#555', fontSize: 13 }}>
+          {new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} · {totalMinutes} minutes total
+        </p>
+      </div>
+
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 10 }} className="no-print">
         <h2 style={{ margin: 0 }}>Today's plan — <span className="stat-number">{totalMinutes} min</span></h2>
         <div>
+          <button onClick={exportPlan} className="btn btn-secondary btn-sm" style={{ marginRight: 8 }}>Export / Print</button>
           <button onClick={openAdd} className="btn btn-secondary btn-sm" style={{ marginRight: 8 }}>+ Add a drill</button>
           <button onClick={regenerate} className="btn btn-outline btn-sm" style={{ marginRight: 8 }}>Shuffle drills</button>
           <button onClick={startOver} className="btn btn-outline btn-sm">Start over</button>
@@ -217,7 +253,7 @@ export default function PracticePlanTab({ team }) {
       </div>
 
       {browserOpen && (
-        <div className="card" style={{ marginBottom: 20, background: 'var(--bg)' }}>
+        <div className="card no-print" style={{ marginBottom: 20, background: 'var(--bg)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
             <p style={{ fontWeight: 700, margin: 0 }}>
               {swapKey ? 'Pick a replacement drill' : 'Browse all drills'}
@@ -285,7 +321,7 @@ export default function PracticePlanTab({ team }) {
             <div key={seg.key} className="card" style={{ marginBottom: 14 }}>
               <div style={{ display: 'flex', gap: 14 }}>
                 <div
-                  className="drill-icon-box"
+                  className="drill-icon-box no-print"
                   onClick={() => setDiagramDrill(d)}
                   title="View interactive diagram"
                   style={{ cursor: 'pointer' }}
@@ -301,12 +337,13 @@ export default function PracticePlanTab({ team }) {
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       <input
                         type="number"
-                        className="field"
+                        className="field no-print"
                         value={seg.minutes}
                         onChange={(e) => updateMinutes(seg.key, e.target.value)}
                         style={{ width: 60, padding: '6px 8px', textAlign: 'center' }}
                       />
-                      <span style={{ fontSize: 12, color: 'var(--ink-soft)' }}>min</span>
+                      <span className="print-only" style={{ fontWeight: 700 }}>{seg.minutes} min</span>
+                      <span style={{ fontSize: 12, color: 'var(--ink-soft)' }} className="no-print">min</span>
                     </div>
                   </div>
                   <p style={{ fontSize: 14, color: 'var(--ink)', marginTop: 6 }}>{d.summary}</p>
@@ -326,7 +363,7 @@ export default function PracticePlanTab({ team }) {
                   </div>
                   <p style={{ fontSize: 12.5, color: 'var(--ink-soft)' }}>Equipment: {d.equipment.join(', ')}</p>
                   {note && <p style={{ fontSize: 12.5, background: 'var(--green-light)', color: 'var(--green-dark)', padding: 10, borderRadius: 8 }}><strong>For {answers.skill}:</strong> {note}</p>}
-                  <div style={{ marginTop: 10, display: 'flex', gap: 8 }}>
+                  <div style={{ marginTop: 10, display: 'flex', gap: 8 }} className="no-print">
                     <button onClick={() => setDiagramDrill(d)} className="btn btn-secondary btn-sm">View on field</button>
                     <button onClick={() => openSwap(seg.key)} className="btn btn-outline btn-sm">Swap drill</button>
                     <button onClick={() => removeSegment(seg.key)} className="btn btn-danger btn-sm">Remove</button>

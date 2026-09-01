@@ -210,3 +210,16 @@ textarea.field { min-height: 80px; resize: vertical; }
   font-weight: 800;
   color: var(--green-dark);
 }
+
+.print-only { display: none; }
+
+@media print {
+  .no-print { display: none !important; }
+  .app-bar { display: none !important; }
+  .tabbar { display: none !important; }
+  body { background: #fff; }
+  .page { padding: 0; max-width: 100%; }
+  .card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
+  .print-only { display: block; }
+  a[href]::after { content: ""; }
+}

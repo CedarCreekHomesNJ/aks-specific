@@ -1787,24 +1787,19 @@ export const GAME_FORMATS = [
 
 export const STYLE_OPTIONS = [
   {
-    id: "blend",
-    name: "Blended identity (recommended)",
-    tagline: "Barcelona-style possession, Arsenal-style combination play, and Premier League-style physical defending, woven through every session."
-  },
-  {
     id: "positional",
-    name: "Positional play emphasis",
-    tagline: "Barcelona-inspired: rondos, structured spacing, and quick possession that never lets the ball go stale."
+    name: "Positional play (Barcelona-inspired)",
+    tagline: "Rondos, structured spacing, and quick possession that never lets the ball go stale."
   },
   {
     id: "combination",
-    name: "Combination play emphasis",
-    tagline: "Arsenal-inspired: third-man runs, overlaps, and underlaps that break lines with quick, connected passing."
+    name: "Combination play (Arsenal-inspired)",
+    tagline: "Third-man runs, overlaps, and underlaps that break lines with quick, connected passing."
   },
   {
     id: "physical",
-    name: "Press and duel emphasis",
-    tagline: "Premier League-inspired: aggressive pressing, physical 1v1 duels, and no-nonsense defending."
+    name: "Press and duels (Premier League-inspired)",
+    tagline: "Aggressive pressing, physical 1v1 duels, and no-nonsense defending."
   }
 ];
 
@@ -1813,6 +1808,32 @@ export const STYLE_DIRECTIVES = {
   combination: "Look for the third-man run, the overlap, and the underlap. Two or three quick passes should be enough to break a defensive line.",
   physical: "Every 1v1 is a contest — attack second balls and aerial duels, defend set pieces aggressively, and never ease off a challenge."
 };
+
+const FOCUS_STYLE_AFFINITY = {
+  dribbling: { combination: 1, positional: 1 },
+  passing: { positional: 2, combination: 1 },
+  shooting: { combination: 2 },
+  defending: { physical: 2 },
+  possession: { positional: 2 },
+  fitness: { physical: 2 }
+};
+
+export function recommendIdentities(skill, focuses) {
+  if (!focuses || !focuses.length) return [];
+  const scores = { positional: 0, combination: 0, physical: 0 };
+  focuses.forEach((f) => {
+    const aff = FOCUS_STYLE_AFFINITY[f] || {};
+    Object.entries(aff).forEach(([k, v]) => { scores[k] += v; });
+  });
+  if (skill === "academy") scores.positional += 1;
+  const max = Math.max(scores.positional, scores.combination, scores.physical);
+  if (max === 0) return [];
+  return Object.entries(scores)
+    .sort((a, b) => b[1] - a[1])
+    .filter(([, v]) => v > 0)
+    .slice(0, 2)
+    .map(([k]) => k);
+}
 
 export const CATEGORY_LABEL = {
   warmup: "Warm-up",
@@ -2076,9 +2097,12 @@ export function filterDrills(category, focus, age, skill, style, gameFormat) {
     const focused = pool.filter((d) => d.focus.some((f) => focusArr.includes(f)));
     if (focused.length) pool = focused;
   }
-  if (style && style !== "blend") {
-    const styled = pool.filter((d) => inferStyles(d).includes(style));
-    if (styled.length) pool = styled;
+  if (style) {
+    const styleArr = Array.isArray(style) ? style : [style];
+    if (styleArr.length && styleArr.length < 3) {
+      const styled = pool.filter((d) => inferStyles(d).some((s) => styleArr.includes(s)));
+      if (styled.length) pool = styled;
+    }
   }
   if (category === "ssg" && gameFormat) {
     const formatted = pool.filter((d) => !d.formats || d.formats.includes(gameFormat));
