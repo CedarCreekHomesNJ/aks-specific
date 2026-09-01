@@ -4,6 +4,7 @@ import {
   GAME_FORMATS, DURATIONS, CATEGORY_LABEL, DRILLS, generatePlan
 } from '../lib/gameData'
 import FormationIcon from './FormationIcon'
+import DrillDiagram from './DrillDiagram'
 
 const STEPS = ['age', 'skill', 'focus', 'identity', 'gameFormat', 'duration', 'players']
 const CATEGORY_FILTERS = ['all', 'warmup', 'technical', 'ssg', 'cooldown']
@@ -21,6 +22,7 @@ export default function PracticePlanTab({ team }) {
   const [filterCategory, setFilterCategory] = useState('all')
   const [filterFocus, setFilterFocus] = useState('all')
   const [search, setSearch] = useState('')
+  const [diagramDrill, setDiagramDrill] = useState(null)
 
   const key = STEPS[step]
 
@@ -233,7 +235,7 @@ export default function PracticePlanTab({ team }) {
 
           <div style={{ marginBottom: 6 }}>
             {CATEGORY_FILTERS.map((c) => (
-              <span key={c} className={`chip chip-sm ${filterCategory === c ? 'chip-active' : ''}`} onClick={() => setFilterCategory(c)} style={{ fontSize: 12, padding: '6px 12px' }}>
+              <span key={c} className={`chip ${filterCategory === c ? 'chip-active' : ''}`} onClick={() => setFilterCategory(c)} style={{ fontSize: 12, padding: '6px 12px' }}>
                 {c === 'all' ? 'All categories' : CATEGORY_LABEL[c]}
               </span>
             ))}
@@ -282,7 +284,12 @@ export default function PracticePlanTab({ team }) {
           return (
             <div key={seg.key} className="card" style={{ marginBottom: 14 }}>
               <div style={{ display: 'flex', gap: 14 }}>
-                <div className="drill-icon-box">
+                <div
+                  className="drill-icon-box"
+                  onClick={() => setDiagramDrill(d)}
+                  title="View interactive diagram"
+                  style={{ cursor: 'pointer' }}
+                >
                   <FormationIcon type={d.formation} />
                 </div>
                 <div style={{ flex: 1 }}>
@@ -320,6 +327,7 @@ export default function PracticePlanTab({ team }) {
                   <p style={{ fontSize: 12.5, color: 'var(--ink-soft)' }}>Equipment: {d.equipment.join(', ')}</p>
                   {note && <p style={{ fontSize: 12.5, background: 'var(--green-light)', color: 'var(--green-dark)', padding: 10, borderRadius: 8 }}><strong>For {answers.skill}:</strong> {note}</p>}
                   <div style={{ marginTop: 10, display: 'flex', gap: 8 }}>
+                    <button onClick={() => setDiagramDrill(d)} className="btn btn-secondary btn-sm">View on field</button>
                     <button onClick={() => openSwap(seg.key)} className="btn btn-outline btn-sm">Swap drill</button>
                     <button onClick={() => removeSegment(seg.key)} className="btn btn-danger btn-sm">Remove</button>
                   </div>
@@ -328,6 +336,10 @@ export default function PracticePlanTab({ team }) {
             </div>
           )
         })
+      )}
+
+      {diagramDrill && (
+        <DrillDiagram drill={diagramDrill} onClose={() => setDiagramDrill(null)} />
       )}
     </div>
   )

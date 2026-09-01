@@ -1870,6 +1870,54 @@ export const OBJECTIVES = [
   { id: "balanced", name: "Balanced / flexible", tagline: "A shape that doesn't overcommit either way — good against an unknown opponent." }
 ];
 
+/* ---------------------------------------------------------
+   DRILL DIAGRAM LAYOUTS — default cone/player positions per
+   drill "shape", used for the interactive per-drill diagram
+--------------------------------------------------------- */
+
+export const DRILL_LAYOUTS = {
+  grid: {
+    cones: [
+      { x: 20, y: 20 }, { x: 50, y: 20 }, { x: 80, y: 20 },
+      { x: 20, y: 50 }, { x: 50, y: 50 }, { x: 80, y: 50 },
+      { x: 20, y: 80 }, { x: 50, y: 80 }, { x: 80, y: 80 }
+    ],
+    players: [{ x: 35, y: 35 }, { x: 65, y: 35 }, { x: 35, y: 65 }, { x: 65, y: 65 }]
+  },
+  gates: {
+    cones: [
+      { x: 18, y: 25 }, { x: 30, y: 25 },
+      { x: 60, y: 45 }, { x: 72, y: 45 },
+      { x: 28, y: 70 }, { x: 40, y: 70 }
+    ],
+    players: [{ x: 24, y: 45 }, { x: 66, y: 65 }, { x: 50, y: 20 }]
+  },
+  circle: {
+    circleOutline: { x: 50, y: 50, r: 32 },
+    players: [{ x: 50, y: 20 }, { x: 78, y: 63 }, { x: 22, y: 63 }, { x: 50, y: 50 }]
+  },
+  box: {
+    boxOutline: true,
+    cones: [{ x: 15, y: 15 }, { x: 85, y: 15 }, { x: 15, y: 85 }, { x: 85, y: 85 }],
+    players: [{ x: 35, y: 35 }, { x: 65, y: 35 }, { x: 35, y: 65 }, { x: 65, y: 65 }]
+  },
+  goal: {
+    goalRect: { x: 20, y: 8, w: 60, h: 22 },
+    players: [{ x: 50, y: 18 }, { x: 50, y: 65 }]
+  },
+  zones: {
+    zoneLines: [33, 66],
+    players: [{ x: 16, y: 35 }, { x: 16, y: 65 }, { x: 50, y: 35 }, { x: 50, y: 65 }, { x: 83, y: 35 }, { x: 83, y: 65 }]
+  },
+  line: {
+    cones: [{ x: 15, y: 50 }, { x: 38, y: 50 }, { x: 61, y: 50 }, { x: 84, y: 50 }],
+    players: [{ x: 15, y: 78 }, { x: 38, y: 78 }, { x: 61, y: 78 }, { x: 84, y: 78 }]
+  },
+  pairs: {
+    players: [{ x: 32, y: 50 }, { x: 68, y: 50 }]
+  }
+};
+
 export const FORMATIONS = {
   "7v7": [
     { name: "2-3-1", tags: ["possession", "balanced"], blurb: "Two center backs, a midfield three, and a lone striker — the standard shape for building out of the back at this age.", slots: [
