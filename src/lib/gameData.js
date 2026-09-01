@@ -1751,6 +1751,147 @@ export const DRILLS = [
       travel: "Keep tackles controlled and at moderate pace to build technique safely.",
       academy: "Add a live 1v1 to goal so the tackle has a real match consequence attached."
     }
+  },
+
+  // TRAINING PHILOSOPHY — COUNTER-PRESS (German-inspired)
+  {
+    id: "cp1", name: "Counter-press and go vertical", category: "technical", formation: "box",
+    ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["defending", "possession"], styles: ["counterpress"],
+    players: "10-16", equipment: ["Cones", "Bibs", "Small goals"],
+    summary: "The instant the ball is lost, the team must win it back and attack directly toward goal within seconds — training the relentless, vertical counter-press associated with the German game.",
+    steps: [
+      "Play a possession game (5v5) in a 30x20 yard area with a small goal at each end.",
+      "The moment the ball is lost, the team that lost it must press immediately to win it back.",
+      "If they win it back within 6 seconds, they must attack directly and try to score within the next two touches.",
+      "If the press fails, both teams reset into normal possession play."
+    ],
+    points: ["Full sprint the instant possession changes, no jogging into the press", "Look forward first once the ball is won, not sideways", "Cut off the easiest pass, don't just chase the ball"],
+    levelNotes: {
+      travel: "Extend the press window to 8 seconds so the pattern can succeed while it's new.",
+      academy: "Tighten to a true 5-6 seconds and track how often the counter-press leads directly to a shot."
+    }
+  },
+  {
+    id: "cp2", name: "Gegenpress triangle trap", category: "technical", formation: "box",
+    ageMin: 13, ageMax: 19, skills: ["academy"], focus: ["defending"], styles: ["counterpress"],
+    players: "9-15", equipment: ["Cones", "Bibs"],
+    summary: "Three defenders work together to trap and surround a ball carrier the instant possession is lost, training the coordinated, immediate pressing triangle that makes the ball impossible to play out of cleanly.",
+    steps: [
+      "Set up a 15x15 yard grid with three defenders and a group of attackers keeping possession.",
+      "When the defenders win the ball or it's played into their zone, they must instantly form a triangle around the new ball carrier.",
+      "The trapped attacker has 3 seconds to play out; if they can't, it counts as a win for the defending trio.",
+      "Rotate defenders in and out every few minutes to keep intensity high."
+    ],
+    points: ["Close down from three angles at once, not just the nearest defender", "Cut off the easiest escape pass first", "Communicate constantly so all three commit together"],
+    levelNotes: {
+      academy: "Track how often the group traps the ball carrier within 3 seconds as a session target."
+    }
+  },
+
+  // TRAINING PHILOSOPHY — TOTAL FOOTBALL / INTERCHANGE (Dutch-inspired)
+  {
+    id: "if1", name: "Position rotation possession", category: "technical", formation: "box",
+    ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["possession", "passing"], styles: ["interchange"],
+    players: "10-16", equipment: ["Cones", "Bibs"],
+    summary: "A possession game where players must rotate to a new position every time the ball is played out of their zone, building the comfort in multiple roles associated with Total Football's fluid positional interchange.",
+    steps: [
+      "Divide a 30x20 yard area into four zones and assign one player to each zone per team.",
+      "Play possession normally, but any player whose zone the ball leaves must immediately rotate into a different zone.",
+      "Continue for 4-5 minutes, encouraging players to communicate who is covering which space as the rotations happen.",
+      "Debrief briefly on how it felt to play an unfamiliar zone before resetting."
+    ],
+    points: ["Communicate rotations loudly so teammates know who covers what", "Stay ready to receive and play regardless of which zone you're in", "Don't leave a zone empty — always have coverage"],
+    levelNotes: {
+      travel: "Rotate on a time signal instead of a possession trigger while the idea is new, so it's more predictable.",
+      academy: "Add a defending team to make the rotations happen under real pressure."
+    }
+  },
+  {
+    id: "if2", name: "Total football switch and cover", category: "ssg", formation: "box",
+    ageMin: 13, ageMax: 19, skills: ["academy"], focus: ["possession", "defending"], styles: ["interchange"], formats: ["9v9", "11v11"],
+    players: "10-16", equipment: ["Cones", "Bibs", "Small goals"],
+    summary: "A small-sided game where any player making a forward run must be covered by a teammate rotating into their vacated space, training the constant positional cover that let Dutch sides press high without leaving gaps behind.",
+    steps: [
+      "Play a normal small-sided game with small goals.",
+      "Any time a player makes an overlapping or underlapping run forward, the nearest teammate must rotate to cover the space they left.",
+      "Coach from the sideline, calling out uncovered spaces as they appear.",
+      "Play 5-6 minute periods, rewarding well-covered rotations verbally."
+    ],
+    points: ["Scan behind you before making a forward run", "Communicate 'I've got you' when covering a teammate's space", "Never leave the same space uncovered twice in a row"],
+    levelNotes: {
+      academy: "Add a rule that a goal conceded through an uncovered space costs the team a point, raising the stakes on the cover."
+    }
+  },
+
+  // TRAINING PHILOSOPHY — DEFENSIVE ORGANIZATION (Italian-inspired)
+  {
+    id: "org1", name: "Compact low block shape", category: "technical", formation: "zones",
+    ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["defending"], styles: ["organization"],
+    players: "10-16", equipment: ["Cones", "Bibs"],
+    summary: "A defending unit practices collapsing into a tight, disciplined low block and springing a fast counter the moment the ball is won, the patient, organized defending associated with classic Italian sides.",
+    steps: [
+      "Set up a defending group of 4-5 in their own third facing an attacking group with a ball.",
+      "As the attackers approach, the defending unit collapses into a compact, connected shape rather than pressing individually.",
+      "The moment the ball is won, the defending unit must break out quickly with a direct pass forward.",
+      "Reset and repeat, coaching the shape and the release pass separately."
+    ],
+    points: ["Stay compact — small gaps between defenders, not stretched out", "Absorb pressure patiently, don't dive in individually", "The release pass after winning it should go forward immediately"],
+    levelNotes: {
+      travel: "Walk through the shape without opposition first so the spacing is understood.",
+      academy: "Add a full attacking team and score the block on how few clean shots it concedes."
+    }
+  },
+  {
+    id: "org2", name: "Zonal marking discipline", category: "technical", formation: "zones",
+    ageMin: 13, ageMax: 19, skills: ["academy"], focus: ["defending"], styles: ["organization"],
+    players: "10-16", equipment: ["Cones", "Bibs"],
+    summary: "Defenders practice holding a zone and passing attackers off to the neighboring defender rather than following them out of position, the disciplined zonal principle behind organized defensive units.",
+    steps: [
+      "Mark 3-4 zones across a defending line and assign one defender to each.",
+      "Attackers move the ball and run across zone lines, trying to drag defenders out of their assigned space.",
+      "Defenders must stay in their own zone and verbally pass the attacker off to the next zone's defender as they cross.",
+      "Rotate attackers and defenders every few minutes."
+    ],
+    points: ["Hold your zone even when an attacker runs through it", "Communicate the handoff clearly and early", "Trust your neighbor to pick up the attacker you're passing off"],
+    levelNotes: {
+      academy: "Add a live finish at goal so the consequence of a missed handoff is fully real."
+    }
+  },
+
+  // TRAINING PHILOSOPHY — INDIVIDUAL FLAIR (Brazilian-inspired)
+  {
+    id: "fl1", name: "Street skills freestyle circuit", category: "technical", formation: "circle",
+    ageMin: 8, ageMax: 16, skills: ["recreation", "travel", "academy"], focus: ["dribbling"], styles: ["flair"],
+    players: "6-20", equipment: ["One ball per player"],
+    summary: "A fun, low-pressure circuit for flashy individual moves, building the confidence and creativity on the ball associated with Brazilian street-football culture — success here is about self-expression, not a drill sheet.",
+    steps: [
+      "Set up 3-4 stations, each demonstrating a flair move: a stall/toe-touch freeze, a rainbow flick attempt, an elastico, a body feint.",
+      "Players rotate through stations, trying each move at their own pace without pressure to get it perfect.",
+      "Play music if possible to keep the energy loose and fun.",
+      "Finish with a 'showcase minute' where anyone who wants to can show the group their favorite move."
+    ],
+    points: ["Have fun — mistakes are part of learning a new move", "Try the move slowly before adding speed", "Celebrate creativity, not just clean execution"],
+    levelNotes: {
+      recreation: "Keep the whole session playful — this is about building love for the ball, not grading technique.",
+      academy: "Challenge players to use a successful move in the small-sided game later in the session."
+    }
+  },
+  {
+    id: "fl2", name: "1v1 showcase battles", category: "technical", formation: "pairs",
+    ageMin: 10, ageMax: 19, skills: ["travel", "academy"], focus: ["dribbling"], styles: ["flair"],
+    players: "8-18", equipment: ["Cones"],
+    summary: "A 1v1 tournament that rewards a successful skill move as much as winning the duel, encouraging the creative, confident risk-taking that turns a tight spot into an opportunity.",
+    steps: [
+      "Mark several small 1v1 grids with a target line or mini-goal at each end.",
+      "Run a bracket-style 1v1 tournament, with players taking turns attacking and defending.",
+      "Award bonus points for a successfully landed skill move, on top of points for winning the duel.",
+      "Crown a winner based on combined duel wins and style points."
+    ],
+    points: ["Attack with confidence — a hesitant move rarely works", "Change pace after the skill move to actually create separation", "Respect the opponent, but don't be afraid to try something bold"],
+    levelNotes: {
+      travel: "Keep the tone fun and competitive without letting it get overly physical.",
+      academy: "Track style points across the season as a lighthearted running leaderboard."
+    }
   }
 ];
 
@@ -1800,33 +1941,57 @@ export const STYLE_OPTIONS = [
     id: "physical",
     name: "Press and duels (Premier League-inspired)",
     tagline: "Aggressive pressing, physical 1v1 duels, and no-nonsense defending."
+  },
+  {
+    id: "counterpress",
+    name: "Counter-press (German-inspired)",
+    tagline: "Win the ball back within seconds, anywhere on the field, then attack immediately and vertically."
+  },
+  {
+    id: "interchange",
+    name: "Total Football (Dutch-inspired)",
+    tagline: "Players rotate freely between positions and cover for each other — fluid movement over fixed roles."
+  },
+  {
+    id: "organization",
+    name: "Defensive organization (Italian-inspired)",
+    tagline: "A disciplined, compact shape that frustrates attackers, with quick, clinical counters once the ball is won."
+  },
+  {
+    id: "flair",
+    name: "Individual flair (Brazilian-inspired)",
+    tagline: "Technical improvisation and 1v1 creativity — turning a tight spot into a chance with skill and confidence."
   }
 ];
 
 export const STYLE_DIRECTIVES = {
   positional: "Keep the ball moving with one- and two-touch combinations. Hold width and spacing so passing lanes stay open, and press to win the ball back within five seconds of losing it.",
   combination: "Look for the third-man run, the overlap, and the underlap. Two or three quick passes should be enough to break a defensive line.",
-  physical: "Every 1v1 is a contest — attack second balls and aerial duels, defend set pieces aggressively, and never ease off a challenge."
+  physical: "Every 1v1 is a contest — attack second balls and aerial duels, defend set pieces aggressively, and never ease off a challenge.",
+  counterpress: "The instant the ball is lost, the nearest players swarm it — full sprint for the first five seconds, then recover shape if it isn't won back.",
+  interchange: "Don't stay locked to one spot. Rotate positions, cover the space a teammate vacates, and stay comfortable receiving anywhere on the field.",
+  organization: "Stay compact and disciplined in shape first — let the opponent come to you, then break quickly and directly once the ball is won.",
+  flair: "Back yourself in tight spaces. A confident, creative touch that beats a defender is worth encouraging, even if it doesn't always come off."
 };
 
 const FOCUS_STYLE_AFFINITY = {
-  dribbling: { combination: 1, positional: 1 },
-  passing: { positional: 2, combination: 1 },
-  shooting: { combination: 2 },
-  defending: { physical: 2 },
-  possession: { positional: 2 },
-  fitness: { physical: 2 }
+  dribbling: { combination: 1, positional: 1, flair: 2 },
+  passing: { positional: 2, combination: 1, interchange: 1 },
+  shooting: { combination: 2, flair: 1 },
+  defending: { physical: 2, organization: 2, counterpress: 1 },
+  possession: { positional: 2, interchange: 1 },
+  fitness: { physical: 2, counterpress: 2 }
 };
 
 export function recommendIdentities(skill, focuses) {
   if (!focuses || !focuses.length) return [];
-  const scores = { positional: 0, combination: 0, physical: 0 };
+  const scores = { positional: 0, combination: 0, physical: 0, counterpress: 0, interchange: 0, organization: 0, flair: 0 };
   focuses.forEach((f) => {
     const aff = FOCUS_STYLE_AFFINITY[f] || {};
     Object.entries(aff).forEach(([k, v]) => { scores[k] += v; });
   });
   if (skill === "academy") scores.positional += 1;
-  const max = Math.max(scores.positional, scores.combination, scores.physical);
+  const max = Math.max(...Object.values(scores));
   if (max === 0) return [];
   return Object.entries(scores)
     .sort((a, b) => b[1] - a[1])

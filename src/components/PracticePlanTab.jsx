@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   AGES, SKILL_LEVELS, FOCUS_OPTIONS, MAX_FOCUS, STYLE_OPTIONS,
   GAME_FORMATS, DURATIONS, CATEGORY_LABEL, DRILLS, generatePlan, recommendIdentities
 } from '../lib/gameData'
+import { supabase } from '../lib/supabase'
 import FormationIcon from './FormationIcon'
 import DrillDiagram from './DrillDiagram'
 
@@ -24,6 +25,28 @@ export default function PracticePlanTab({ team }) {
   const [filterFocus, setFilterFocus] = useState('all')
   const [search, setSearch] = useState('')
   const [diagramDrill, setDiagramDrill] = useState(null)
+
+  const [savedPlans, setSavedPlans] = useState([])
+  const [savedPlansLoading, setSavedPlansLoading] = useState(true)
+  const [showSaveForm, setShowSaveForm] = useState(false)
+  const [saveName, setSaveName] = useState('')
+  const [saving, setSaving] = useState(false)
+  const [saveError, setSaveError] = useState('')
+
+  useEffect(() => {
+    loadSavedPlans()
+  }, [team.id])
+
+  async function loadSavedPlans() {
+    setSavedPlansLoading(true)
+    const { data, error } = await supabase
+      .from('saved_plans')
+      .select('*')
+      .eq('team_id', team.id)
+      .order('created_at', { ascending: false })
+    if (!error) setSavedPlans(data)
+    setSavedPlansLoading(false)
+  }
 
   const key = STEPS[step]
   const recommended = recommendIdentities(answers.skill, answers.focus)
@@ -80,6 +103,7 @@ export default function PracticePlanTab({ team }) {
     setIdentityTouched(false)
     setBrowserOpen(false)
     setSwapKey(null)
+    setShowSaveForm(false)
   }
 
   function regenerate() {
@@ -132,6 +156,42 @@ export default function PracticePlanTab({ team }) {
     window.print()
   }
 
+  async function savePlanToLibrary() {
+    const name = saveName.trim() || `Practice plan — ${new Date().toLocaleDateString()}`
+    setSaving(true)
+    setSaveError('')
+    const { error } = await supabase.from('saved_plans').insert({
+      team_id: team.id,
+      name,
+      skill: answers.skill,
+      plan_data: plan,
+      total_minutes: totalMinutes
+    })
+    setSaving(false)
+    if (error) {
+      setSaveError('Could not save this plan right now. Try again.')
+      return
+    }
+    setShowSaveForm(false)
+    setSaveName('')
+    loadSavedPlans()
+  }
+
+  function loadPlanFromLibrary(saved) {
+    setPlan(saved.plan_data)
+    setAnswers((prev) => ({ ...prev, skill: saved.skill || prev.skill }))
+    setPhase('plan')
+    setBrowserOpen(false)
+    setSwapKey(null)
+  }
+
+  async function deletePlanFromLibrary(id) {
+    const confirmed = window.confirm('Delete this saved plan? This cannot be undone.')
+    if (!confirmed) return
+    await supabase.from('saved_plans').delete().eq('id', id)
+    loadSavedPlans()
+  }
+
   const totalMinutes = plan.reduce((a, s) => a + (s.minutes || 0), 0)
 
   const filteredDrills = DRILLS.filter((d) => {
@@ -141,10 +201,46 @@ export default function PracticePlanTab({ team }) {
     return true
   })
 
+  if (phase === 'library') {
+    return (
+      <div style={{ maxWidth: 700 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+          <h2 style={{ margin: 0 }}>Saved plans</h2>
+          <button onClick={startOver} className="btn btn-primary btn-sm">+ Build a new plan</button>
+        </div>
+        {savedPlansLoading ? (
+          <p style={{ color: 'var(--ink-soft)' }}>Loading saved plans…</p>
+        ) : savedPlans.length === 0 ? (
+          <p style={{ color: 'var(--ink-soft)' }}>No saved plans yet — build one and save it to see it here.</p>
+        ) : (
+          savedPlans.map((sp) => (
+            <div key={sp.id} className="card" style={{ padding: 16, marginBottom: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div>
+                <strong style={{ fontSize: 15.5 }}>{sp.name}</strong>
+                <div style={{ fontSize: 12.5, color: 'var(--ink-soft)', marginTop: 4 }}>
+                  {new Date(sp.created_at).toLocaleDateString()} · {sp.total_minutes} min{sp.skill ? ` · ${sp.skill}` : ''}
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: 8 }}>
+                <button onClick={() => loadPlanFromLibrary(sp)} className="btn btn-secondary btn-sm">Load</button>
+                <button onClick={() => deletePlanFromLibrary(sp.id)} className="btn btn-danger btn-sm">Delete</button>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+    )
+  }
+
   if (phase === 'wizard') {
     return (
       <div className="card" style={{ maxWidth: 600 }}>
-        <p className="section-title">Step {step + 1} of {STEPS.length}</p>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+          <p className="section-title" style={{ margin: 0 }}>Step {step + 1} of {STEPS.length}</p>
+          {savedPlans.length > 0 && (
+            <button onClick={() => setPhase('library')} className="btn btn-outline btn-sm">Saved plans ({savedPlans.length})</button>
+          )}
+        </div>
 
         {key === 'age' && (
           <div>
@@ -182,7 +278,7 @@ export default function PracticePlanTab({ team }) {
             <p style={{ fontSize: 13, color: 'var(--ink-soft)', marginBottom: 12 }}>
               {recommended.length > 0
                 ? 'Based on the competitive level and focus you picked, we suggest the identities marked below — pick any combination you want.'
-                : "Pick any combination — leave all unpicked for a healthy mix of all three."}
+                : "Pick any combination — leave all unpicked for a healthy mix across the board."}
             </p>
             {STYLE_OPTIONS.map((s) => {
               const isRecommended = recommended.includes(s.id)
@@ -242,14 +338,34 @@ export default function PracticePlanTab({ team }) {
         </p>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 10 }} className="no-print">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, flexWrap: 'wrap', gap: 10 }} className="no-print">
         <h2 style={{ margin: 0 }}>Today's plan — <span className="stat-number">{totalMinutes} min</span></h2>
         <div>
+          <button onClick={() => setPhase('library')} className="btn btn-outline btn-sm" style={{ marginRight: 8 }}>Saved plans ({savedPlans.length})</button>
           <button onClick={exportPlan} className="btn btn-secondary btn-sm" style={{ marginRight: 8 }}>Export / Print</button>
           <button onClick={openAdd} className="btn btn-secondary btn-sm" style={{ marginRight: 8 }}>+ Add a drill</button>
           <button onClick={regenerate} className="btn btn-outline btn-sm" style={{ marginRight: 8 }}>Shuffle drills</button>
           <button onClick={startOver} className="btn btn-outline btn-sm">Start over</button>
         </div>
+      </div>
+
+      <div className="no-print" style={{ marginBottom: 20 }}>
+        {!showSaveForm ? (
+          <button onClick={() => setShowSaveForm(true)} className="btn btn-primary btn-sm">Save this plan to your library</button>
+        ) : (
+          <div className="card" style={{ padding: 14, display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+            <input
+              className="field"
+              placeholder={`Practice plan — ${new Date().toLocaleDateString()}`}
+              value={saveName}
+              onChange={(e) => setSaveName(e.target.value)}
+              style={{ flex: 1, minWidth: 200 }}
+            />
+            <button onClick={savePlanToLibrary} disabled={saving} className="btn btn-primary btn-sm">{saving ? 'Saving…' : 'Save'}</button>
+            <button onClick={() => setShowSaveForm(false)} className="btn btn-outline btn-sm">Cancel</button>
+            {saveError && <p style={{ color: '#D92D20', fontSize: 13, width: '100%', margin: 0 }}>{saveError}</p>}
+          </div>
+        )}
       </div>
 
       {browserOpen && (
