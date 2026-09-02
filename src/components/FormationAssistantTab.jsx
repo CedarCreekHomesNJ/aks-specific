@@ -33,7 +33,10 @@ export default function FormationAssistantTab({ team }) {
   const [pendingSubOff, setPendingSubOff] = useState(null)
   const [starterTargetPct, setStarterTargetPct] = useState(67)
   const [subTargetPct, setSubTargetPct] = useState(33)
+  const [gameModePositions, setGameModePositions] = useState({})
   const tickRef = useRef(null)
+  const gmPitchRef = useRef(null)
+  const gmDragRef = useRef(null)
 
   useEffect(() => {
     loadRoster()
@@ -121,6 +124,7 @@ export default function FormationAssistantTab({ team }) {
     setElapsedSeconds(0)
     setClockRunning(false)
     setPendingSubOff(null)
+    setGameModePositions({})
     setGameStarted(true)
   }
 
@@ -133,6 +137,7 @@ export default function FormationAssistantTab({ team }) {
     setPlayers([])
     setElapsedSeconds(0)
     setPendingSubOff(null)
+    setGameModePositions({})
   }
 
   function selectSubOff(id) {
@@ -162,6 +167,38 @@ export default function FormationAssistantTab({ team }) {
     return p.playedSeconds - target
   }
 
+  function handleGmPointerDown(e, id) {
+    e.preventDefault()
+    gmDragRef.current = { id, startX: e.clientX, startY: e.clientY, moved: false }
+    try { e.target.setPointerCapture(e.pointerId) } catch (err) { /* ignore */ }
+  }
+
+  function handleGmPointerMove(e) {
+    const drag = gmDragRef.current
+    if (!drag || !gmPitchRef.current) return
+    const dx = Math.abs(e.clientX - drag.startX)
+    const dy = Math.abs(e.clientY - drag.startY)
+    if (!drag.moved && (dx > 6 || dy > 6)) drag.moved = true
+    if (drag.moved) {
+      const rect = gmPitchRef.current.getBoundingClientRect()
+      const x = clampPercent(((e.clientX - rect.left) / rect.width) * 100)
+      const y = clampPercent(100 - ((e.clientY - rect.top) / rect.height) * 100)
+      setGameModePositions((prev) => ({ ...prev, [drag.id]: { x, y } }))
+    }
+  }
+
+  function handleGmPointerUp() {
+    const drag = gmDragRef.current
+    if (drag && !drag.moved) {
+      selectSubOff(drag.id)
+    }
+    gmDragRef.current = null
+  }
+
+  function resetGameModePositions() {
+    setGameModePositions({})
+  }
+
   const onFieldPlayers = players.filter((p) => p.onField)
   const benchPlayers = players.filter((p) => !p.onField)
 
@@ -181,6 +218,7 @@ export default function FormationAssistantTab({ team }) {
 
   const clockLabel = half === 'FT' ? 'Full time' : `Half ${half} · ${fmtTime(remainingInHalf)} remaining`
   const clockButtonLabel = half === 'FT' ? null : atHalftime ? '▶ Start second half' : clockRunning ? '⏸ Pause clock' : '▶ Start clock'
+  const hasGmCustomPositions = Object.keys(gameModePositions).length > 0
 
   const suggestionBanner = suggestion && (
     <div style={{ background: 'var(--orange-light)', border: '1px solid var(--orange)', borderRadius: 10, padding: 12, marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
@@ -194,24 +232,32 @@ export default function FormationAssistantTab({ team }) {
   function GameModePitch() {
     return (
       <div
+        ref={gmPitchRef}
         className="pitch-card"
         style={{
           width: 'min(94vw, calc((100vh - 190px) / 1.4))',
           aspectRatio: '1 / 1.4',
           flexShrink: 0,
-          position: 'relative'
+          position: 'relative',
+          touchAction: 'none'
         }}
+        onPointerMove={handleGmPointerMove}
+        onPointerUp={handleGmPointerUp}
+        onPointerLeave={handleGmPointerUp}
       >
-        <div style={{ position: 'absolute', inset: '2%', border: '2px solid rgba(255,255,255,0.25)', borderRadius: 10 }} />
-        <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)', width: '22%', aspectRatio: '1 / 1', border: '2px solid rgba(255,255,255,0.2)', borderRadius: '50%' }} />
+        <div style={{ position: 'absolute', inset: '2%', border: '2px solid rgba(255,255,255,0.25)', borderRadius: 10, pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)', width: '22%', aspectRatio: '1 / 1', border: '2px solid rgba(255,255,255,0.2)', borderRadius: '50%', pointerEvents: 'none' }} />
         {onFieldPlayers.filter((p) => p.x != null).map((p) => {
+          const custom = gameModePositions[p.id]
+          const dx = custom ? custom.x : p.x
+          const dy = custom ? custom.y : p.y
           const over = paceDelta(p) > 60
           const selected = pendingSubOff === p.id
           return (
             <div
               key={p.id}
-              onClick={() => selectSubOff(p.id)}
-              style={{ position: 'absolute', left: `${p.x}%`, top: `${100 - p.y}%`, transform: 'translate(-50%, -50%)', textAlign: 'center', cursor: 'pointer' }}
+              onPointerDown={(e) => handleGmPointerDown(e, p.id)}
+              style={{ position: 'absolute', left: `${dx}%`, top: `${100 - dy}%`, transform: 'translate(-50%, -50%)', textAlign: 'center', cursor: 'grab', touchAction: 'none', userSelect: 'none' }}
             >
               <div style={{
                 width: 'clamp(46px, 8.5vw, 84px)', height: 'clamp(46px, 8.5vw, 84px)', borderRadius: '50%',
@@ -274,6 +320,9 @@ export default function FormationAssistantTab({ team }) {
             {clockButtonLabel && (
               <button onClick={() => setClockRunning((r) => !r)} className="btn btn-secondary btn-sm" style={{ marginRight: 8 }}>{clockButtonLabel}</button>
             )}
+            {hasGmCustomPositions && (
+              <button onClick={resetGameModePositions} className="btn btn-outline btn-sm" style={{ marginRight: 8 }}>Reset positions</button>
+            )}
             <button onClick={() => setFullScreen(false)} className="btn btn-outline btn-sm">✕ Exit Game Mode</button>
           </div>
         </div>
@@ -284,6 +333,9 @@ export default function FormationAssistantTab({ team }) {
             Subbing off {players.find((p) => p.id === pendingSubOff)?.name} — tap a sub to bring them on, or tap the same player again to cancel.
           </p>
         )}
+        <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', marginBottom: 10 }}>
+          Tap a player to select them for a sub. Drag a player to reposition them and show the team shape live.
+        </p>
 
         <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', justifyContent: 'center', alignItems: 'flex-start' }}>
           <GameModePitch />
