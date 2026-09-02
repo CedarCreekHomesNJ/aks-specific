@@ -39,9 +39,13 @@ export default function FormationAssistantTab({ team }) {
   const [savingGame, setSavingGame] = useState(false)
   const [seasonStats, setSeasonStats] = useState([])
   const [seasonLoading, setSeasonLoading] = useState(true)
+  const [drawMode, setDrawMode] = useState(false)
+  const [hasDrawing, setHasDrawing] = useState(false)
   const tickRef = useRef(null)
   const gmPitchRef = useRef(null)
   const gmDragRef = useRef(null)
+  const canvasRef = useRef(null)
+  const drawActiveRef = useRef(false)
 
   useEffect(() => {
     loadRoster()
@@ -72,6 +76,25 @@ export default function FormationAssistantTab({ team }) {
       setClockRunning(false)
     }
   }, [elapsedSeconds, gameStarted, halfSeconds])
+
+  useEffect(() => {
+    if (!fullScreen) {
+      setDrawMode(false)
+      return
+    }
+    const canvas = canvasRef.current
+    const container = gmPitchRef.current
+    if (!canvas || !container) return
+    function resize() {
+      const rect = container.getBoundingClientRect()
+      canvas.width = rect.width
+      canvas.height = rect.height
+    }
+    resize()
+    const ro = new ResizeObserver(resize)
+    ro.observe(container)
+    return () => ro.disconnect()
+  }, [fullScreen])
 
   async function loadRoster() {
     setLoading(true)
@@ -279,6 +302,43 @@ export default function FormationAssistantTab({ team }) {
     setGameModePositions({})
   }
 
+  function handleDrawPointerDown(e) {
+    if (!drawMode || !canvasRef.current) return
+    e.preventDefault()
+    const canvas = canvasRef.current
+    const rect = canvas.getBoundingClientRect()
+    const ctx = canvas.getContext('2d')
+    ctx.beginPath()
+    ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top)
+    drawActiveRef.current = true
+    try { canvas.setPointerCapture(e.pointerId) } catch (err) { /* ignore */ }
+  }
+
+  function handleDrawPointerMove(e) {
+    if (!drawMode || !drawActiveRef.current || !canvasRef.current) return
+    const canvas = canvasRef.current
+    const rect = canvas.getBoundingClientRect()
+    const ctx = canvas.getContext('2d')
+    ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top)
+    ctx.strokeStyle = '#FFD400'
+    ctx.lineWidth = e.pointerType === 'pen' ? 3.5 : 5
+    ctx.lineCap = 'round'
+    ctx.lineJoin = 'round'
+    ctx.stroke()
+    setHasDrawing(true)
+  }
+
+  function handleDrawPointerUp() {
+    drawActiveRef.current = false
+  }
+
+  function clearDrawing() {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
+    setHasDrawing(false)
+  }
+
   const onFieldPlayers = players.filter((p) => p.onField)
   const benchPlayers = players.filter((p) => !p.onField)
 
@@ -356,6 +416,19 @@ export default function FormationAssistantTab({ team }) {
             </div>
           )
         })}
+        <canvas
+          ref={canvasRef}
+          onPointerDown={handleDrawPointerDown}
+          onPointerMove={handleDrawPointerMove}
+          onPointerUp={handleDrawPointerUp}
+          onPointerLeave={handleDrawPointerUp}
+          style={{
+            position: 'absolute', inset: 0, width: '100%', height: '100%',
+            pointerEvents: drawMode ? 'auto' : 'none',
+            touchAction: 'none',
+            cursor: drawMode ? 'crosshair' : 'default'
+          }}
+        />
       </div>
     )
   }
@@ -400,6 +473,16 @@ export default function FormationAssistantTab({ team }) {
             {clockButtonLabel && (
               <button onClick={() => setClockRunning((r) => !r)} className="btn btn-secondary btn-sm" style={{ marginRight: 8 }}>{clockButtonLabel}</button>
             )}
+            <button
+              onClick={() => setDrawMode((d) => !d)}
+              className={drawMode ? 'btn btn-primary btn-sm' : 'btn btn-outline btn-sm'}
+              style={{ marginRight: 8 }}
+            >
+              ✏️ {drawMode ? 'Drawing on' : 'Draw'}
+            </button>
+            {hasDrawing && (
+              <button onClick={clearDrawing} className="btn btn-outline btn-sm" style={{ marginRight: 8 }}>Clear drawing</button>
+            )}
             {hasGmCustomPositions && (
               <button onClick={resetGameModePositions} className="btn btn-outline btn-sm" style={{ marginRight: 8 }}>Reset positions</button>
             )}
@@ -414,7 +497,9 @@ export default function FormationAssistantTab({ team }) {
           </p>
         )}
         <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', marginBottom: 10 }}>
-          Tap a player to select them for a sub. Drag a player to reposition them and show the team shape live.
+          {drawMode
+            ? 'Draw mode is on — sketch on the pitch with your finger or Apple Pencil. Turn it off to move players again.'
+            : 'Tap a player to select them for a sub. Drag a player to reposition them and show the team shape live.'}
         </p>
 
         <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', justifyContent: 'center', alignItems: 'flex-start' }}>
