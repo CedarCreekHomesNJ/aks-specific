@@ -5,11 +5,13 @@ import { SKILL_CATEGORIES, ALL_SKILLS, MAX_STRENGTHS, MAX_NEEDS, POSITIONS, sugg
 export default function RosterTab({ team }) {
   const [roster, setRoster] = useState([])
   const [loading, setLoading] = useState(true)
+  const [editingId, setEditingId] = useState(null)
   const [name, setName] = useState('')
   const [age, setAge] = useState('')
   const [strengths, setStrengths] = useState([])
   const [needs, setNeeds] = useState([])
   const [error, setError] = useState('')
+  const [saving, setSaving] = useState(false)
 
   useEffect(() => {
     loadRoster()
@@ -35,31 +37,58 @@ export default function RosterTab({ team }) {
     })
   }
 
-  async function addPlayer() {
+  function startEdit(player) {
+    setEditingId(player.id)
+    setName(player.name)
+    setAge(player.age ? String(player.age) : '')
+    setStrengths(player.strengths || [])
+    setNeeds(player.needs || [])
+    setError('')
+  }
+
+  function cancelEdit() {
+    setEditingId(null)
+    setName('')
+    setAge('')
+    setStrengths([])
+    setNeeds([])
+    setError('')
+  }
+
+  async function submitPlayer() {
     if (!name.trim()) { setError('Enter a player name first.'); return }
     if (!strengths.length) { setError('Pick at least one strength.'); return }
     setError('')
+    setSaving(true)
     const suggested = suggestPositionsForPlayer({ strengths, needs })
-    const { error } = await supabase.from('players').insert({
-      team_id: team.id,
+    const payload = {
       name: name.trim(),
       age: age ? Number(age) : null,
       strengths,
       needs,
       suggested_positions: suggested
-    })
-    if (error) {
-      setError('Could not add this player right now. Try again.')
+    }
+
+    let dbError
+    if (editingId) {
+      const { error } = await supabase.from('players').update(payload).eq('id', editingId)
+      dbError = error
+    } else {
+      const { error } = await supabase.from('players').insert({ team_id: team.id, ...payload })
+      dbError = error
+    }
+
+    setSaving(false)
+    if (dbError) {
+      setError(editingId ? 'Could not save these changes right now. Try again.' : 'Could not add this player right now. Try again.')
       return
     }
-    setName('')
-    setAge('')
-    setStrengths([])
-    setNeeds([])
+    cancelEdit()
     loadRoster()
   }
 
   async function removePlayer(id) {
+    if (editingId === id) cancelEdit()
     await supabase.from('players').delete().eq('id', id)
     loadRoster()
   }
@@ -67,7 +96,7 @@ export default function RosterTab({ team }) {
   return (
     <div style={{ maxWidth: 680 }}>
       <div className="card" style={{ marginBottom: 24 }}>
-        <h2 style={{ fontSize: 20 }}>Add a player</h2>
+        <h2 style={{ fontSize: 20 }}>{editingId ? 'Edit player' : 'Add a player'}</h2>
 
         <div style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
           <div style={{ flex: 2 }}>
@@ -109,7 +138,14 @@ export default function RosterTab({ team }) {
 
         {error && <p style={{ color: '#D92D20' }}>{error}</p>}
 
-        <button onClick={addPlayer} className="btn btn-primary" style={{ marginTop: 12 }}>Add to roster</button>
+        <div style={{ marginTop: 12, display: 'flex', gap: 8 }}>
+          <button onClick={submitPlayer} disabled={saving} className="btn btn-primary">
+            {saving ? 'Saving…' : editingId ? 'Save changes' : 'Add to roster'}
+          </button>
+          {editingId && (
+            <button onClick={cancelEdit} className="btn btn-outline">Cancel</button>
+          )}
+        </div>
       </div>
 
       {loading ? (
@@ -119,7 +155,7 @@ export default function RosterTab({ team }) {
       ) : (
         <div>
           {roster.map((p) => (
-            <div key={p.id} className="card" style={{ padding: 14, marginBottom: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <div key={p.id} className="card" style={{ padding: 14, marginBottom: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderLeft: editingId === p.id ? '4px solid var(--orange)' : undefined }}>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
                   <strong style={{ fontSize: 15.5 }}>{p.name}</strong>
@@ -131,7 +167,10 @@ export default function RosterTab({ team }) {
                 </div>
                 <div style={{ fontSize: 12.5, color: 'var(--ink-soft)', marginTop: 6 }}>{p.strengths.join(', ')}</div>
               </div>
-              <button onClick={() => removePlayer(p.id)} className="btn btn-outline btn-sm">Remove</button>
+              <div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
+                <button onClick={() => startEdit(p)} className="btn btn-outline btn-sm">Edit</button>
+                <button onClick={() => removePlayer(p.id)} className="btn btn-danger btn-sm">Remove</button>
+              </div>
             </div>
           ))}
         </div>
