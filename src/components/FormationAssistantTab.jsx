@@ -34,12 +34,19 @@ export default function FormationAssistantTab({ team }) {
   const [starterTargetPct, setStarterTargetPct] = useState(67)
   const [subTargetPct, setSubTargetPct] = useState(33)
   const [gameModePositions, setGameModePositions] = useState({})
+  const [gameEvents, setGameEvents] = useState([])
+  const [selectedEventId, setSelectedEventId] = useState('')
+  const [savingGame, setSavingGame] = useState(false)
+  const [seasonStats, setSeasonStats] = useState([])
+  const [seasonLoading, setSeasonLoading] = useState(true)
   const tickRef = useRef(null)
   const gmPitchRef = useRef(null)
   const gmDragRef = useRef(null)
 
   useEffect(() => {
     loadRoster()
+    loadGameEvents()
+    loadSeasonStats()
   }, [team.id])
 
   useEffect(() => {
@@ -74,6 +81,48 @@ export default function FormationAssistantTab({ team }) {
       .eq('team_id', team.id)
     if (!error) setRoster(data)
     setLoading(false)
+  }
+
+  async function loadGameEvents() {
+    const { data, error } = await supabase
+      .from('schedule_events')
+      .select('*')
+      .eq('team_id', team.id)
+      .eq('type', 'game')
+      .order('event_date', { ascending: false })
+    if (!error) setGameEvents(data)
+  }
+
+  async function loadSeasonStats() {
+    setSeasonLoading(true)
+    const { data: sessions, error: sessionsError } = await supabase
+      .from('game_sessions')
+      .select('id')
+      .eq('team_id', team.id)
+    if (sessionsError || !sessions.length) {
+      setSeasonStats([])
+      setSeasonLoading(false)
+      return
+    }
+    const sessionIds = sessions.map((s) => s.id)
+    const { data: times, error: timesError } = await supabase
+      .from('game_player_times')
+      .select('*')
+      .in('game_session_id', sessionIds)
+    if (timesError) {
+      setSeasonStats([])
+      setSeasonLoading(false)
+      return
+    }
+    const byPlayer = {}
+    times.forEach((t) => {
+      if (!byPlayer[t.player_name]) byPlayer[t.player_name] = { name: t.player_name, totalSeconds: 0, games: 0 }
+      byPlayer[t.player_name].totalSeconds += t.played_seconds || 0
+      byPlayer[t.player_name].games += 1
+    })
+    const list = Object.values(byPlayer).sort((a, b) => b.totalSeconds - a.totalSeconds)
+    setSeasonStats(list)
+    setSeasonLoading(false)
   }
 
   const formation = pickFormation(format, objective)
@@ -128,16 +177,47 @@ export default function FormationAssistantTab({ team }) {
     setGameStarted(true)
   }
 
-  function endGameDay() {
-    const confirmed = window.confirm('End this game and clear the playing-time tracker? This cannot be undone.')
+  async function endGameDay() {
+    const confirmed = window.confirm('End this game? Playing time will be saved to your season history.')
     if (!confirmed) return
     setClockRunning(false)
+    setSavingGame(true)
+
+    const { data: session, error: sessionError } = await supabase
+      .from('game_sessions')
+      .insert({
+        team_id: team.id,
+        event_id: selectedEventId || null,
+        half_length_minutes: halfLengthMinutes,
+        total_seconds: elapsedSeconds
+      })
+      .select()
+      .single()
+
+    if (!sessionError && session) {
+      const rows = players
+        .filter((p) => p.playedSeconds > 0)
+        .map((p) => ({
+          game_session_id: session.id,
+          player_id: p.id,
+          player_name: p.name,
+          tier: p.tier,
+          played_seconds: p.playedSeconds
+        }))
+      if (rows.length) {
+        await supabase.from('game_player_times').insert(rows)
+      }
+    }
+
+    setSavingGame(false)
     setGameStarted(false)
     setFullScreen(false)
     setPlayers([])
     setElapsedSeconds(0)
     setPendingSubOff(null)
     setGameModePositions({})
+    setSelectedEventId('')
+    loadSeasonStats()
   }
 
   function selectSubOff(id) {
@@ -438,7 +518,7 @@ export default function FormationAssistantTab({ team }) {
                 <div>
                   <h3 style={{ margin: 0 }}>Game Day — playing time tracker</h3>
                   <p style={{ fontSize: 12.5, color: 'var(--ink-soft)', margin: '4px 0 0' }}>
-                    Stays in this browser tab only — refreshing the page resets it, so keep this tab open during the match.
+                    {gameStarted ? 'Keep this tab open — ending the game saves it to your season history.' : 'Playing time saves to your season history when you end the game.'}
                   </p>
                 </div>
                 {!gameStarted ? (
@@ -446,7 +526,7 @@ export default function FormationAssistantTab({ team }) {
                 ) : (
                   <div>
                     <button onClick={() => setFullScreen(true)} className="btn btn-secondary btn-sm" style={{ marginRight: 8 }}>Enter Game Mode</button>
-                    <button onClick={endGameDay} className="btn btn-danger btn-sm">End game</button>
+                    <button onClick={endGameDay} disabled={savingGame} className="btn btn-danger btn-sm">{savingGame ? 'Saving…' : 'End game'}</button>
                   </div>
                 )}
               </div>
@@ -457,6 +537,20 @@ export default function FormationAssistantTab({ team }) {
                   {HALF_LENGTHS.map((m) => (
                     <span key={m} className={`chip ${halfLengthMinutes === m ? 'chip-active' : ''}`} onClick={() => setHalfLengthMinutes(m)}>{m} min</span>
                   ))}
+
+                  {gameEvents.length > 0 && (
+                    <div style={{ marginTop: 14 }}>
+                      <label className="field-label">Link to a scheduled game (optional)</label>
+                      <select className="field" value={selectedEventId} onChange={(e) => setSelectedEventId(e.target.value)} style={{ maxWidth: 320 }}>
+                        <option value="">Not linked to a schedule entry</option>
+                        {gameEvents.map((ev) => (
+                          <option key={ev.id} value={ev.id}>
+                            {ev.event_date}{ev.opponent ? ` vs ${ev.opponent}` : ''}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -510,6 +604,25 @@ export default function FormationAssistantTab({ team }) {
                     </div>
                   </div>
                 </div>
+              )}
+            </div>
+          )}
+
+          {!gameStarted && (
+            <div className="card" style={{ marginTop: 20 }}>
+              <h3 style={{ margin: 0 }}>Season playing time</h3>
+              <p style={{ fontSize: 12.5, color: 'var(--ink-soft)', margin: '4px 0 14px' }}>Totals across every game you've ended and saved.</p>
+              {seasonLoading ? (
+                <p style={{ fontSize: 13, color: 'var(--ink-soft)' }}>Loading…</p>
+              ) : seasonStats.length === 0 ? (
+                <p style={{ fontSize: 13, color: 'var(--ink-soft)' }}>No games recorded yet — playing time will show up here once you end a Game Day session.</p>
+              ) : (
+                seasonStats.map((s) => (
+                  <div key={s.name} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid var(--line)' }}>
+                    <span style={{ fontSize: 13.5 }}>{s.name}</span>
+                    <span style={{ fontSize: 13, color: 'var(--ink-soft)' }}>{s.games} game{s.games !== 1 ? 's' : ''} · {fmtTime(s.totalSeconds)} total</span>
+                  </div>
+                ))
               )}
             </div>
           )}
