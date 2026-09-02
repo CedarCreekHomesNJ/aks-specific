@@ -58,6 +58,13 @@ export default function Home() {
     navigate(`/t/${joinCode.trim()}`)
   }
 
+  async function deleteTeam(team) {
+    const confirmed = window.confirm(`Permanently delete "${team.team_name}"? This removes its roster, schedule, and everything else. This cannot be undone.`)
+    if (!confirmed) return
+    await supabase.from('teams').delete().eq('id', team.id)
+    loadTeams()
+  }
+
   async function signOut() {
     await supabase.auth.signOut()
     navigate('/')
@@ -96,11 +103,12 @@ export default function Home() {
             ) : (
               <div style={{ marginBottom: 24 }}>
                 {teams.map((t) => (
-                  <Link key={t.id} to={`/t/${t.access_code}`} style={{ textDecoration: 'none' }}>
-                    <div className="card" style={{ padding: 14, marginBottom: 8 }}>
-                      <strong style={{ color: 'var(--ink)' }}>{t.team_name}</strong>
-                    </div>
-                  </Link>
+                  <div key={t.id} className="card" style={{ padding: 14, marginBottom: 8, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Link to={`/t/${t.access_code}`} style={{ textDecoration: 'none', color: 'var(--ink)', fontWeight: 700, flex: 1 }}>
+                      {t.team_name}
+                    </Link>
+                    <button onClick={() => deleteTeam(t)} className="btn btn-danger btn-sm">Delete</button>
+                  </div>
                 ))}
               </div>
             )}
