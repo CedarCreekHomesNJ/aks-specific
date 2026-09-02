@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { saveLink } from '../lib/localLinks'
+import { useAuth } from '../lib/AuthContext'
 import TeamProfileTab from '../components/TeamProfileTab'
 import RosterTab from '../components/RosterTab'
 import PracticePlanTab from '../components/PracticePlanTab'
@@ -18,21 +19,39 @@ const TABS = [
 
 export default function TeamDashboard() {
   const { code } = useParams()
+  const { user, loading: authLoading } = useAuth()
   const [team, setTeam] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [activeTab, setActiveTab] = useState('profile')
 
   useEffect(() => {
+    if (authLoading) return
     let cancelled = false
+
     async function load() {
-      const { data, error } = await supabase
-        .from('teams')
-        .select('*')
-        .eq('access_code', code)
-        .single()
+      if (!user) {
+        sessionStorage.setItem('pendingTeamCode', code)
+        if (!cancelled) {
+          setError('LOGIN_REQUIRED')
+          setLoading(false)
+        }
+        return
+      }
+
+      let { data, error } = await supabase.from('teams').select('*').eq('access_code', code).single()
+
+      if (error || !data) {
+        const { data: joinedId } = await supabase.rpc('join_team_by_code', { code })
+        if (joinedId) {
+          const retry = await supabase.from('teams').select('*').eq('access_code', code).single()
+          data = retry.data
+          error = retry.error
+        }
+      }
+
       if (cancelled) return
-      if (error) {
+      if (error || !data) {
         setError('No team found for this link.')
       } else {
         setTeam(data)
@@ -40,16 +59,30 @@ export default function TeamDashboard() {
       }
       setLoading(false)
     }
+
     load()
     return () => { cancelled = true }
-  }, [code])
+  }, [code, user, authLoading])
 
   function handleTeamUpdate(updated) {
     setTeam(updated)
     saveLink({ type: 'team', code: updated.access_code, label: updated.team_name })
   }
 
-  if (loading) return <p style={{ padding: 40 }}>Loading team…</p>
+  if (authLoading || loading) return <p style={{ padding: 40 }}>Loading team…</p>
+
+  if (error === 'LOGIN_REQUIRED') {
+    return (
+      <div className="page" style={{ maxWidth: 420, margin: '60px auto' }}>
+        <div className="card" style={{ textAlign: 'center', padding: 28 }}>
+          <h2>Sign in to continue</h2>
+          <p style={{ color: 'var(--ink-soft)', marginBottom: 16 }}>This team's page requires an account — you'll land right back here after signing in.</p>
+          <Link to="/login"><button className="btn btn-primary">Sign in / Create account</button></Link>
+        </div>
+      </div>
+    )
+  }
+
   if (error) return <p style={{ padding: 40, color: '#D92D20' }}>{error}</p>
 
   return (
