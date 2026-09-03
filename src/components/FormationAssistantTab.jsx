@@ -15,6 +15,110 @@ function initialsOf(name) {
   return name.split(' ').map((p) => p[0]).slice(0, 2).join('').toUpperCase()
 }
 
+// Defined at module scope (not inside FormationAssistantTab) so React keeps
+// the same canvas DOM node across re-renders instead of tearing it down —
+// previously this was an inline function inside the component, which meant
+// React remounted the whole pitch (wiping the drawing canvas) on every
+// re-render, including every second when the game clock ticks.
+function GameModePitch({
+  gmPitchRef, onFieldPlayers, gameModePositions, pendingSubOff, paceDelta,
+  handleGmPointerDown, handleGmPointerMove, handleGmPointerUp,
+  canvasRef, drawMode, handleDrawPointerDown, handleDrawPointerMove, handleDrawPointerUp
+}) {
+  return (
+    <div
+      ref={gmPitchRef}
+      className="pitch-card"
+      style={{
+        width: 'min(94vw, calc((100vh - 190px) / 1.4))',
+        aspectRatio: '1 / 1.4',
+        flexShrink: 0,
+        position: 'relative',
+        touchAction: 'none'
+      }}
+      onPointerMove={handleGmPointerMove}
+      onPointerUp={handleGmPointerUp}
+      onPointerLeave={handleGmPointerUp}
+    >
+      <PitchLines />
+      {onFieldPlayers.filter((p) => p.x != null).map((p) => {
+        const custom = gameModePositions[p.id]
+        const dx = custom ? custom.x : p.x
+        const dy = custom ? custom.y : p.y
+        const over = paceDelta(p) > 60
+        const selected = pendingSubOff === p.id
+        return (
+          <div
+            key={p.id}
+            onPointerDown={(e) => handleGmPointerDown(e, p.id)}
+            style={{ position: 'absolute', left: `${dx}%`, top: `${100 - dy}%`, transform: 'translate(-50%, -50%)', textAlign: 'center', cursor: 'grab', touchAction: 'none', userSelect: 'none' }}
+          >
+            <div style={{
+              width: 'clamp(46px, 8.5vw, 84px)', height: 'clamp(46px, 8.5vw, 84px)', borderRadius: '50%',
+              background: selected ? 'var(--orange)' : '#fff',
+              border: `3px solid ${selected ? '#fff' : over ? 'var(--orange)' : 'var(--green-dark)'}`,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontFamily: "'Poppins', sans-serif", fontWeight: 800, fontSize: 'clamp(9px, 1.7vw, 14px)',
+              color: selected ? '#fff' : 'var(--green-dark)', margin: '0 auto',
+              boxShadow: '0 3px 10px rgba(0,0,0,0.4)', padding: 4, lineHeight: 1.15, textAlign: 'center'
+            }}>
+              {p.name}
+            </div>
+            <div style={{ fontSize: 'clamp(10px, 1.6vw, 14px)', color: over ? 'var(--orange)' : '#fff', marginTop: 4, fontWeight: 700 }}>
+              {fmtTime(p.playedSeconds)}
+            </div>
+          </div>
+        )
+      })}
+      <canvas
+        ref={canvasRef}
+        onPointerDown={handleDrawPointerDown}
+        onPointerMove={handleDrawPointerMove}
+        onPointerUp={handleDrawPointerUp}
+        onPointerLeave={handleDrawPointerUp}
+        style={{
+          position: 'absolute', inset: 0, width: '100%', height: '100%',
+          pointerEvents: drawMode ? 'auto' : 'none',
+          touchAction: 'none',
+          WebkitUserSelect: 'none',
+          userSelect: 'none',
+          WebkitTouchCallout: 'none',
+          cursor: drawMode ? 'crosshair' : 'default'
+        }}
+      />
+    </div>
+  )
+}
+
+function BenchSidebar({ benchPlayers, pendingSubOff, paceDelta, performSub }) {
+  return (
+    <div style={{ minWidth: 200 }}>
+      <p className="section-title">Subs {pendingSubOff ? '— tap one to bring on' : ''}</p>
+      {benchPlayers.length === 0 ? (
+        <p style={{ fontSize: 13, color: 'var(--ink-soft)' }}>No subs on the bench.</p>
+      ) : (
+        benchPlayers.slice().sort((a, b) => paceDelta(a) - paceDelta(b)).map((p) => {
+          const under = paceDelta(p) < -60
+          return (
+            <div
+              key={p.id}
+              onClick={() => performSub(p.id)}
+              className="card"
+              style={{ padding: 10, marginBottom: 8, cursor: pendingSubOff ? 'pointer' : 'default', opacity: pendingSubOff ? 1 : 0.85, borderLeft: under ? '4px solid var(--blue)' : '4px solid var(--line)' }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <strong style={{ fontSize: 13.5 }}>{p.name}</strong>
+                <span className="stat-number" style={{ fontSize: 13 }}>{fmtTime(p.playedSeconds)}</span>
+              </div>
+              {under && <div style={{ fontSize: 11, color: 'var(--blue)' }}>{Math.round(Math.abs(paceDelta(p)) / 60)} min under pace</div>}
+            </div>
+          )
+        })
+      )}
+    </div>
+  )
+}
+
 export default function FormationAssistantTab({ team }) {
   const [roster, setRoster] = useState([])
   const [loading, setLoading] = useState(true)
@@ -24,7 +128,6 @@ export default function FormationAssistantTab({ team }) {
   const pitchRef = useRef(null)
   const draggingRef = useRef(null)
 
-  // Game Day state
   const [gameStarted, setGameStarted] = useState(false)
   const [fullScreen, setFullScreen] = useState(false)
   const [halfLengthMinutes, setHalfLengthMinutes] = useState(30)
@@ -188,8 +291,6 @@ export default function FormationAssistantTab({ team }) {
   }
 
   const hasCustomPositions = Object.keys(customPositions).length > 0
-
-  // --- Game Day logic ---
 
   function startGameDay() {
     const starters = slots
@@ -380,101 +481,6 @@ export default function FormationAssistantTab({ team }) {
     </div>
   )
 
-  function GameModePitch() {
-    return (
-      <div
-        ref={gmPitchRef}
-        className="pitch-card"
-        style={{
-          width: 'min(94vw, calc((100vh - 190px) / 1.4))',
-          aspectRatio: '1 / 1.4',
-          flexShrink: 0,
-          position: 'relative',
-          touchAction: 'none'
-        }}
-        onPointerMove={handleGmPointerMove}
-        onPointerUp={handleGmPointerUp}
-        onPointerLeave={handleGmPointerUp}
-      >
-        <PitchLines />
-        {onFieldPlayers.filter((p) => p.x != null).map((p) => {
-          const custom = gameModePositions[p.id]
-          const dx = custom ? custom.x : p.x
-          const dy = custom ? custom.y : p.y
-          const over = paceDelta(p) > 60
-          const selected = pendingSubOff === p.id
-          return (
-            <div
-              key={p.id}
-              onPointerDown={(e) => handleGmPointerDown(e, p.id)}
-              style={{ position: 'absolute', left: `${dx}%`, top: `${100 - dy}%`, transform: 'translate(-50%, -50%)', textAlign: 'center', cursor: 'grab', touchAction: 'none', userSelect: 'none' }}
-            >
-              <div style={{
-                width: 'clamp(46px, 8.5vw, 84px)', height: 'clamp(46px, 8.5vw, 84px)', borderRadius: '50%',
-                background: selected ? 'var(--orange)' : '#fff',
-                border: `3px solid ${selected ? '#fff' : over ? 'var(--orange)' : 'var(--green-dark)'}`,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontFamily: "'Poppins', sans-serif", fontWeight: 800, fontSize: 'clamp(9px, 1.7vw, 14px)',
-                color: selected ? '#fff' : 'var(--green-dark)', margin: '0 auto',
-                boxShadow: '0 3px 10px rgba(0,0,0,0.4)', padding: 4, lineHeight: 1.15, textAlign: 'center'
-              }}>
-                {p.name}
-              </div>
-              <div style={{ fontSize: 'clamp(10px, 1.6vw, 14px)', color: over ? 'var(--orange)' : '#fff', marginTop: 4, fontWeight: 700 }}>
-                {fmtTime(p.playedSeconds)}
-              </div>
-            </div>
-          )
-        })}
-        <canvas
-          ref={canvasRef}
-          onPointerDown={handleDrawPointerDown}
-          onPointerMove={handleDrawPointerMove}
-          onPointerUp={handleDrawPointerUp}
-          onPointerLeave={handleDrawPointerUp}
-          style={{
-            position: 'absolute', inset: 0, width: '100%', height: '100%',
-            pointerEvents: drawMode ? 'auto' : 'none',
-            touchAction: 'none',
-            WebkitUserSelect: 'none',
-            userSelect: 'none',
-            WebkitTouchCallout: 'none',
-            cursor: drawMode ? 'crosshair' : 'default'
-          }}
-        />
-      </div>
-    )
-  }
-
-  function BenchSidebar() {
-    return (
-      <div style={{ minWidth: 200 }}>
-        <p className="section-title">Subs {pendingSubOff ? '— tap one to bring on' : ''}</p>
-        {benchPlayers.length === 0 ? (
-          <p style={{ fontSize: 13, color: 'var(--ink-soft)' }}>No subs on the bench.</p>
-        ) : (
-          benchPlayers.slice().sort((a, b) => paceDelta(a) - paceDelta(b)).map((p) => {
-            const under = paceDelta(p) < -60
-            return (
-              <div
-                key={p.id}
-                onClick={() => performSub(p.id)}
-                className="card"
-                style={{ padding: 10, marginBottom: 8, cursor: pendingSubOff ? 'pointer' : 'default', opacity: pendingSubOff ? 1 : 0.85, borderLeft: under ? '4px solid var(--blue)' : '4px solid var(--line)' }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <strong style={{ fontSize: 13.5 }}>{p.name}</strong>
-                  <span className="stat-number" style={{ fontSize: 13 }}>{fmtTime(p.playedSeconds)}</span>
-                </div>
-                {under && <div style={{ fontSize: 11, color: 'var(--blue)' }}>{Math.round(Math.abs(paceDelta(p)) / 60)} min under pace</div>}
-              </div>
-            )
-          })
-        )}
-      </div>
-    )
-  }
-
   if (fullScreen) {
     return (
       <div style={{ position: 'fixed', inset: 0, background: '#0c2417', zIndex: 1000, overflowY: drawMode ? 'hidden' : 'auto', touchAction: drawMode ? 'none' : 'auto', padding: 16 }}>
@@ -516,8 +522,22 @@ export default function FormationAssistantTab({ team }) {
         </p>
 
         <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', justifyContent: 'center', alignItems: 'flex-start' }}>
-          <GameModePitch />
-          <BenchSidebar />
+          <GameModePitch
+            gmPitchRef={gmPitchRef}
+            onFieldPlayers={onFieldPlayers}
+            gameModePositions={gameModePositions}
+            pendingSubOff={pendingSubOff}
+            paceDelta={paceDelta}
+            handleGmPointerDown={handleGmPointerDown}
+            handleGmPointerMove={handleGmPointerMove}
+            handleGmPointerUp={handleGmPointerUp}
+            canvasRef={canvasRef}
+            drawMode={drawMode}
+            handleDrawPointerDown={handleDrawPointerDown}
+            handleDrawPointerMove={handleDrawPointerMove}
+            handleDrawPointerUp={handleDrawPointerUp}
+          />
+          <BenchSidebar benchPlayers={benchPlayers} pendingSubOff={pendingSubOff} paceDelta={paceDelta} performSub={performSub} />
         </div>
       </div>
     )
@@ -697,7 +717,7 @@ export default function FormationAssistantTab({ team }) {
                     </div>
 
                     <div style={{ flex: 1, minWidth: 240 }}>
-                      <BenchSidebar />
+                      <BenchSidebar benchPlayers={benchPlayers} pendingSubOff={pendingSubOff} paceDelta={paceDelta} performSub={performSub} />
                     </div>
                   </div>
                 </div>
