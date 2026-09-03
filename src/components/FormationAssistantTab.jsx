@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { GAME_FORMATS, OBJECTIVES, pickFormation, assignRosterToFormation } from '../lib/gameData'
+import PitchLines from './PitchLines'
 
 const HALF_LENGTHS = [30, 35, 40, 45]
 
@@ -85,10 +86,16 @@ export default function FormationAssistantTab({ team }) {
     const canvas = canvasRef.current
     const container = gmPitchRef.current
     if (!canvas || !container) return
+
     function resize() {
       const rect = container.getBoundingClientRect()
-      canvas.width = rect.width
-      canvas.height = rect.height
+      const w = Math.round(rect.width)
+      const h = Math.round(rect.height)
+      // Only touch the canvas backing store if the size actually changed.
+      // Resizing a canvas clears it, so doing this unnecessarily (e.g. from
+      // iOS Safari's address bar showing/hiding) would wipe a drawing mid-stroke.
+      if (canvas.width !== w) canvas.width = w
+      if (canvas.height !== h) canvas.height = h
     }
     resize()
     const ro = new ResizeObserver(resize)
@@ -316,6 +323,7 @@ export default function FormationAssistantTab({ team }) {
 
   function handleDrawPointerMove(e) {
     if (!drawMode || !drawActiveRef.current || !canvasRef.current) return
+    e.preventDefault()
     const canvas = canvasRef.current
     const rect = canvas.getBoundingClientRect()
     const ctx = canvas.getContext('2d')
@@ -385,8 +393,7 @@ export default function FormationAssistantTab({ team }) {
         onPointerUp={handleGmPointerUp}
         onPointerLeave={handleGmPointerUp}
       >
-        <div style={{ position: 'absolute', inset: '2%', border: '2px solid rgba(255,255,255,0.25)', borderRadius: 10, pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)', width: '22%', aspectRatio: '1 / 1', border: '2px solid rgba(255,255,255,0.2)', borderRadius: '50%', pointerEvents: 'none' }} />
+        <PitchLines />
         {onFieldPlayers.filter((p) => p.x != null).map((p) => {
           const custom = gameModePositions[p.id]
           const dx = custom ? custom.x : p.x
@@ -551,8 +558,7 @@ export default function FormationAssistantTab({ team }) {
               onPointerUp={handlePointerUp}
               onPointerLeave={handlePointerUp}
             >
-              <div style={{ position: 'absolute', inset: 10, border: '2px solid rgba(255,255,255,0.25)', borderRadius: 10, pointerEvents: 'none' }} />
-              <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)', width: 70, height: 70, border: '2px solid rgba(255,255,255,0.2)', borderRadius: '50%', pointerEvents: 'none' }} />
+              <PitchLines />
               {slots.map((s, i) => (
                 <div
                   key={s.slotKey || i}
