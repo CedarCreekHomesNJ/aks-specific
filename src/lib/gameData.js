@@ -8,7 +8,7 @@
 export const DRILLS = [
   // WARM-UP
   {
-    id: "w1", name: "Cone gate tag", category: "warmup", formation: "grid",
+    id: "w1", diagramPlayers: 4, name: "Cone gate tag", category: "warmup", formation: "grid",
     ageMin: 7, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: [],
     players: "8-20", equipment: ["Cones", "One ball per player"],
     summary: "A moving warm-up where every player dribbles freely in a grid and tries to pass through as many cone gates as possible before time runs out.",
@@ -26,7 +26,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "w2", name: "Dynamic movement and ball taps", category: "warmup", formation: "line",
+    id: "w2", diagramPlayers: 4, name: "Dynamic movement and ball taps", category: "warmup", formation: "line",
     ageMin: 7, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: [],
     players: "6-24", equipment: ["Cones for lanes", "One ball per player"],
     summary: "Players move down a set of lanes performing a movement pattern out and a ball mastery move back, raising heart rate while waking up their footwork.",
@@ -44,7 +44,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "w3", name: "Rondo warm-up (3v1)", category: "warmup", formation: "circle",
+    id: "w3", diagramPlayers: 4, name: "Rondo warm-up (3v1)", category: "warmup", formation: "circle",
     ageMin: 9, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: [], styles: ["positional"],
     players: "8-16", equipment: ["Cones", "One ball"],
     summary: "Small groups of four keep the ball away from a single defender in a tight circle, waking up first touch and quick decision-making before the session's main work.",
@@ -62,7 +62,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "w4", name: "Juggling and ball mastery circle", category: "warmup", formation: "circle",
+    id: "w4", diagramPlayers: 4, name: "Juggling and ball mastery circle", category: "warmup", formation: "circle",
     ageMin: 7, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: [],
     players: "6-20", equipment: ["One ball per player"],
     summary: "A low-intensity, high-repetition warm-up where players work individually on touches and juggling in a shared space, building comfort on the ball before contact drills begin.",
@@ -81,7 +81,7 @@ export const DRILLS = [
   },
 
   {
-    id: "w5", name: "Passing square warm-up", category: "warmup", formation: "box",
+    id: "w5", diagramPlayers: 4, name: "Passing square warm-up", category: "warmup", formation: "box",
     ageMin: 8, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: [],
     players: "8-20", equipment: ["Cones", "Balls"],
     summary: "Groups pass around and across a small square, an easy way to raise the heart rate while getting early touches on the ball with a purpose.",
@@ -99,7 +99,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "w6", name: "Shark attack dribble warm-up", category: "warmup", formation: "grid",
+    id: "w6", diagramPlayers: 4, name: "Shark attack dribble warm-up", category: "warmup", formation: "grid",
     ageMin: 7, ageMax: 10, skills: ["recreation", "travel"], focus: [],
     players: "8-20", equipment: ["Cones"],
     summary: "A classic, high-energy game where dribbling 'fish' try to cross a grid without a 'shark' stealing their ball — a fun way to get young players moving and touching the ball early.",
@@ -116,7 +116,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "w7", name: "Partner mirror warm-up", category: "warmup", formation: "pairs",
+    id: "w7", diagramPlayers: 2, name: "Partner mirror warm-up", category: "warmup", formation: "pairs",
     ageMin: 9, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: [],
     players: "8-24", equipment: ["None"],
     summary: "Partners face off and mirror each other's lateral movement without a ball, raising the heart rate while priming the footwork used in defending and agility work later in the session.",
@@ -135,7 +135,7 @@ export const DRILLS = [
 
   // DRIBBLING
   {
-    id: "d1", name: "Cone maze dribbling", category: "technical", formation: "grid",
+    id: "d1", diagramPlayers: 1, name: "Cone maze dribbling", category: "technical", formation: "grid",
     ageMin: 7, ageMax: 12, skills: ["recreation", "travel", "academy"], focus: ["dribbling"],
     players: "6-16", equipment: ["Cones", "One ball per player"],
     summary: "Players weave a ball through a winding line of cones, building close control and the confidence to look up while dribbling in traffic.",
@@ -153,7 +153,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "d2", name: "1v1 gates duel", category: "technical", formation: "gates",
+    id: "d2", diagramPlayers: 2, name: "1v1 gates duel", category: "technical", formation: "gates",
     ageMin: 8, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: ["dribbling"],
     players: "8-20", equipment: ["Cones"],
     summary: "Paired players face off in a small grid scattered with cone gates, each trying to dribble the ball through any gate while their opponent tries to do the same and prevent theirs.",
@@ -171,7 +171,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "d3", name: "Change of direction ladder", category: "technical", formation: "line",
+    id: "d3", diagramPlayers: 1, name: "Change of direction ladder", category: "technical", formation: "line",
     ageMin: 11, ageMax: 19, skills: ["travel", "academy"], focus: ["dribbling", "fitness"],
     players: "6-16", equipment: ["Cones", "One ball per player"],
     summary: "A repetition-based dribbling circuit that pairs sharp changes of direction with game-realistic touches, sharpening the moves players use to beat a defender in tight spaces.",
@@ -189,7 +189,7 @@ export const DRILLS = [
   },
 
   {
-    id: "d4", name: "Two-touch cone turns", category: "technical", formation: "line",
+    id: "d4", diagramPlayers: 1, name: "Two-touch cone turns", category: "technical", formation: "line",
     ageMin: 7, ageMax: 10, skills: ["recreation", "travel"], focus: ["dribbling"],
     players: "6-16", equipment: ["Cones", "Balls"],
     summary: "Players dribble to a single cone, use exactly two touches to turn away from it, and dribble back — a simple, repeatable way to introduce the turning moves used to escape pressure.",
@@ -206,7 +206,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "d5", name: "1v1 end zone dribbling", category: "technical", formation: "gates",
+    id: "d5", diagramPlayers: 2, name: "1v1 end zone dribbling", category: "technical", formation: "gates",
     ageMin: 13, ageMax: 19, skills: ["travel", "academy"], focus: ["dribbling"],
     players: "8-18", equipment: ["Cones"],
     summary: "An attacker tries to dribble into either of two end zones while a defender denies access to both, a game-realistic test of the moves and decision-making needed to beat a real opponent.",
@@ -223,7 +223,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "d6", name: "Ball mastery skill moves circuit", category: "technical", formation: "circle",
+    id: "d6", diagramPlayers: 1, name: "Ball mastery skill moves circuit", category: "technical", formation: "circle",
     ageMin: 8, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: ["dribbling"],
     players: "6-20", equipment: ["One ball per player"],
     summary: "A stationed circuit where players cycle through individual ball-mastery moves — step-overs, scissors, rolls, and cuts — building the foot skills that show up inside every dribbling situation.",
@@ -240,7 +240,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "d7", name: "Speed dribble sprint", category: "technical", formation: "line",
+    id: "d7", diagramPlayers: 1, name: "Speed dribble sprint", category: "technical", formation: "line",
     ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["dribbling", "fitness"],
     players: "6-18", equipment: ["Cones", "Balls"],
     summary: "Players push the ball into open space and sprint onto it in a straight line, training the speed dribbling needed to break away on the counter-attack.",
@@ -259,7 +259,7 @@ export const DRILLS = [
 
   // PASSING
   {
-    id: "p1", name: "Triangle passing", category: "technical", formation: "box",
+    id: "p1", diagramPlayers: 3, name: "Triangle passing", category: "technical", formation: "box",
     ageMin: 7, ageMax: 12, skills: ["recreation", "travel", "academy"], focus: ["passing"],
     players: "6-15", equipment: ["Cones"],
     summary: "Groups of three pass the ball around a triangle, building the basic mechanics of an accurate pass and a controlled first touch.",
@@ -277,7 +277,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "p2", name: "Passing gates", category: "technical", formation: "gates",
+    id: "p2", diagramPlayers: 2, name: "Passing gates", category: "technical", formation: "gates",
     ageMin: 8, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: ["passing"],
     players: "8-20", equipment: ["Cones", "Balls"],
     summary: "Pairs pass the ball back and forth through a series of small gates spread across the field, rewarding weight and accuracy over pure power.",
@@ -295,7 +295,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "p3", name: "Rondo 4v2 possession", category: "technical", formation: "circle",
+    id: "p3", diagramPlayers: 6, name: "Rondo 4v2 possession", category: "technical", formation: "circle",
     ageMin: 10, ageMax: 19, skills: ["travel", "academy"], focus: ["passing", "possession"], styles: ["positional"],
     players: "12-18", equipment: ["Cones", "Bibs"],
     summary: "Four attackers keep the ball from two defenders inside a tight grid, forcing quick, accurate passing under real pressure.",
@@ -312,7 +312,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "p4", name: "Wall pass combination play", category: "technical", formation: "grid",
+    id: "p4", diagramPlayers: 3, name: "Wall pass combination play", category: "technical", formation: "grid",
     ageMin: 13, ageMax: 19, skills: ["travel", "academy"], focus: ["passing"], styles: ["combination"],
     players: "9-18", equipment: ["Cones", "Small goals or target cones"],
     summary: "Groups of three practice the give-and-go, learning to pass, sprint into space, and receive the return ball on the move — the foundation of combination play.",
@@ -330,7 +330,7 @@ export const DRILLS = [
   },
 
   {
-    id: "p5", name: "Long pass accuracy channels", category: "technical", formation: "line",
+    id: "p5", diagramPlayers: 2, name: "Long pass accuracy channels", category: "technical", formation: "line",
     ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["passing"],
     players: "8-18", equipment: ["Cones", "Balls"],
     summary: "Players strike longer diagonal passes into marked target channels, building the range and accuracy needed to switch play or find a runner in behind.",
@@ -347,7 +347,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "p6", name: "Give and go grid", category: "technical", formation: "grid",
+    id: "p6", diagramPlayers: 3, name: "Give and go grid", category: "technical", formation: "grid",
     ageMin: 8, ageMax: 12, skills: ["recreation", "travel"], focus: ["passing"],
     players: "9-18", equipment: ["Cones", "Balls"],
     summary: "Groups of three rotate through a simple give-and-go pattern inside a grid, an easy first introduction to combination passing for younger players.",
@@ -364,7 +364,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "p7", name: "First touch and pass under pressure", category: "technical", formation: "box",
+    id: "p7", diagramPlayers: 3, name: "First touch and pass under pressure", category: "technical", formation: "box",
     ageMin: 13, ageMax: 19, skills: ["academy"], focus: ["passing"],
     players: "9-15", equipment: ["Cones", "Bibs", "Balls"],
     summary: "A receiving player is passed the ball while a defender closes down from behind, forcing a quick, well-directed first touch that sets up the next pass under real pressure.",
@@ -380,7 +380,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "p8", name: "Circle passing with movement", category: "technical", formation: "circle",
+    id: "p8", diagramPlayers: 6, name: "Circle passing with movement", category: "technical", formation: "circle",
     ageMin: 7, ageMax: 10, skills: ["recreation"], focus: ["passing"],
     players: "8-16", equipment: ["Cones", "Balls"],
     summary: "Players stand in a circle and pass across to a teammate before following their pass into the new spot, keeping everyone moving and involved.",
@@ -398,7 +398,7 @@ export const DRILLS = [
 
   // SHOOTING
   {
-    id: "s1", name: "Shooting gates", category: "technical", formation: "goal",
+    id: "s1", diagramPlayers: 1, name: "Shooting gates", category: "technical", formation: "goal",
     ageMin: 7, ageMax: 12, skills: ["recreation", "travel", "academy"], focus: ["shooting"],
     players: "6-16", equipment: ["Cones", "Goal", "Balls"],
     summary: "Players dribble through a gate before striking on goal, linking a touch in stride to a controlled shot rather than shooting from a standstill.",
@@ -416,7 +416,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "s2", name: "1v1 to goal", category: "technical", formation: "goal",
+    id: "s2", diagramPlayers: 2, name: "1v1 to goal", category: "technical", formation: "goal",
     ageMin: 9, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: ["shooting", "dribbling"],
     players: "8-18", equipment: ["Cones", "Goal", "Balls"],
     summary: "An attacker and defender face off from the top of the box, combining the season's dribbling and finishing work into one live, competitive rep.",
@@ -433,7 +433,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "s3", name: "Finishing lines", category: "technical", formation: "goal",
+    id: "s3", diagramPlayers: 2, name: "Finishing lines", category: "technical", formation: "goal",
     ageMin: 10, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: ["shooting"],
     players: "8-20", equipment: ["Cones", "Goal", "Balls"],
     summary: "A service-and-finish drill where a coach or teammate delivers a cross or a through ball and the striker must finish first-time or in two touches.",
@@ -450,7 +450,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "s4", name: "Far post finishing combos", category: "technical", formation: "goal",
+    id: "s4", diagramPlayers: 3, name: "Far post finishing combos", category: "technical", formation: "goal",
     ageMin: 14, ageMax: 19, skills: ["travel", "academy"], focus: ["shooting", "passing"], styles: ["combination"],
     players: "9-18", equipment: ["Cones", "Goal", "Balls"],
     summary: "A three-player combination that builds a wide overlap, a cutback or cross, and a first-time finish at the far post — a pattern lifted straight from the match.",
@@ -468,7 +468,7 @@ export const DRILLS = [
   },
 
   {
-    id: "s5", name: "Volley and half-volley finishing", category: "technical", formation: "goal",
+    id: "s5", diagramPlayers: 2, name: "Volley and half-volley finishing", category: "technical", formation: "goal",
     ageMin: 14, ageMax: 19, skills: ["academy"], focus: ["shooting"],
     players: "6-14", equipment: ["Goal", "Balls"],
     summary: "A coach or partner tosses or drops the ball for the striker to finish out of the air, a demanding technical rep for older, more advanced players.",
@@ -484,7 +484,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "s6", name: "Rebound finishing", category: "technical", formation: "goal",
+    id: "s6", diagramPlayers: 1, name: "Rebound finishing", category: "technical", formation: "goal",
     ageMin: 9, ageMax: 14, skills: ["recreation", "travel"], focus: ["shooting"],
     players: "8-18", equipment: ["Goal", "Balls"],
     summary: "Players shoot from distance and immediately follow their shot to finish any rebound, building the instinct to attack the goal after a save or block.",
@@ -501,7 +501,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "s7", name: "Free kick technique", category: "technical", formation: "goal",
+    id: "s7", diagramPlayers: 1, name: "Free kick technique", category: "technical", formation: "goal",
     ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["shooting"],
     players: "6-16", equipment: ["Goal", "Balls", "Cones for a wall"],
     summary: "Players work individually on striking technique for direct free kicks, focusing on the plant foot, contact point, and follow-through that create bend and power.",
@@ -520,7 +520,7 @@ export const DRILLS = [
 
   // DEFENDING
   {
-    id: "def1", name: "1v1 defending shape", category: "technical", formation: "pairs",
+    id: "def1", diagramPlayers: 2, name: "1v1 defending shape", category: "technical", formation: "pairs",
     ageMin: 8, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: ["defending"], styles: ["physical"],
     players: "6-18", equipment: ["Cones"],
     summary: "Paired players work on the defender's body shape and footwork, learning to delay an attacker and show them into a low-danger area instead of diving in.",
@@ -537,7 +537,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "def2", name: "Jockey and contain", category: "technical", formation: "line",
+    id: "def2", diagramPlayers: 2, name: "Jockey and contain", category: "technical", formation: "line",
     ageMin: 9, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: ["defending"],
     players: "6-20", equipment: ["Cones"],
     summary: "A footwork-focused drill where defenders shuffle and backpedal to stay goal-side of a moving attacker without a ball in play, isolating pure defensive movement.",
@@ -554,7 +554,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "def3", name: "Defensive shadow pressing", category: "technical", formation: "zones",
+    id: "def3", diagramPlayers: 7, name: "Defensive shadow pressing", category: "technical", formation: "zones",
     ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["defending"],
     players: "10-18", equipment: ["Cones", "Bibs"],
     summary: "A small group works together to press and cut off passing lanes as a unit, translating individual defending into coordinated team pressure.",
@@ -571,7 +571,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "def4", name: "Recover and delay race", category: "technical", formation: "line",
+    id: "def4", diagramPlayers: 1, name: "Recover and delay race", category: "technical", formation: "line",
     ageMin: 7, ageMax: 12, skills: ["recreation", "travel"], focus: ["defending", "fitness"],
     players: "8-20", equipment: ["Cones"],
     summary: "A fun, race-based introduction to defensive recovery runs, teaching young players to sprint back into position after losing the ball.",
@@ -589,7 +589,7 @@ export const DRILLS = [
   },
 
   {
-    id: "def5", name: "Team shape shadow defending", category: "technical", formation: "zones",
+    id: "def5", diagramPlayers: 4, name: "Team shape shadow defending", category: "technical", formation: "zones",
     ageMin: 14, ageMax: 19, skills: ["academy"], focus: ["defending"], styles: ["physical"],
     players: "10-16", equipment: ["Cones", "Bibs"],
     summary: "A unit of defenders moves together without opposition, shifting and shadowing as a coach moves a ball around the edge of the area to rehearse collective shape before adding pressure.",
@@ -605,7 +605,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "def6", name: "Tackle timing gates", category: "technical", formation: "gates",
+    id: "def6", diagramPlayers: 2, name: "Tackle timing gates", category: "technical", formation: "gates",
     ageMin: 9, ageMax: 13, skills: ["recreation", "travel"], focus: ["defending"],
     players: "8-16", equipment: ["Cones"],
     summary: "A defender waits at a gate and must time a tackle or interception as an attacker dribbles through, building the patience and timing needed to win the ball cleanly rather than diving in early.",
@@ -622,7 +622,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "def7", name: "2v2 defending to end line", category: "technical", formation: "zones",
+    id: "def7", diagramPlayers: 4, name: "2v2 defending to end line", category: "technical", formation: "zones",
     ageMin: 11, ageMax: 19, skills: ["travel", "academy"], focus: ["defending"],
     players: "8-16", equipment: ["Cones"],
     summary: "Two defenders work together to stop two attackers from reaching an end line, training the cover-and-press partnership that underpins real team defending.",
@@ -641,7 +641,7 @@ export const DRILLS = [
 
   // FITNESS / AGILITY
   {
-    id: "f1", name: "Agility ladder circuit", category: "technical", formation: "line",
+    id: "f1", diagramPlayers: 1, name: "Agility ladder circuit", category: "technical", formation: "line",
     ageMin: 8, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: ["fitness"],
     players: "6-20", equipment: ["Agility ladders or chalk lines"],
     summary: "A footwork circuit using agility ladders to build the quick, coordinated steps that show up in every change of direction on the field.",
@@ -658,7 +658,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "f2", name: "Shuttle sprint relay", category: "technical", formation: "line",
+    id: "f2", diagramPlayers: 4, name: "Shuttle sprint relay", category: "technical", formation: "line",
     ageMin: 9, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: ["fitness"],
     players: "8-24", equipment: ["Cones"],
     summary: "Teams race in a shuttle format, building repeat sprint speed and the fun, competitive edge that keeps conditioning work from feeling like a chore.",
@@ -675,7 +675,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "f3", name: "Cone weave speed course", category: "technical", formation: "grid",
+    id: "f3", diagramPlayers: 1, name: "Cone weave speed course", category: "technical", formation: "grid",
     ageMin: 10, ageMax: 19, skills: ["travel", "academy"], focus: ["fitness", "dribbling"],
     players: "6-18", equipment: ["Cones", "Balls (optional)"],
     summary: "A short, high-intensity course combining sprints, cuts, and backpedals that mirrors the movement demands of a match, run with or without a ball.",
@@ -693,7 +693,7 @@ export const DRILLS = [
   },
 
   {
-    id: "f4", name: "Reaction sprint starts", category: "technical", formation: "line",
+    id: "f4", diagramPlayers: 4, name: "Reaction sprint starts", category: "technical", formation: "line",
     ageMin: 8, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: ["fitness"],
     players: "8-24", equipment: ["Cones"],
     summary: "Players start from different body positions and sprint on a visual or verbal cue, sharpening the first-step quickness that matters more in games than top-end speed.",
@@ -710,7 +710,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "f5", name: "Small-space quickness circuit", category: "technical", formation: "grid",
+    id: "f5", diagramPlayers: 1, name: "Small-space quickness circuit", category: "technical", formation: "grid",
     ageMin: 10, ageMax: 19, skills: ["travel", "academy"], focus: ["fitness"],
     players: "6-18", equipment: ["Cones"],
     summary: "A tight circuit of short, sharp changes of direction packed into a small area, mirroring the quick, repeated bursts players make during a real match.",
@@ -729,7 +729,7 @@ export const DRILLS = [
 
   // SSG / POSSESSION
   {
-    id: "ssg1", name: "4v4 small-sided game", category: "ssg", formation: "box",
+    id: "ssg1", diagramPlayers: 8, name: "4v4 small-sided game", category: "ssg", formation: "box",
     ageMin: 7, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: ["dribbling", "passing", "shooting", "defending", "possession", "fitness"], formats: ["7v7", "9v9", "11v11"],
     players: "8-16", equipment: ["Cones or small goals", "Bibs"],
     summary: "A small-sided game with no goalkeepers and small goals, maximizing every player's touches and forcing the technical and tactical ideas from earlier in the session into a live, game-realistic setting.",
@@ -747,7 +747,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "ssg2", name: "Possession box", category: "ssg", formation: "box",
+    id: "ssg2", diagramPlayers: 10, name: "Possession box", category: "ssg", formation: "box",
     ageMin: 9, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: ["possession", "passing"], formats: ["9v9", "11v11"],
     players: "10-18", equipment: ["Cones", "Bibs"],
     summary: "One team tries to keep the ball inside a grid against a smaller, high-pressure defending team, rewarding quick combination play and support angles.",
@@ -764,7 +764,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "ssg3", name: "3-zone transition game", category: "ssg", formation: "zones",
+    id: "ssg3", diagramPlayers: 8, name: "3-zone transition game", category: "ssg", formation: "zones",
     ageMin: 11, ageMax: 19, skills: ["travel", "academy"], focus: ["defending", "possession", "fitness"], formats: ["9v9", "11v11"],
     players: "10-16", equipment: ["Cones", "Bibs", "Small goals"],
     summary: "The field is split into three zones, and teams must play the ball through each zone to score, rewarding quick transitions between attacking and defending.",
@@ -781,7 +781,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "ssg4", name: "Positional rondo (7v3)", category: "ssg", formation: "circle",
+    id: "ssg4", diagramPlayers: 10, name: "Positional rondo (7v3)", category: "ssg", formation: "circle",
     ageMin: 12, ageMax: 19, skills: ["academy"], focus: ["possession", "passing"], styles: ["positional"], formats: ["11v11"],
     players: "10-14", equipment: ["Cones", "Bibs"],
     summary: "A large possession rondo where attackers hold specific positions around a grid, training the spacing and patience of a real build-out under pressure.",
@@ -798,7 +798,7 @@ export const DRILLS = [
   },
 
   {
-    id: "ssg5", name: "3v3 to four goals", category: "ssg", formation: "box",
+    id: "ssg5", diagramPlayers: 6, name: "3v3 to four goals", category: "ssg", formation: "box",
     ageMin: 7, ageMax: 14, skills: ["recreation", "travel", "academy"], focus: ["dribbling", "shooting", "passing"], formats: ["7v7", "9v9"],
     players: "6-12", equipment: ["Cones", "Bibs"],
     summary: "Two small teams attack four mini-goals at once, rewarding players who can dribble at pace, spot the open goal, and finish or combine to create one.",
@@ -815,7 +815,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "ssg6", name: "6v6 possession to target players", category: "ssg", formation: "box",
+    id: "ssg6", diagramPlayers: 14, name: "6v6 possession to target players", category: "ssg", formation: "box",
     ageMin: 13, ageMax: 19, skills: ["travel", "academy"], focus: ["possession", "passing", "defending"], formats: ["9v9", "11v11"],
     players: "12-16", equipment: ["Cones", "Bibs"],
     summary: "Two full teams play possession with a fixed target player at each end, training the patience to build play and the timing to find the target under pressure.",
@@ -832,7 +832,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "ssg7", name: "Two-touch league game", category: "ssg", formation: "box",
+    id: "ssg7", diagramPlayers: 8, name: "Two-touch league game", category: "ssg", formation: "box",
     ageMin: 10, ageMax: 16, skills: ["travel", "academy"], focus: ["passing", "possession"], formats: ["7v7", "9v9", "11v11"],
     players: "10-16", equipment: ["Cones", "Bibs", "Small goals"],
     summary: "A regular small-sided game with a two-touch restriction, forcing faster decision-making and better first touches without changing anything else about the game.",
@@ -851,7 +851,7 @@ export const DRILLS = [
 
   // COOLDOWN
   {
-    id: "c1", name: "Static stretch circle", category: "cooldown", formation: "circle",
+    id: "c1", diagramPlayers: 6, name: "Static stretch circle", category: "cooldown", formation: "circle",
     ageMin: 7, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: [],
     players: "6-24", equipment: ["None"],
     summary: "The team gathers in a circle for a guided stretch, bringing the heart rate down and closing the session with a shared, calm moment.",
@@ -868,7 +868,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "c2", name: "Walk and talk debrief", category: "cooldown", formation: "circle",
+    id: "c2", diagramPlayers: 6, name: "Walk and talk debrief", category: "cooldown", formation: "circle",
     ageMin: 11, ageMax: 19, skills: ["travel", "academy"], focus: [],
     players: "6-24", equipment: ["None"],
     summary: "Players walk a slow lap while the coach reviews the session's theme and asks a few players to reflect on what they noticed, connecting today's work to the next game.",
@@ -885,7 +885,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "c3", name: "Team huddle and stretch", category: "cooldown", formation: "circle",
+    id: "c3", diagramPlayers: 6, name: "Team huddle and stretch", category: "cooldown", formation: "circle",
     ageMin: 7, ageMax: 10, skills: ["recreation"], focus: [],
     players: "6-20", equipment: ["None"],
     summary: "A short, upbeat stretch and huddle designed for young players, closing the session on a positive note with a quick shout-out to the group's effort.",
@@ -903,7 +903,7 @@ export const DRILLS = [
 
   // TRAINING PHILOSOPHY — POSITIONAL PLAY (Barcelona-inspired)
   {
-    id: "bp1", name: "Positional grid (juego de posición)", category: "technical", formation: "box",
+    id: "bp1", diagramPlayers: 8, name: "Positional grid (juego de posición)", category: "technical", formation: "box",
     ageMin: 10, ageMax: 19, skills: ["travel", "academy"], focus: ["possession", "passing"], styles: ["positional"],
     players: "10-16", equipment: ["Cones", "Bibs"],
     summary: "A possession game where every player is assigned a fixed zone, the same structured-spacing idea Barcelona's academy is famous for — the ball moves, but the shape and the passing lanes never collapse.",
@@ -920,7 +920,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "bp2", name: "Five-second press trigger", category: "technical", formation: "box",
+    id: "bp2", diagramPlayers: 8, name: "Five-second press trigger", category: "technical", formation: "box",
     ageMin: 11, ageMax: 19, skills: ["travel", "academy"], focus: ["possession", "defending"], styles: ["positional"],
     players: "10-16", equipment: ["Cones", "Bibs"],
     summary: "Built around the same idea that made Barcelona's possession game so hard to play against: the moment the ball is lost, the nearest players swarm it instantly, aiming to win it back before the opponent can settle.",
@@ -939,7 +939,7 @@ export const DRILLS = [
 
   // TRAINING PHILOSOPHY — COMBINATION PLAY (Arsenal-inspired)
   {
-    id: "ar1", name: "Third-man combination play", category: "technical", formation: "grid",
+    id: "ar1", diagramPlayers: 3, name: "Third-man combination play", category: "technical", formation: "grid",
     ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["passing"], styles: ["combination"],
     players: "9-15", equipment: ["Cones"],
     summary: "The quick, layered combination play associated with modern Arsenal sides — a pass, a disguised lay-off, and a third player breaking into space to receive the final ball behind the defense.",
@@ -956,7 +956,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "ar2", name: "Overlap and underlap channel", category: "technical", formation: "gates",
+    id: "ar2", diagramPlayers: 2, name: "Overlap and underlap channel", category: "technical", formation: "gates",
     ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["passing", "dribbling"], styles: ["combination"],
     players: "9-18", equipment: ["Cones"],
     summary: "A wide combination pattern built on the overlapping and underlapping runs that create the extra passing option in behind a defense — a staple of quick, attacking wing play.",
@@ -975,7 +975,7 @@ export const DRILLS = [
 
   // TRAINING PHILOSOPHY — PRESS AND PHYSICAL DUELS (Premier League-inspired)
   {
-    id: "epl1", name: "Duel box: win the physical battle", category: "technical", formation: "pairs",
+    id: "epl1", diagramPlayers: 2, name: "Duel box: win the physical battle", category: "technical", formation: "pairs",
     ageMin: 10, ageMax: 19, skills: ["travel", "academy"], focus: ["defending"], styles: ["physical"],
     players: "8-18", equipment: ["Cones"],
     summary: "A no-nonsense 1v1 battle for the ball in a tight space, built to develop the physical, competitive edge associated with English top-flight defending — full commitment, every duel.",
@@ -992,7 +992,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "epl2", name: "Second ball battle", category: "technical", formation: "grid",
+    id: "epl2", diagramPlayers: 2, name: "Second ball battle", category: "technical", formation: "grid",
     ageMin: 11, ageMax: 19, skills: ["travel", "academy"], focus: ["defending", "fitness"], styles: ["physical"],
     players: "8-16", equipment: ["Cones", "Balls"],
     summary: "A coach launches a long ball for two players to compete for the loose second ball after the initial header or clearance, the scrappy, high-intensity moment that decides a lot of English top-flight matches.",
@@ -1009,7 +1009,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "epl3", name: "Press and win it back SSG", category: "ssg", formation: "box",
+    id: "epl3", diagramPlayers: 8, name: "Press and win it back SSG", category: "ssg", formation: "box",
     ageMin: 11, ageMax: 19, skills: ["travel", "academy"], focus: ["defending", "possession", "fitness"], styles: ["physical"], formats: ["9v9", "11v11"],
     players: "10-16", equipment: ["Cones", "Bibs", "Small goals"],
     summary: "A high-intensity small-sided game where losing the ball means an immediate, coordinated press rather than falling back — the aggressive, front-foot defending style associated with the English top flight.",
@@ -1028,7 +1028,7 @@ export const DRILLS = [
 
   // WARM-UP (additional)
   {
-    id: "w8", name: "Figure-8 dribble warm-up", category: "warmup", formation: "circle",
+    id: "w8", diagramPlayers: 1, name: "Figure-8 dribble warm-up", category: "warmup", formation: "circle",
     ageMin: 7, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: [],
     players: "6-20", equipment: ["Cones", "One ball per player"],
     summary: "Players weave a continuous figure-8 pattern around two cones, an easy repeatable warm-up that builds close control and a rhythm before the session ramps up.",
@@ -1046,7 +1046,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "w9", name: "Passing diamond warm-up", category: "warmup", formation: "box",
+    id: "w9", diagramPlayers: 4, name: "Passing diamond warm-up", category: "warmup", formation: "box",
     ageMin: 9, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: [],
     players: "8-20", equipment: ["Cones", "Balls"],
     summary: "Groups of four pass around a diamond shape, an early-session way to get passing rhythm and movement going before the main technical work begins.",
@@ -1066,7 +1066,7 @@ export const DRILLS = [
 
   // DRIBBLING (additional)
   {
-    id: "d8", name: "Sole roll control course", category: "technical", formation: "line",
+    id: "d8", diagramPlayers: 1, name: "Sole roll control course", category: "technical", formation: "line",
     ageMin: 7, ageMax: 11, skills: ["recreation", "travel"], focus: ["dribbling"],
     players: "6-16", equipment: ["Cones", "Balls"],
     summary: "Players guide the ball through a simple course using only sole rolls, isolating one foundational touch so it becomes automatic before combining it with other moves.",
@@ -1083,7 +1083,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "d9", name: "1v1 end-to-end dribble battle", category: "technical", formation: "zones",
+    id: "d9", diagramPlayers: 2, name: "1v1 end-to-end dribble battle", category: "technical", formation: "zones",
     ageMin: 10, ageMax: 16, skills: ["travel", "academy"], focus: ["dribbling"],
     players: "8-16", equipment: ["Cones"],
     summary: "Two players start at opposite ends of a channel and try to dribble past each other to the far end, a simple but demanding test of close control under direct pressure.",
@@ -1100,7 +1100,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "d10", name: "Scissor move repetition drill", category: "technical", formation: "line",
+    id: "d10", diagramPlayers: 1, name: "Scissor move repetition drill", category: "technical", formation: "line",
     ageMin: 10, ageMax: 19, skills: ["travel", "academy"], focus: ["dribbling"],
     players: "6-18", equipment: ["Cones", "Balls"],
     summary: "Focused repetition on the scissor move at a cone, building the fake-and-go pattern that creates separation from a defender in a 1v1 moment.",
@@ -1117,7 +1117,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "d11", name: "Dribble and freeze", category: "technical", formation: "grid",
+    id: "d11", diagramPlayers: 4, name: "Dribble and freeze", category: "technical", formation: "grid",
     ageMin: 7, ageMax: 10, skills: ["recreation", "travel"], focus: ["dribbling"],
     players: "8-20", equipment: ["Cones"],
     summary: "A reaction-based dribbling game where players freeze in place with the ball under close control the instant the coach calls it, building the habit of keeping the ball tight at all times.",
@@ -1133,7 +1133,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "d12", name: "Tight-space turns box", category: "technical", formation: "box",
+    id: "d12", diagramPlayers: 4, name: "Tight-space turns box", category: "technical", formation: "box",
     ageMin: 11, ageMax: 19, skills: ["travel", "academy"], focus: ["dribbling"],
     players: "8-16", equipment: ["Cones", "Bibs"],
     summary: "Several players dribble inside a small shared box, forced to turn away from traffic constantly — a demanding way to build the close control needed in congested midfield areas.",
@@ -1150,7 +1150,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "d13", name: "Dribbling relay tournament", category: "technical", formation: "line",
+    id: "d13", diagramPlayers: 4, name: "Dribbling relay tournament", category: "technical", formation: "line",
     ageMin: 8, ageMax: 14, skills: ["recreation", "travel"], focus: ["dribbling"],
     players: "8-20", equipment: ["Cones"],
     summary: "Teams race through a dribbling course in a bracket-style tournament, turning close-control practice into a competitive, high-energy team event.",
@@ -1169,7 +1169,7 @@ export const DRILLS = [
 
   // PASSING (additional)
   {
-    id: "p9", name: "One-touch finishing square", category: "technical", formation: "box",
+    id: "p9", diagramPlayers: 6, name: "One-touch finishing square", category: "technical", formation: "box",
     ageMin: 13, ageMax: 19, skills: ["academy"], focus: ["passing"],
     players: "8-16", equipment: ["Cones", "Bibs"],
     summary: "A fast-tempo square possession game restricted to strictly one touch, sharpening the speed of thought and technique needed to play at the top of the sport.",
@@ -1185,7 +1185,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "p10", name: "Cross-field switch passing", category: "technical", formation: "line",
+    id: "p10", diagramPlayers: 2, name: "Cross-field switch passing", category: "technical", formation: "line",
     ageMin: 13, ageMax: 19, skills: ["travel", "academy"], focus: ["passing"],
     players: "8-16", equipment: ["Cones", "Balls"],
     summary: "Players practice switching the point of attack with a long, accurate diagonal pass across the width of the field — a skill that unlocks space against a compact defense.",
@@ -1202,7 +1202,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "p11", name: "Passing under time pressure", category: "technical", formation: "box",
+    id: "p11", diagramPlayers: 8, name: "Passing under time pressure", category: "technical", formation: "box",
     ageMin: 11, ageMax: 17, skills: ["travel", "academy"], focus: ["passing"],
     players: "9-16", equipment: ["Cones", "Bibs"],
     summary: "A possession game with a visible countdown clock, training players to keep their passing quality high even as the pressure and pace increase.",
@@ -1219,7 +1219,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "p12", name: "Two-ball rondo", category: "technical", formation: "circle",
+    id: "p12", diagramPlayers: 8, name: "Two-ball rondo", category: "technical", formation: "circle",
     ageMin: 12, ageMax: 19, skills: ["academy"], focus: ["passing", "possession"],
     players: "10-16", equipment: ["Cones", "Bibs"],
     summary: "A standard rondo with a second ball introduced mid-drill, forcing constant scanning and communication since two plays are live in the grid at once.",
@@ -1235,7 +1235,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "p13", name: "Support angle passing triangle", category: "technical", formation: "box",
+    id: "p13", diagramPlayers: 3, name: "Support angle passing triangle", category: "technical", formation: "box",
     ageMin: 9, ageMax: 13, skills: ["recreation", "travel"], focus: ["passing"],
     players: "6-15", equipment: ["Cones"],
     summary: "A guided passing drill that teaches young players to find a supporting angle rather than standing square to the ball, the foundation of good spacing in possession.",
@@ -1251,7 +1251,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "p14", name: "Driven pass technique", category: "technical", formation: "line",
+    id: "p14", diagramPlayers: 2, name: "Driven pass technique", category: "technical", formation: "line",
     ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["passing"],
     players: "8-16", equipment: ["Cones", "Balls"],
     summary: "Focused technical work on the low, driven pass — firmer and flatter than a standard ground pass — used to beat a defender's leg or cover more ground quickly.",
@@ -1270,7 +1270,7 @@ export const DRILLS = [
 
   // SHOOTING (additional)
   {
-    id: "s8", name: "Quick-fire finishing circuit", category: "technical", formation: "goal",
+    id: "s8", diagramPlayers: 1, name: "Quick-fire finishing circuit", category: "technical", formation: "goal",
     ageMin: 9, ageMax: 14, skills: ["recreation", "travel"], focus: ["shooting"],
     players: "8-18", equipment: ["Cones", "Goal", "Balls"],
     summary: "A high-repetition finishing circuit where players move quickly between three shooting stations, keeping energy high and touches on goal frequent.",
@@ -1287,7 +1287,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "s9", name: "Curling shot technique", category: "technical", formation: "goal",
+    id: "s9", diagramPlayers: 1, name: "Curling shot technique", category: "technical", formation: "goal",
     ageMin: 13, ageMax: 19, skills: ["travel", "academy"], focus: ["shooting"],
     players: "6-14", equipment: ["Goal", "Balls"],
     summary: "Technical work on striking with the inside of the foot to bend the ball around a goalkeeper or a defender, a finishing tool for tighter-angle chances.",
@@ -1304,7 +1304,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "s10", name: "1-2 combination finish", category: "technical", formation: "goal",
+    id: "s10", diagramPlayers: 3, name: "1-2 combination finish", category: "technical", formation: "goal",
     ageMin: 11, ageMax: 17, skills: ["travel", "academy"], focus: ["shooting", "passing"],
     players: "8-16", equipment: ["Cones", "Goal", "Balls"],
     summary: "A simple wall-pass into the box, finished first-time, linking the passing work from earlier in a session directly into a shooting outcome.",
@@ -1321,7 +1321,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "s11", name: "Near post far post choice", category: "technical", formation: "goal",
+    id: "s11", diagramPlayers: 2, name: "Near post far post choice", category: "technical", formation: "goal",
     ageMin: 10, ageMax: 16, skills: ["recreation", "travel", "academy"], focus: ["shooting"],
     players: "8-18", equipment: ["Cones", "Goal", "Balls"],
     summary: "Players receive a service and must read the goalkeeper's position to decide between a near-post or far-post finish, building in-game decision-making rather than a scripted shot.",
@@ -1338,7 +1338,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "s12", name: "Penalty kick composure reps", category: "technical", formation: "goal",
+    id: "s12", diagramPlayers: 1, name: "Penalty kick composure reps", category: "technical", formation: "goal",
     ageMin: 10, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: ["shooting"],
     players: "6-18", equipment: ["Goal", "Balls"],
     summary: "Players take penalty kicks under a bit of manufactured pressure — a countdown, a crowd of watching teammates — building the composure needed for the real, high-stakes version.",
@@ -1355,7 +1355,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "s13", name: "Turn and shoot", category: "technical", formation: "goal",
+    id: "s13", diagramPlayers: 2, name: "Turn and shoot", category: "technical", formation: "goal",
     ageMin: 9, ageMax: 14, skills: ["recreation", "travel"], focus: ["shooting"],
     players: "8-16", equipment: ["Cones", "Goal", "Balls"],
     summary: "Players receive with their back to goal and must turn under control before shooting, a common finishing pattern for a target forward receiving into feet.",
@@ -1374,7 +1374,7 @@ export const DRILLS = [
 
   // DEFENDING (additional)
   {
-    id: "def8", name: "Show and delay to sideline", category: "technical", formation: "zones",
+    id: "def8", diagramPlayers: 2, name: "Show and delay to sideline", category: "technical", formation: "zones",
     ageMin: 9, ageMax: 14, skills: ["recreation", "travel"], focus: ["defending"],
     players: "8-16", equipment: ["Cones"],
     summary: "Defenders practice showing an attacker toward the sideline and delaying rather than diving in, using the touchline as an extra defender the way real games reward.",
@@ -1391,7 +1391,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "def9", name: "Defending crosses and headers", category: "technical", formation: "goal",
+    id: "def9", diagramPlayers: 3, name: "Defending crosses and headers", category: "technical", formation: "goal",
     ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["defending"],
     players: "8-16", equipment: ["Cones", "Goal", "Balls"],
     summary: "Defenders practice tracking a runner and winning the ball in the air on crosses into the box, a specific and high-value defending skill that isolated 1v1 drills don't cover.",
@@ -1408,7 +1408,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "def10", name: "Compactness shuttle", category: "technical", formation: "zones",
+    id: "def10", diagramPlayers: 4, name: "Compactness shuttle", category: "technical", formation: "zones",
     ageMin: 12, ageMax: 19, skills: ["academy"], focus: ["defending"],
     players: "10-16", equipment: ["Cones", "Bibs"],
     summary: "A unit of defenders shuttles side to side and forward-back on a coach's command, training the collective compactness that makes a defensive line hard to play through.",
@@ -1424,7 +1424,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "def11", name: "1v2 defending recovery", category: "technical", formation: "zones",
+    id: "def11", diagramPlayers: 3, name: "1v2 defending recovery", category: "technical", formation: "zones",
     ageMin: 13, ageMax: 19, skills: ["academy"], focus: ["defending"],
     players: "9-16", equipment: ["Cones"],
     summary: "A lone defender faces two attackers and must delay, show them into a difficult angle, and buy time for cover to arrive — training composure in a numbers-down moment.",
@@ -1440,7 +1440,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "def12", name: "Interception reads", category: "technical", formation: "box",
+    id: "def12", diagramPlayers: 6, name: "Interception reads", category: "technical", formation: "box",
     ageMin: 10, ageMax: 15, skills: ["travel", "academy"], focus: ["defending"],
     players: "8-16", equipment: ["Cones", "Bibs"],
     summary: "Defenders practice reading a passing lane and stepping in front to intercept, rather than only reacting once the ball has been played — a proactive defending habit.",
@@ -1457,7 +1457,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "def13", name: "Last defender race", category: "technical", formation: "line",
+    id: "def13", diagramPlayers: 1, name: "Last defender race", category: "technical", formation: "line",
     ageMin: 8, ageMax: 12, skills: ["recreation", "travel"], focus: ["defending", "fitness"],
     players: "8-20", equipment: ["Cones"],
     summary: "A fun race that simulates being the last defender chasing back on a breakaway, building recovery speed and the mentality to never stop chasing the play.",
@@ -1475,7 +1475,7 @@ export const DRILLS = [
 
   // FITNESS / AGILITY (additional)
   {
-    id: "f6", name: "Box jump and sprint combo", category: "technical", formation: "line",
+    id: "f6", diagramPlayers: 1, name: "Box jump and sprint combo", category: "technical", formation: "line",
     ageMin: 11, ageMax: 19, skills: ["travel", "academy"], focus: ["fitness"],
     players: "6-18", equipment: ["Cones"],
     summary: "A short explosive circuit pairing a jump with an immediate sprint, training the burst of power that shows up in duels, headers, and quick accelerations.",
@@ -1492,7 +1492,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "f7", name: "Partner resistance sprints", category: "technical", formation: "pairs",
+    id: "f7", diagramPlayers: 2, name: "Partner resistance sprints", category: "technical", formation: "pairs",
     ageMin: 13, ageMax: 19, skills: ["travel", "academy"], focus: ["fitness"],
     players: "8-18", equipment: ["None"],
     summary: "Partners provide light resistance to each other over short sprints, building the drive phase strength that helps players win the first few steps of a race for the ball.",
@@ -1509,7 +1509,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "f8", name: "Repeat sprint pyramid", category: "technical", formation: "line",
+    id: "f8", diagramPlayers: 1, name: "Repeat sprint pyramid", category: "technical", formation: "line",
     ageMin: 13, ageMax: 19, skills: ["academy"], focus: ["fitness"],
     players: "6-20", equipment: ["Cones"],
     summary: "A demanding conditioning set that climbs and descends in distance, building the repeat-sprint ability that separates fresh legs from tired ones late in a match.",
@@ -1527,7 +1527,7 @@ export const DRILLS = [
 
   // SSG / POSSESSION (additional)
   {
-    id: "ssg8", name: "Overload possession 5v3", category: "ssg", formation: "box",
+    id: "ssg8", diagramPlayers: 8, name: "Overload possession 5v3", category: "ssg", formation: "box",
     ageMin: 9, ageMax: 16, skills: ["recreation", "travel", "academy"], focus: ["possession", "passing"], formats: ["7v7", "9v9"],
     players: "8-16", equipment: ["Cones", "Bibs"],
     summary: "A numbers-up possession game that rewards quick combination play and support, building confidence in keeping the ball against real pressure.",
@@ -1544,7 +1544,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "ssg9", name: "End-zone possession game", category: "ssg", formation: "zones",
+    id: "ssg9", diagramPlayers: 8, name: "End-zone possession game", category: "ssg", formation: "zones",
     ageMin: 10, ageMax: 17, skills: ["travel", "academy"], focus: ["possession", "shooting"], formats: ["7v7", "9v9"],
     players: "10-16", equipment: ["Cones", "Bibs"],
     summary: "Teams score by dribbling or passing the ball into an end zone rather than at a goal, rewarding patient buildup and combination play over direct shooting.",
@@ -1561,7 +1561,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "ssg10", name: "4v4 plus goalkeepers", category: "ssg", formation: "box",
+    id: "ssg10", diagramPlayers: 10, name: "4v4 plus goalkeepers", category: "ssg", formation: "box",
     ageMin: 9, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: ["shooting", "defending", "possession"], formats: ["9v9", "11v11"],
     players: "10-16", equipment: ["Cones", "Goals", "Bibs"],
     summary: "A small-sided game with full-size goals and goalkeepers, closer to the real match picture than a small-goals version and a good finishing-focused session closer.",
@@ -1578,7 +1578,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "ssg11", name: "Counter-attack transition game", category: "ssg", formation: "zones",
+    id: "ssg11", diagramPlayers: 8, name: "Counter-attack transition game", category: "ssg", formation: "zones",
     ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["possession", "defending", "fitness"], formats: ["9v9", "11v11"],
     players: "12-18", equipment: ["Cones", "Bibs", "Goals"],
     summary: "A game built specifically to reward fast, direct attacking the moment the ball is won, training the counter-attacking instinct that punishes a disorganized opponent.",
@@ -1595,7 +1595,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "ssg12", name: "Wide overload game", category: "ssg", formation: "box",
+    id: "ssg12", diagramPlayers: 8, name: "Wide overload game", category: "ssg", formation: "box",
     ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["possession", "passing"], styles: ["combination"], formats: ["9v9", "11v11"],
     players: "10-16", equipment: ["Cones", "Bibs", "Goals"],
     summary: "A small-sided game with wide channels that only attackers can use, encouraging teams to build overloads out wide and cross into the box — reinforcing the combination-play ideas from earlier in a session.",
@@ -1614,7 +1614,7 @@ export const DRILLS = [
 
   // COOLDOWN (additional)
   {
-    id: "c4", name: "Foam roll and mobility flow", category: "cooldown", formation: "line",
+    id: "c4", diagramPlayers: 4, name: "Foam roll and mobility flow", category: "cooldown", formation: "line",
     ageMin: 13, ageMax: 19, skills: ["academy"], focus: [],
     players: "6-20", equipment: ["Foam rollers (optional)"],
     summary: "A slightly more structured cooldown for older, higher-training-load players, combining mobility movements with optional foam rolling to aid recovery between sessions.",
@@ -1630,7 +1630,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "c5", name: "Two-minute reflection circle", category: "cooldown", formation: "circle",
+    id: "c5", diagramPlayers: 6, name: "Two-minute reflection circle", category: "cooldown", formation: "circle",
     ageMin: 9, ageMax: 19, skills: ["recreation", "travel", "academy"], focus: [],
     players: "6-24", equipment: ["None"],
     summary: "A quick, low-key closing circle where players share one word or one sentence about the session, building team culture without eating into limited practice time.",
@@ -1648,7 +1648,7 @@ export const DRILLS = [
 
   // TRAINING PHILOSOPHY — POSITIONAL PLAY (additional)
   {
-    id: "bp3", name: "Build-out from the back", category: "technical", formation: "zones",
+    id: "bp3", diagramPlayers: 6, name: "Build-out from the back", category: "technical", formation: "zones",
     ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["possession", "passing"], styles: ["positional"],
     players: "10-16", equipment: ["Cones", "Bibs"],
     summary: "A structured possession pattern starting from the goalkeeper, training the patient, positional build-out associated with possession-based teams rather than clearing the ball long under pressure.",
@@ -1665,7 +1665,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "bp4", name: "Rondo to switch", category: "technical", formation: "box",
+    id: "bp4", diagramPlayers: 8, name: "Rondo to switch", category: "technical", formation: "box",
     ageMin: 12, ageMax: 19, skills: ["academy"], focus: ["possession", "passing"], styles: ["positional"],
     players: "10-16", equipment: ["Cones", "Bibs"],
     summary: "A large rondo split into two connected zones, training players to recognize the moment to switch the point of attack from a settled possession into a fresh side.",
@@ -1683,7 +1683,7 @@ export const DRILLS = [
 
   // TRAINING PHILOSOPHY — COMBINATION PLAY (additional)
   {
-    id: "ar3", name: "Give-and-go into the box", category: "technical", formation: "gates",
+    id: "ar3", diagramPlayers: 3, name: "Give-and-go into the box", category: "technical", formation: "gates",
     ageMin: 11, ageMax: 17, skills: ["travel", "academy"], focus: ["passing", "shooting"], styles: ["combination"],
     players: "9-16", equipment: ["Cones", "Goal", "Balls"],
     summary: "A simple combination pattern that ends in a shot, connecting the wall-pass idea directly to a finishing outcome so players see the full value of the combination.",
@@ -1700,7 +1700,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "ar4", name: "Diagonal combination runs", category: "technical", formation: "zones",
+    id: "ar4", diagramPlayers: 3, name: "Diagonal combination runs", category: "technical", formation: "zones",
     ageMin: 13, ageMax: 19, skills: ["travel", "academy"], focus: ["passing", "dribbling"], styles: ["combination"],
     players: "9-18", equipment: ["Cones"],
     summary: "Players practice the diagonal run that pulls a defender out of position and opens a passing lane behind them — a key combination-play movement in the final third.",
@@ -1719,7 +1719,7 @@ export const DRILLS = [
 
   // TRAINING PHILOSOPHY — PRESS AND PHYSICAL DUELS (additional)
   {
-    id: "epl4", name: "Set piece defending organization", category: "technical", formation: "zones",
+    id: "epl4", diagramPlayers: 6, name: "Set piece defending organization", category: "technical", formation: "zones",
     ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["defending"], styles: ["physical"],
     players: "10-18", equipment: ["Cones", "Goal", "Balls"],
     summary: "A focused walkthrough and live rep of defending a corner or free kick, training the organization and physical commitment that decides a large share of goals at every level.",
@@ -1736,7 +1736,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "epl5", name: "Front-foot tackling technique", category: "technical", formation: "pairs",
+    id: "epl5", diagramPlayers: 2, name: "Front-foot tackling technique", category: "technical", formation: "pairs",
     ageMin: 10, ageMax: 19, skills: ["travel", "academy"], focus: ["defending"], styles: ["physical"],
     players: "8-18", equipment: ["Cones"],
     summary: "Technical work on the block tackle — timing, body position, and follow-through — building the confidence to win the ball cleanly and decisively rather than shying away from contact.",
@@ -1755,7 +1755,7 @@ export const DRILLS = [
 
   // TRAINING PHILOSOPHY — COUNTER-PRESS (German-inspired)
   {
-    id: "cp1", name: "Counter-press and go vertical", category: "technical", formation: "box",
+    id: "cp1", diagramPlayers: 10, name: "Counter-press and go vertical", category: "technical", formation: "box",
     ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["defending", "possession"], styles: ["counterpress"],
     players: "10-16", equipment: ["Cones", "Bibs", "Small goals"],
     summary: "The instant the ball is lost, the team must win it back and attack directly toward goal within seconds — training the relentless, vertical counter-press associated with the German game.",
@@ -1772,7 +1772,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "cp2", name: "Gegenpress triangle trap", category: "technical", formation: "box",
+    id: "cp2", diagramPlayers: 4, name: "Gegenpress triangle trap", category: "technical", formation: "box",
     ageMin: 13, ageMax: 19, skills: ["academy"], focus: ["defending"], styles: ["counterpress"],
     players: "9-15", equipment: ["Cones", "Bibs"],
     summary: "Three defenders work together to trap and surround a ball carrier the instant possession is lost, training the coordinated, immediate pressing triangle that makes the ball impossible to play out of cleanly.",
@@ -1790,7 +1790,7 @@ export const DRILLS = [
 
   // TRAINING PHILOSOPHY — TOTAL FOOTBALL / INTERCHANGE (Dutch-inspired)
   {
-    id: "if1", name: "Position rotation possession", category: "technical", formation: "box",
+    id: "if1", diagramPlayers: 8, name: "Position rotation possession", category: "technical", formation: "box",
     ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["possession", "passing"], styles: ["interchange"],
     players: "10-16", equipment: ["Cones", "Bibs"],
     summary: "A possession game where players must rotate to a new position every time the ball is played out of their zone, building the comfort in multiple roles associated with Total Football's fluid positional interchange.",
@@ -1807,7 +1807,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "if2", name: "Total football switch and cover", category: "ssg", formation: "box",
+    id: "if2", diagramPlayers: 8, name: "Total football switch and cover", category: "ssg", formation: "box",
     ageMin: 13, ageMax: 19, skills: ["academy"], focus: ["possession", "defending"], styles: ["interchange"], formats: ["9v9", "11v11"],
     players: "10-16", equipment: ["Cones", "Bibs", "Small goals"],
     summary: "A small-sided game where any player making a forward run must be covered by a teammate rotating into their vacated space, training the constant positional cover that let Dutch sides press high without leaving gaps behind.",
@@ -1825,7 +1825,7 @@ export const DRILLS = [
 
   // TRAINING PHILOSOPHY — DEFENSIVE ORGANIZATION (Italian-inspired)
   {
-    id: "org1", name: "Compact low block shape", category: "technical", formation: "zones",
+    id: "org1", diagramPlayers: 5, name: "Compact low block shape", category: "technical", formation: "zones",
     ageMin: 12, ageMax: 19, skills: ["travel", "academy"], focus: ["defending"], styles: ["organization"],
     players: "10-16", equipment: ["Cones", "Bibs"],
     summary: "A defending unit practices collapsing into a tight, disciplined low block and springing a fast counter the moment the ball is won, the patient, organized defending associated with classic Italian sides.",
@@ -1842,7 +1842,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "org2", name: "Zonal marking discipline", category: "technical", formation: "zones",
+    id: "org2", diagramPlayers: 4, name: "Zonal marking discipline", category: "technical", formation: "zones",
     ageMin: 13, ageMax: 19, skills: ["academy"], focus: ["defending"], styles: ["organization"],
     players: "10-16", equipment: ["Cones", "Bibs"],
     summary: "Defenders practice holding a zone and passing attackers off to the neighboring defender rather than following them out of position, the disciplined zonal principle behind organized defensive units.",
@@ -1860,7 +1860,7 @@ export const DRILLS = [
 
   // TRAINING PHILOSOPHY — INDIVIDUAL FLAIR (Brazilian-inspired)
   {
-    id: "fl1", name: "Street skills freestyle circuit", category: "technical", formation: "circle",
+    id: "fl1", diagramPlayers: 1, name: "Street skills freestyle circuit", category: "technical", formation: "circle",
     ageMin: 8, ageMax: 16, skills: ["recreation", "travel", "academy"], focus: ["dribbling"], styles: ["flair"],
     players: "6-20", equipment: ["One ball per player"],
     summary: "A fun, low-pressure circuit for flashy individual moves, building the confidence and creativity on the ball associated with Brazilian street-football culture — success here is about self-expression, not a drill sheet.",
@@ -1877,7 +1877,7 @@ export const DRILLS = [
     }
   },
   {
-    id: "fl2", name: "1v1 showcase battles", category: "technical", formation: "pairs",
+    id: "fl2", diagramPlayers: 2, name: "1v1 showcase battles", category: "technical", formation: "pairs",
     ageMin: 10, ageMax: 19, skills: ["travel", "academy"], focus: ["dribbling"], styles: ["flair"],
     players: "8-18", equipment: ["Cones"],
     summary: "A 1v1 tournament that rewards a successful skill move as much as winning the duel, encouraging the creative, confident risk-taking that turns a tight spot into an opportunity.",
