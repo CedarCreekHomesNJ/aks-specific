@@ -4,6 +4,7 @@ import { GAME_FORMATS, OBJECTIVES, pickFormation, assignRosterToFormation } from
 import PitchLines from './PitchLines'
 
 const HALF_LENGTHS = [30, 35, 40, 45]
+const OPPONENT_COUNT = 11
 
 function fmtTime(sec) {
   const m = Math.floor(sec / 60)
@@ -15,15 +16,36 @@ function initialsOf(name) {
   return name.split(' ').map((p) => p[0]).slice(0, 2).join('').toUpperCase()
 }
 
-// Defined at module scope (not inside FormationAssistantTab) so React keeps
-// the same canvas DOM node across re-renders instead of tearing it down —
-// previously this was an inline function inside the component, which meant
-// React remounted the whole pitch (wiping the drawing canvas) on every
-// re-render, including every second when the game clock ticks.
+function OpponentCircle({ idx, isDragging, dragPos, mode, pos, onPointerDown, onPointerMove, onPointerUp }) {
+  let style
+  if (isDragging) {
+    style = { position: 'fixed', left: dragPos.x, top: dragPos.y, transform: 'translate(-50%, -50%)', zIndex: 2000, cursor: 'grabbing', touchAction: 'none', userSelect: 'none' }
+  } else if (mode === 'pitch') {
+    style = { position: 'absolute', left: `${pos.x}%`, top: `${pos.y}%`, transform: 'translate(-50%, -50%)', cursor: 'grab', touchAction: 'none', userSelect: 'none' }
+  } else {
+    style = { cursor: 'grab', touchAction: 'none', userSelect: 'none' }
+  }
+  return (
+    <div onPointerDown={(e) => onPointerDown(e, idx)} onPointerMove={onPointerMove} onPointerUp={onPointerUp} style={style}>
+      <div style={{
+        width: mode === 'pitch' || isDragging ? 32 : 30, height: mode === 'pitch' || isDragging ? 32 : 30, borderRadius: '50%',
+        background: 'linear-gradient(160deg, #ffdcd2 0%, #ffb3a0 100%)',
+        border: '2px solid #C23B22',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        fontFamily: "'Poppins', sans-serif", fontWeight: 800, fontSize: 11, color: '#8f2a17',
+        boxShadow: '0 2px 6px rgba(0,0,0,0.35)'
+      }}>
+        {idx + 1}
+      </div>
+    </div>
+  )
+}
+
 function GameModePitch({
   gmPitchRef, onFieldPlayers, gameModePositions, pendingSubOff, paceDelta,
   handleGmPointerDown, handleGmPointerMove, handleGmPointerUp,
-  canvasRef, drawMode, handleDrawPointerDown, handleDrawPointerMove, handleDrawPointerUp
+  canvasRef, drawMode, handleDrawPointerDown, handleDrawPointerMove, handleDrawPointerUp,
+  oppPositions, oppDrag, handleOppPointerDown, handleOppPointerMove, handleOppPointerUp
 }) {
   return (
     <div
@@ -70,6 +92,25 @@ function GameModePitch({
           </div>
         )
       })}
+
+      {oppPositions.map((pos, idx) => {
+        if (!pos) return null
+        const isDragging = oppDrag && oppDrag.idx === idx
+        return (
+          <OpponentCircle
+            key={`opp-${idx}`}
+            idx={idx}
+            isDragging={isDragging}
+            dragPos={oppDrag}
+            mode="pitch"
+            pos={pos}
+            onPointerDown={handleOppPointerDown}
+            onPointerMove={handleOppPointerMove}
+            onPointerUp={handleOppPointerUp}
+          />
+        )
+      })}
+
       <canvas
         ref={canvasRef}
         onPointerDown={handleDrawPointerDown}
@@ -86,6 +127,34 @@ function GameModePitch({
           cursor: drawMode ? 'crosshair' : 'default'
         }}
       />
+    </div>
+  )
+}
+
+function OpponentTray({ oppPositions, oppDrag, handleOppPointerDown, handleOppPointerMove, handleOppPointerUp, resetOpponents }) {
+  const trayIndices = oppPositions.map((pos, idx) => ({ pos, idx })).filter(({ pos }) => pos === null)
+  const placedCount = oppPositions.filter((p) => p !== null).length
+
+  return (
+    <div style={{ minWidth: 130 }}>
+      <p className="section-title" style={{ color: '#fff' }}>Opponent (drag onto pitch)</p>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, maxWidth: 130 }}>
+        {trayIndices.map(({ idx }) => (
+          <OpponentCircle
+            key={`tray-${idx}`}
+            idx={idx}
+            isDragging={oppDrag && oppDrag.idx === idx}
+            dragPos={oppDrag}
+            mode="tray"
+            onPointerDown={handleOppPointerDown}
+            onPointerMove={handleOppPointerMove}
+            onPointerUp={handleOppPointerUp}
+          />
+        ))}
+      </div>
+      {placedCount > 0 && (
+        <button onClick={resetOpponents} className="btn btn-outline btn-sm" style={{ marginTop: 10 }}>Reset opponents</button>
+      )}
     </div>
   )
 }
@@ -144,7 +213,10 @@ export default function FormationAssistantTab({ team }) {
   const [seasonStats, setSeasonStats] = useState([])
   const [seasonLoading, setSeasonLoading] = useState(true)
   const [drawMode, setDrawMode] = useState(false)
+  const [drawTool, setDrawTool] = useState('pen')
   const [hasDrawing, setHasDrawing] = useState(false)
+  const [oppPositions, setOppPositions] = useState(() => Array(OPPONENT_COUNT).fill(null))
+  const [oppDrag, setOppDrag] = useState(null)
   const tickRef = useRef(null)
   const gmPitchRef = useRef(null)
   const gmDragRef = useRef(null)
@@ -302,6 +374,7 @@ export default function FormationAssistantTab({ team }) {
     setClockRunning(false)
     setPendingSubOff(null)
     setGameModePositions({})
+    setOppPositions(Array(OPPONENT_COUNT).fill(null))
     setGameStarted(true)
   }
 
@@ -407,12 +480,52 @@ export default function FormationAssistantTab({ team }) {
     setGameModePositions({})
   }
 
+  function handleOppPointerDown(e, idx) {
+    e.preventDefault()
+    setOppDrag({ idx, x: e.clientX, y: e.clientY })
+    try { e.target.setPointerCapture(e.pointerId) } catch (err) { /* ignore */ }
+  }
+
+  function handleOppPointerMove(e) {
+    setOppDrag((prev) => (prev ? { ...prev, x: e.clientX, y: e.clientY } : prev))
+  }
+
+  function handleOppPointerUp(e) {
+    if (!oppDrag) return
+    const idx = oppDrag.idx
+    if (gmPitchRef.current) {
+      const rect = gmPitchRef.current.getBoundingClientRect()
+      const inside = e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom
+      if (inside) {
+        const x = clampPercent(((e.clientX - rect.left) / rect.width) * 100)
+        const y = clampPercent(((e.clientY - rect.top) / rect.height) * 100)
+        setOppPositions((positions) => {
+          const next = [...positions]
+          next[idx] = { x, y }
+          return next
+        })
+      } else {
+        setOppPositions((positions) => {
+          const next = [...positions]
+          next[idx] = null
+          return next
+        })
+      }
+    }
+    setOppDrag(null)
+  }
+
+  function resetOpponents() {
+    setOppPositions(Array(OPPONENT_COUNT).fill(null))
+  }
+
   function handleDrawPointerDown(e) {
     if (!drawMode || !canvasRef.current) return
     e.preventDefault()
     const canvas = canvasRef.current
     const rect = canvas.getBoundingClientRect()
     const ctx = canvas.getContext('2d')
+    ctx.globalCompositeOperation = drawTool === 'eraser' ? 'destination-out' : 'source-over'
     ctx.beginPath()
     ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top)
     drawActiveRef.current = true
@@ -425,8 +538,9 @@ export default function FormationAssistantTab({ team }) {
     const canvas = canvasRef.current
     const rect = canvas.getBoundingClientRect()
     const ctx = canvas.getContext('2d')
+    ctx.globalCompositeOperation = drawTool === 'eraser' ? 'destination-out' : 'source-over'
     ctx.strokeStyle = '#FFD400'
-    ctx.lineWidth = e.pointerType === 'pen' ? 3.5 : 5
+    ctx.lineWidth = drawTool === 'eraser' ? 22 : (e.pointerType === 'pen' ? 3.5 : 5)
     ctx.lineCap = 'round'
     ctx.lineJoin = 'round'
     const native = e.nativeEvent
@@ -488,22 +602,27 @@ export default function FormationAssistantTab({ team }) {
           <div>
             <span className="stat-number" style={{ color: '#fff', fontSize: 20 }}>{clockLabel}</span>
           </div>
-          <div>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             {clockButtonLabel && (
-              <button onClick={() => setClockRunning((r) => !r)} className="btn btn-secondary btn-sm" style={{ marginRight: 8 }}>{clockButtonLabel}</button>
+              <button onClick={() => setClockRunning((r) => !r)} className="btn btn-secondary btn-sm">{clockButtonLabel}</button>
             )}
             <button
               onClick={() => setDrawMode((d) => !d)}
               className={drawMode ? 'btn btn-primary btn-sm' : 'btn btn-outline btn-sm'}
-              style={{ marginRight: 8 }}
             >
               ✏️ {drawMode ? 'Drawing on' : 'Draw'}
             </button>
+            {drawMode && (
+              <>
+                <button onClick={() => setDrawTool('pen')} className={drawTool === 'pen' ? 'btn btn-primary btn-sm' : 'btn btn-outline btn-sm'}>🖊️ Pen</button>
+                <button onClick={() => setDrawTool('eraser')} className={drawTool === 'eraser' ? 'btn btn-primary btn-sm' : 'btn btn-outline btn-sm'}>🧹 Eraser</button>
+              </>
+            )}
             {hasDrawing && (
-              <button onClick={clearDrawing} className="btn btn-outline btn-sm" style={{ marginRight: 8 }}>Clear drawing</button>
+              <button onClick={clearDrawing} className="btn btn-outline btn-sm">Clear all</button>
             )}
             {hasGmCustomPositions && (
-              <button onClick={resetGameModePositions} className="btn btn-outline btn-sm" style={{ marginRight: 8 }}>Reset positions</button>
+              <button onClick={resetGameModePositions} className="btn btn-outline btn-sm">Reset positions</button>
             )}
             <button onClick={() => setFullScreen(false)} className="btn btn-outline btn-sm">✕ Exit Game Mode</button>
           </div>
@@ -517,8 +636,8 @@ export default function FormationAssistantTab({ team }) {
         )}
         <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', marginBottom: 10 }}>
           {drawMode
-            ? 'Draw mode is on — sketch on the pitch with your finger or Apple Pencil. Turn it off to move players again.'
-            : 'Tap a player to select them for a sub. Drag a player to reposition them and show the team shape live.'}
+            ? `${drawTool === 'eraser' ? 'Eraser is on — drag over a line to remove just that part.' : 'Draw mode is on — sketch with your finger or Apple Pencil.'} Turn Draw off to move players again.`
+            : 'Tap a player to select them for a sub. Drag a player to reposition them, or drag an opponent circle onto the pitch.'}
         </p>
 
         <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', justifyContent: 'center', alignItems: 'flex-start' }}>
@@ -536,8 +655,23 @@ export default function FormationAssistantTab({ team }) {
             handleDrawPointerDown={handleDrawPointerDown}
             handleDrawPointerMove={handleDrawPointerMove}
             handleDrawPointerUp={handleDrawPointerUp}
+            oppPositions={oppPositions}
+            oppDrag={oppDrag}
+            handleOppPointerDown={handleOppPointerDown}
+            handleOppPointerMove={handleOppPointerMove}
+            handleOppPointerUp={handleOppPointerUp}
           />
-          <BenchSidebar benchPlayers={benchPlayers} pendingSubOff={pendingSubOff} paceDelta={paceDelta} performSub={performSub} />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+            <OpponentTray
+              oppPositions={oppPositions}
+              oppDrag={oppDrag}
+              handleOppPointerDown={handleOppPointerDown}
+              handleOppPointerMove={handleOppPointerMove}
+              handleOppPointerUp={handleOppPointerUp}
+              resetOpponents={resetOpponents}
+            />
+            <BenchSidebar benchPlayers={benchPlayers} pendingSubOff={pendingSubOff} paceDelta={paceDelta} performSub={performSub} />
+          </div>
         </div>
       </div>
     )
