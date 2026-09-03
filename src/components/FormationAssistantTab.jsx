@@ -91,9 +91,6 @@ export default function FormationAssistantTab({ team }) {
       const rect = container.getBoundingClientRect()
       const w = Math.round(rect.width)
       const h = Math.round(rect.height)
-      // Only touch the canvas backing store if the size actually changed.
-      // Resizing a canvas clears it, so doing this unnecessarily (e.g. from
-      // iOS Safari's address bar showing/hiding) would wipe a drawing mid-stroke.
       if (canvas.width !== w) canvas.width = w
       if (canvas.height !== h) canvas.height = h
     }
@@ -327,16 +324,22 @@ export default function FormationAssistantTab({ team }) {
     const canvas = canvasRef.current
     const rect = canvas.getBoundingClientRect()
     const ctx = canvas.getContext('2d')
-    ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top)
     ctx.strokeStyle = '#FFD400'
     ctx.lineWidth = e.pointerType === 'pen' ? 3.5 : 5
     ctx.lineCap = 'round'
     ctx.lineJoin = 'round'
+    const native = e.nativeEvent
+    const coalesced = native && native.getCoalescedEvents ? native.getCoalescedEvents() : null
+    const points = coalesced && coalesced.length ? coalesced : [e]
+    points.forEach((pt) => {
+      ctx.lineTo(pt.clientX - rect.left, pt.clientY - rect.top)
+    })
     ctx.stroke()
     setHasDrawing(true)
   }
 
-  function handleDrawPointerUp() {
+  function handleDrawPointerUp(e) {
+    if (drawMode) e.preventDefault()
     drawActiveRef.current = false
   }
 
@@ -433,6 +436,9 @@ export default function FormationAssistantTab({ team }) {
             position: 'absolute', inset: 0, width: '100%', height: '100%',
             pointerEvents: drawMode ? 'auto' : 'none',
             touchAction: 'none',
+            WebkitUserSelect: 'none',
+            userSelect: 'none',
+            WebkitTouchCallout: 'none',
             cursor: drawMode ? 'crosshair' : 'default'
           }}
         />
@@ -471,7 +477,7 @@ export default function FormationAssistantTab({ team }) {
 
   if (fullScreen) {
     return (
-      <div style={{ position: 'fixed', inset: 0, background: '#0c2417', zIndex: 1000, overflowY: 'auto', padding: 16 }}>
+      <div style={{ position: 'fixed', inset: 0, background: '#0c2417', zIndex: 1000, overflowY: drawMode ? 'hidden' : 'auto', touchAction: drawMode ? 'none' : 'auto', padding: 16 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10, marginBottom: 12 }}>
           <div>
             <span className="stat-number" style={{ color: '#fff', fontSize: 20 }}>{clockLabel}</span>
