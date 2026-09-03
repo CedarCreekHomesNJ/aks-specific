@@ -1892,6 +1892,168 @@ export const DRILLS = [
       travel: "Keep the tone fun and competitive without letting it get overly physical.",
       academy: "Track style points across the season as a lighthearted running leaderboard."
     }
+  },
+
+  // ELITE / ACADEMY-ONLY — advanced technical and tactical drills for players on a serious development path
+  {
+    id: "el1", diagramPlayers: 3, name: "Third-man rotation under pressure", category: "technical", formation: "box",
+    ageMin: 15, ageMax: 19, skills: ["academy"], focus: ["possession", "passing"],
+    players: "9-15", equipment: ["Cones", "Bibs"],
+    summary: "A tight-space combination where the third player's run and the timing of the layoff have to be nearly simultaneous, the kind of split-second rotation that separates advanced players from merely good ones.",
+    steps: [
+      "Set up a 12x12 yard grid with a passer, a wall player, and a third player starting wide, plus a defender pressing the wall player.",
+      "The passer plays into the wall player as the defender closes down immediately.",
+      "The third player must time a run into the space behind the defender before the ball even arrives at the wall player.",
+      "The wall player must find the third player's run with one touch, under real pressure, not a free rehearsal."
+    ],
+    points: ["The wall player's touch is decided before the ball arrives, not after", "The third player's run is disguised until the last possible moment", "If the layoff isn't on, recycle immediately rather than forcing it"],
+    levelNotes: {
+      academy: "Add a scoring condition (2 points only if the whole sequence takes under 3 seconds) to keep the tempo honest."
+    }
+  },
+  {
+    id: "el2", diagramPlayers: 3, name: "One-touch finishing combinations", category: "technical", formation: "goal",
+    ageMin: 15, ageMax: 19, skills: ["academy"], focus: ["shooting", "passing"],
+    players: "9-15", equipment: ["Cones", "Goal", "Balls"],
+    summary: "A rapid combination that ends in a first-time finish, demanding the same technical precision under fatigue that a real match moment requires — no settling touches allowed anywhere in the sequence.",
+    steps: [
+      "Set up two servers at the top of the box and a finisher making a starting run from deeper.",
+      "Server one plays a firm one-touch pass to server two.",
+      "Server two lays it first-time into the finisher's path without breaking stride.",
+      "The finisher must strike first-time — any extra touch voids the rep, so reset and go again."
+    ],
+    points: ["Every touch in the sequence is first-time — this is the whole point of the drill", "Body shape has to be set before the ball arrives, not scrambled after", "Quality over pace at first — add speed once the technique holds up"],
+    levelNotes: {
+      academy: "Run this as a competitive count — track the group's longest streak of clean one-touch sequences across a session."
+    }
+  },
+  {
+    id: "el3", diagramPlayers: 3, name: "Half-turn receiving under pressure", category: "technical", formation: "box",
+    ageMin: 15, ageMax: 19, skills: ["academy"], focus: ["passing", "possession"],
+    players: "9-15", equipment: ["Cones", "Bibs"],
+    summary: "Receiving on the half-turn — opening the body to play forward in one motion — is one of the clearest technical markers of an advanced player, and this drill isolates it under a defender's real pressure rather than a passive rehearsal.",
+    steps: [
+      "Set up a passer, a receiver with a defender starting behind them, and a forward target beyond.",
+      "The passer plays into the receiver as the defender closes in from behind.",
+      "The receiver must open their body on the first touch to face forward, not just control the ball flat-footed.",
+      "The receiver plays forward to the target within two touches total, defender permitting."
+    ],
+    points: ["Check the defender's position with a shoulder glance before the ball arrives", "The first touch should already be angled forward, not sideways then forward", "If the half-turn isn't on, protect the ball and reset rather than force it"],
+    levelNotes: {
+      academy: "Progress to a live defender who can win the ball, not just apply passive pressure, once the technique is consistent."
+    }
+  },
+  {
+    id: "el4", diagramPlayers: 4, name: "Elite recovery and re-press", category: "technical", formation: "zones",
+    ageMin: 15, ageMax: 19, skills: ["academy"], focus: ["defending", "fitness"],
+    players: "10-16", equipment: ["Cones", "Bibs"],
+    summary: "A demanding conditioning-meets-defending drill: sprint to recover, then immediately re-press as a coordinated unit, replicating the physical and tactical demand of defending in the run of play at a high level.",
+    steps: [
+      "Start three to four defenders out of position (beaten, turned around, or caught upfield) facing a possession team.",
+      "On the coach's signal, the group sprints to recover into a connected defensive shape.",
+      "The instant they're organized, they must press together to win the ball within a tight time window.",
+      "Reset immediately into a new out-of-position start and repeat — the demand is in the repetition, not a single clean rep."
+    ],
+    points: ["Full sprint on the recovery, no jogging back into shape", "Organize as a connected line, not as individuals arriving separately", "The press that follows recovery has to be immediate, not a pause-then-press"],
+    levelNotes: {
+      academy: "Track how many reps the group can sustain before recovery speed or press coordination visibly drops — that number is real conditioning data."
+    }
+  },
+  {
+    id: "el5", diagramPlayers: 4, name: "Disguised passing under pressure", category: "technical", formation: "box",
+    ageMin: 15, ageMax: 19, skills: ["academy"], focus: ["passing"],
+    players: "9-15", equipment: ["Cones", "Bibs"],
+    summary: "Advanced players pass to where a defender isn't looking, not just to an open teammate — this drill trains disguise: body shape and eyes suggesting one pass while actually playing another.",
+    steps: [
+      "Set up a small rondo with four attackers and a defender working to read passing intentions.",
+      "Attackers must set up every pass with a disguise — a look, a body shape cue, or a fake toward one teammate before playing to another.",
+      "The defender's job is specifically to read the disguise and intercept based on where the passer is looking or shaping to play.",
+      "Rotate the defender in for any attacker who gets read and intercepted, keeping the incentive sharp."
+    ],
+    points: ["The disguise has to be believable, not just a token glance", "Still make the technically correct pass — disguise doesn't excuse a bad decision", "Vary which disguise you use so the defender can't pattern-read you"],
+    levelNotes: {
+      academy: "Have the group vote on the best-disguised pass of the session — makes the subtlety visible and rewarded."
+    }
+  },
+  {
+    id: "el6", diagramPlayers: 3, name: "1v1 into 2v1 combination", category: "technical", formation: "gates",
+    ageMin: 15, ageMax: 19, skills: ["academy"], focus: ["dribbling", "passing"],
+    players: "9-15", equipment: ["Cones"],
+    summary: "A realistic in-game sequence: an attacker takes on a defender 1v1, and if it's not on, a supporting teammate arrives to create a 2v1 — training the decision of when to go alone and when to combine.",
+    steps: [
+      "Set up an attacker with the ball facing a defender in a mid-sized grid, with a supporting attacker starting wide and delayed.",
+      "The lead attacker first tries to beat the defender 1v1 with a move.",
+      "If the 1v1 isn't won within two touches, the supporting player arrives to create a 2v1 overload.",
+      "The pair must combine to beat the defender using an angle the defender can't cover alone."
+    ],
+    points: ["Commit fully to the 1v1 first — don't rush to the pass as a safety net", "The support player's timing matters as much as the first attacker's move", "Once it's a 2v1, use the angle the defender is weakest to"],
+    levelNotes: {
+      academy: "Add a shot clock (5 seconds total) to force the 1v1-then-combine decision to happen at game speed."
+    }
+  },
+  {
+    id: "el7", diagramPlayers: 1, name: "High-intensity repeated sprints with the ball", category: "technical", formation: "line",
+    ageMin: 15, ageMax: 19, skills: ["academy"], focus: ["fitness", "dribbling"],
+    players: "6-16", equipment: ["Cones", "Balls"],
+    summary: "Match-realistic conditioning that keeps technical demand in the mix instead of stripping it out — sprinting with the ball under control is a very different fitness cost than sprinting empty-handed, and elite players need both.",
+    steps: [
+      "Mark a 30-yard straight channel with cones at 10-yard intervals.",
+      "Player sprints the full 30 yards under close control, touching the ball at every 10-yard cone.",
+      "Walk back for a short, incomplete recovery (20-25 seconds), deliberately less than full rest.",
+      "Repeat for 6-8 total reps, tracking whether ball control noticeably breaks down as fatigue builds."
+    ],
+    points: ["Full sprint speed even as fatigue sets in — this is the point of the drill", "Keep the ball within a stride of the body even at top speed", "Honest self-assessment: note the rep where control starts to slip"],
+    levelNotes: {
+      academy: "This is a serious conditioning load — make sure it comes after a proper warm-up and isn't stacked on top of another high-intensity block that day."
+    }
+  },
+  {
+    id: "el8", diagramPlayers: 8, name: "Positional play: 6v6 plus three neutrals", category: "ssg", formation: "box",
+    ageMin: 16, ageMax: 19, skills: ["academy"], focus: ["possession", "passing"], styles: ["positional"], formats: ["11v11"],
+    players: "12-18", equipment: ["Cones", "Bibs"],
+    summary: "A possession framework used at a high level: two teams of six, plus three neutral players who always play for whichever team has the ball, creating a constant numbers advantage that rewards quick, purposeful circulation.",
+    steps: [
+      "Mark a large area (roughly half a field) with two teams of six and three neutral players wearing a third color.",
+      "Neutrals always play for the team in possession, creating a 9v6 advantage for whoever has the ball.",
+      "The possessing team scores a point for a set number of consecutive passes (start around 8-10) using the neutrals to circulate.",
+      "The moment possession is lost, the new possessing team immediately gets the neutrals' support — no reset needed."
+    ],
+    points: ["Neutrals should always offer an easy out ball, not just stand and wait", "Use the extra numbers to switch the point of attack, not just keep it safe centrally", "Press with real intent even against the overload — it's still a training rep, not a walkthrough"],
+    levelNotes: {
+      academy: "Raise the required pass count as the group's circulation speed improves across the season."
+    }
+  },
+  {
+    id: "el9", diagramPlayers: 1, name: "Weak-foot finishing under fatigue", category: "technical", formation: "goal",
+    ageMin: 15, ageMax: 19, skills: ["academy"], focus: ["shooting"],
+    players: "6-14", equipment: ["Goal", "Balls", "Cones"],
+    summary: "Weak-foot competence tends to disappear first when a player is tired — this drill deliberately stacks a short fitness burst right before every weak-foot finish, so the technique gets trained under the conditions it'll actually be needed in.",
+    steps: [
+      "Set up a short 15-yard shuttle sprint ending at the top of the box, with a ball service waiting there.",
+      "Player sprints the shuttle at full effort, arriving out of breath at the top of the box.",
+      "Immediately receive a service and finish using the weak foot only — no strong-foot reps in this drill.",
+      "Recover fully, then repeat for 6-8 total reps, tracking finishing quality as fatigue accumulates."
+    ],
+    points: ["The sprint has to be genuinely hard — this only works if there's real fatigue to finish through", "Don't let technique collapse into just poking at the ball — stay composed even out of breath", "Track honestly whether weak-foot quality holds up rep to rep"],
+    levelNotes: {
+      academy: "Alternate this with a strong-foot version occasionally so the comparison data (fatigue's effect on each foot) stays meaningful."
+    }
+  },
+  {
+    id: "el10", diagramPlayers: 8, name: "Breaking down a low block", category: "technical", formation: "zones",
+    ageMin: 16, ageMax: 19, skills: ["academy"], focus: ["possession", "passing"],
+    players: "10-16", equipment: ["Cones", "Bibs", "Small goals"],
+    summary: "Patient, purposeful play against a deliberately compact, organized defense — the exact picture a team faces when an opponent sits deep, and a real test of whether a possession group can actually create chances rather than just keep the ball.",
+    steps: [
+      "Set up an attacking group against a defending group instructed to hold a deliberately deep, compact low block.",
+      "The attacking team must build patiently, using width to stretch the block before committing centrally.",
+      "Look specifically for combination play or a switch of play to unbalance the block, not just probing passes across the top.",
+      "Score a bonus point for any chance created by actually breaking a defender's line, not just shooting from outside it."
+    ],
+    points: ["Patience is not passivity — keep probing with purpose, don't just recycle safely", "Use width to pull the block apart before attacking centrally", "A well-timed switch of play is often more effective than forcing the ball through the middle"],
+    levelNotes: {
+      academy: "Coach the defending team's discipline too — a low block that breaks shape too easily doesn't give the attacking group a real problem to solve."
+    }
   }
 ];
 
@@ -1902,9 +2064,10 @@ export const DRILLS = [
 export const AGES = Array.from({ length: 13 }, (_, i) => i + 7); // 7..19
 
 export const SKILL_LEVELS = [
-  { id: "recreation", name: "Recreation", tagline: "Fun, participation, and basic skill building for every player on the roster." },
-  { id: "travel", name: "Travel club", tagline: "Competitive club soccer with an emphasis on technique and team tactics." },
-  { id: "academy", name: "Academy club", tagline: "High-performance training with detailed technical and tactical demands." }
+  { id: "recreation", name: "Beginner", tagline: "Fun, participation, and basic skill building for every player on the roster." },
+  { id: "travel", name: "Intermediate", tagline: "Competitive club soccer with an emphasis on technique and team tactics." },
+  { id: "school", name: "Middle School / High School Competitive", tagline: "School-team soccer — a wide range of ability on one roster, competitive but not full-time club intensity." },
+  { id: "academy", name: "Advanced", tagline: "High-performance training with detailed technical and tactical demands." }
 ];
 
 export const FOCUS_OPTIONS = [
@@ -2236,11 +2399,15 @@ export function assignRosterToFormation(formation, roster) {
   });
 }
 
-export function pickDrill(pool, usedIds) {
+export function pickDrill(pool, usedIds, recentIds) {
   const fresh = pool.filter((d) => !usedIds.has(d.id));
-  const list = fresh.length ? fresh : pool;
-  if (!list.length) return null;
-  return list[Math.floor(Math.random() * list.length)];
+  let candidates = fresh.length ? fresh : pool;
+  if (recentIds && recentIds.size) {
+    const notRecent = candidates.filter((d) => !recentIds.has(d.id));
+    if (notRecent.length) candidates = notRecent;
+  }
+  if (!candidates.length) return null;
+  return candidates[Math.floor(Math.random() * candidates.length)];
 }
 
 export function inferStyles(d) {
@@ -2254,8 +2421,9 @@ export function inferStyles(d) {
 }
 
 export function filterDrills(category, focus, age, skill, style, gameFormat) {
+  const effectiveSkill = skill === "school" ? "travel" : skill;
   let pool = DRILLS.filter(
-    (d) => d.category === category && age >= d.ageMin && age <= d.ageMax && d.skills.includes(skill)
+    (d) => d.category === category && age >= d.ageMin && age <= d.ageMax && d.skills.includes(effectiveSkill)
   );
   const focusArr = focus ? (Array.isArray(focus) ? focus : [focus]) : null;
   if (focusArr && focusArr.length) {
@@ -2286,7 +2454,7 @@ export function roundTo5(n) {
   return Math.max(5, Math.round(n / 5) * 5);
 }
 
-export function generatePlan({ age, skill, focuses, duration, style, gameFormat }) {
+export function generatePlan({ age, skill, focuses, duration, style, gameFormat, recentIds }) {
   const foci = focuses && focuses.length ? focuses : ["possession"];
   const warmupPct = duration <= 45 ? 0.16 : 0.12;
   const cooldownPct = duration <= 45 ? 0.14 : 0.12;
@@ -2310,7 +2478,7 @@ export function generatePlan({ age, skill, focuses, duration, style, gameFormat 
   const usedIds = new Set();
   const items = segments.map((seg, i) => {
     const pool = filterDrills(seg.category, seg.focus, age, skill, style, gameFormat);
-    const drill = pickDrill(pool, usedIds);
+    const drill = pickDrill(pool, usedIds, recentIds);
     if (drill) usedIds.add(drill.id);
     return { ...seg, minutes: minutesList[i], drill };
   }).filter((it) => it.drill);

@@ -356,7 +356,9 @@ export const DRILL_PATTERN = {
   ar1: 'thirdManRun', ar2: 'combinationOverlap', ar3: 'giveAndGo', ar4: 'thirdManRun',
   epl1: 'duelBox', epl2: 'duelBox', epl3: 'smallSidedFreePlay', epl4: 'setPieceDefending', epl5: 'oneVOneDuel',
   cp1: 'zoneAdvance', cp2: 'pressTrap', if1: 'smallSidedFreePlay', if2: 'combinationOverlap',
-  org1: 'defensiveShadowLine', org2: 'defensiveShadowLine', fl1: 'freestyleSolo', fl2: 'oneVOneDuel'
+  org1: 'defensiveShadowLine', org2: 'defensiveShadowLine', fl1: 'freestyleSolo', fl2: 'oneVOneDuel',
+  el1: 'thirdManRun', el2: 'giveAndGo', el3: 'pressureReceive', el4: 'pressTrap', el5: 'polygonRotation',
+  el6: 'pressureReceive', el7: 'soloDribble', el8: 'smallSidedFreePlay', el9: 'soloDribbleShoot', el10: 'zoneAdvance'
 }
 
 export function getDrillPattern(drill) {

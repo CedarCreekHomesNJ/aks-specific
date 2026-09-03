@@ -9,6 +9,24 @@ import DrillDiagram from './DrillDiagram'
 
 const STEPS = ['age', 'skill', 'focus', 'identity', 'gameFormat', 'duration', 'players']
 const CATEGORY_FILTERS = ['all', 'warmup', 'technical', 'ssg', 'cooldown']
+const RECENT_CAP = 40
+
+function loadRecentIds(teamId) {
+  try {
+    const raw = localStorage.getItem(`aks_recent_drills_${teamId}`)
+    return raw ? JSON.parse(raw) : []
+  } catch (e) {
+    return []
+  }
+}
+
+function saveRecentIds(teamId, ids) {
+  try {
+    localStorage.setItem(`aks_recent_drills_${teamId}`, JSON.stringify(ids.slice(0, RECENT_CAP)))
+  } catch (e) {
+    // localStorage unavailable — variety just won't persist across sessions
+  }
+}
 
 export default function PracticePlanTab({ team }) {
   const [phase, setPhase] = useState('wizard')
@@ -25,6 +43,7 @@ export default function PracticePlanTab({ team }) {
   const [filterFocus, setFilterFocus] = useState('all')
   const [search, setSearch] = useState('')
   const [diagramDrill, setDiagramDrill] = useState(null)
+  const [recentDrillIds, setRecentDrillIds] = useState(() => loadRecentIds(team.id))
 
   const [savedPlans, setSavedPlans] = useState([])
   const [savedPlansLoading, setSavedPlansLoading] = useState(true)
@@ -75,10 +94,16 @@ export default function PracticePlanTab({ team }) {
   }
 
   function buildPlan() {
-    return generatePlan({
+    const result = generatePlan({
       age: answers.age, skill: answers.skill, focuses: answers.focus,
-      duration: answers.duration, style: answers.identity, gameFormat: answers.gameFormat
+      duration: answers.duration, style: answers.identity, gameFormat: answers.gameFormat,
+      recentIds: new Set(recentDrillIds)
     })
+    const usedThisTime = result.filter((s) => s.drill).map((s) => s.drill.id)
+    const merged = [...usedThisTime, ...recentDrillIds.filter((id) => !usedThisTime.includes(id))].slice(0, RECENT_CAP)
+    setRecentDrillIds(merged)
+    saveRecentIds(team.id, merged)
+    return result
   }
 
   function next() {
